@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JEditorPane;
 import javax.swing.DropMode;
 import javax.swing.JList;
+import javax.swing.JComboBox;
 
 public class Window extends JFrame {
 
@@ -52,6 +53,8 @@ public class Window extends JFrame {
 	private JLabel lblLarghezza;
 	private JLabel lblAltezza;
 	private JList listPlants;
+	private JList listPlantsCart;
+	private JComboBox comboBoxAcquari;
 
 	/**
 	 * Launch the application.
@@ -217,6 +220,21 @@ public class Window extends JFrame {
 		
 		panelSalva = new JPanel();
 		panelCardMain.add(panelSalva, "name_453599213935200");
+		SpringLayout sl_panelSalva = new SpringLayout();
+		panelSalva.setLayout(sl_panelSalva);
+		
+		listPlantsCart = new JList();
+		sl_panelSalva.putConstraint(SpringLayout.NORTH, listPlantsCart, 10, SpringLayout.NORTH, panelSalva);
+		sl_panelSalva.putConstraint(SpringLayout.WEST, listPlantsCart, 10, SpringLayout.WEST, panelSalva);
+		sl_panelSalva.putConstraint(SpringLayout.SOUTH, listPlantsCart, 302, SpringLayout.NORTH, panelSalva);
+		sl_panelSalva.putConstraint(SpringLayout.EAST, listPlantsCart, 475, SpringLayout.WEST, panelSalva);
+		panelSalva.add(listPlantsCart);
+		
+		comboBoxAcquari = new JComboBox();
+		sl_panelSalva.putConstraint(SpringLayout.NORTH, comboBoxAcquari, 10, SpringLayout.NORTH, panelSalva);
+		sl_panelSalva.putConstraint(SpringLayout.WEST, comboBoxAcquari, 6, SpringLayout.EAST, listPlantsCart);
+		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxAcquari, 251, SpringLayout.EAST, listPlantsCart);
+		panelSalva.add(comboBoxAcquari);
 		
 		panelSections = new JPanel();
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, panelCardMain, -24, SpringLayout.NORTH, panelSections);
