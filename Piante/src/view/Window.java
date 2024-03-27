@@ -19,6 +19,8 @@ import javax.swing.DropMode;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.AbstractListModel;
+import javax.swing.JTextPane;
+import javax.swing.JCheckBox;
 
 public class Window extends JFrame {
 
@@ -54,8 +56,12 @@ public class Window extends JFrame {
 	private JLabel lblLarghezza;
 	private JLabel lblAltezza;
 	private JList listPlants;
-	private JList listPlantsCart;
 	private JComboBox comboBoxAcquari;
+	private JScrollPane scrollPane;
+	private JPanel panel;
+	private JCheckBox chckbxNewCheckBox;
+	private JPanel panel_1;
+	private JCheckBox chckbxNewCheckBox_1;
 
 	/**
 	 * Launch the application.
@@ -227,32 +233,10 @@ public class Window extends JFrame {
 		SpringLayout sl_panelSalva = new SpringLayout();
 		panelSalva.setLayout(sl_panelSalva);
 		
-		listPlantsCart = new JList<>();
-		listPlantsCart.setModel(new AbstractListModel() {
-		    JComboBox<String>[] values = new JComboBox[] {
-		        new JComboBox<>(new String[]{"1", "2", "3"}),
-		        new JComboBox<>(new String[]{"4", "5", "6"}),
-		        new JComboBox<>(new String[]{"7", "8", "9"})
-		    };
-
-		    public int getSize() {
-		        return values.length;
-		    }
-
-		    public Object getElementAt(int index) {
-		        return values[index];
-		    }
-		});
-		sl_panelSalva.putConstraint(SpringLayout.NORTH, listPlantsCart, 10, SpringLayout.NORTH, panelSalva);
-		sl_panelSalva.putConstraint(SpringLayout.WEST, listPlantsCart, 10, SpringLayout.WEST, panelSalva);
-		sl_panelSalva.putConstraint(SpringLayout.SOUTH, listPlantsCart, 302, SpringLayout.NORTH, panelSalva);
-		sl_panelSalva.putConstraint(SpringLayout.EAST, listPlantsCart, 475, SpringLayout.WEST, panelSalva);
-		panelSalva.add(listPlantsCart);
-		
 		comboBoxAcquari = new JComboBox();
 		sl_panelSalva.putConstraint(SpringLayout.NORTH, comboBoxAcquari, 10, SpringLayout.NORTH, panelSalva);
-		sl_panelSalva.putConstraint(SpringLayout.WEST, comboBoxAcquari, 6, SpringLayout.EAST, listPlantsCart);
-		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxAcquari, 251, SpringLayout.EAST, listPlantsCart);
+		sl_panelSalva.putConstraint(SpringLayout.WEST, comboBoxAcquari, 481, SpringLayout.WEST, panelSalva);
+		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxAcquari, -183, SpringLayout.EAST, panelSalva);
 		panelSalva.add(comboBoxAcquari);
 		
 		panelSections = new JPanel();
@@ -277,6 +261,27 @@ public class Window extends JFrame {
 	    panelCardMain.add(panelAcquari, "panelAcquari");
 	    panelCardMain.add(panelCerca, "panelCerca");
 	    panelCardMain.add(panelSalva, "panelSalva");
+	    
+	    scrollPane = new JScrollPane();
+	    sl_panelSalva.putConstraint(SpringLayout.NORTH, scrollPane, 10, SpringLayout.NORTH, panelSalva);
+	    sl_panelSalva.putConstraint(SpringLayout.WEST, scrollPane, 10, SpringLayout.WEST, panelSalva);
+	    sl_panelSalva.putConstraint(SpringLayout.SOUTH, scrollPane, 304, SpringLayout.NORTH, panelSalva);
+	    sl_panelSalva.putConstraint(SpringLayout.EAST, scrollPane, 471, SpringLayout.WEST, panelSalva);
+	    panelSalva.add(scrollPane);
+	    
+	    panel = new JPanel();
+	    scrollPane.setViewportView(panel);
+	    GridLayout panelCart= new GridLayout(30, 1, 0, 0);
+	    panel.setLayout(panelCart);
+	    
+	    panel_1 = new JPanel();
+	    panel.add(panel_1);
+	    panel_1.setLayout(new GridLayout(0, 3, 0, 0));
+	    
+	    chckbxNewCheckBox_1 = new JCheckBox("New check box");
+	    panel_1.add(chckbxNewCheckBox_1);
+	    
+	
 	    
 	 // Aggiungi un ActionListener ai bottoni per cambiare il pannello visualizzato
 	    btnAcquari.addActionListener(e -> cardLayout.show(panelCardMain, "panelAcquari"));
