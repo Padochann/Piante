@@ -21,6 +21,16 @@ import javax.swing.JComboBox;
 import javax.swing.AbstractListModel;
 import javax.swing.JTextPane;
 import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
+import javax.swing.BoxLayout;
+import java.awt.Component;
+import javax.swing.ScrollPaneConstants;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.MatteBorder;
+import java.awt.Color;
 
 public class Window extends JFrame {
 
@@ -234,9 +244,7 @@ public class Window extends JFrame {
 		panelSalva.setLayout(sl_panelSalva);
 		
 		comboBoxAcquari = new JComboBox();
-		sl_panelSalva.putConstraint(SpringLayout.NORTH, comboBoxAcquari, 10, SpringLayout.NORTH, panelSalva);
-		sl_panelSalva.putConstraint(SpringLayout.WEST, comboBoxAcquari, 481, SpringLayout.WEST, panelSalva);
-		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxAcquari, -183, SpringLayout.EAST, panelSalva);
+		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxAcquari, -41, SpringLayout.EAST, panelSalva);
 		panelSalva.add(comboBoxAcquari);
 		
 		panelSections = new JPanel();
@@ -263,10 +271,12 @@ public class Window extends JFrame {
 	    panelCardMain.add(panelSalva, "panelSalva");
 	    
 	    scrollPane = new JScrollPane();
+	    sl_panelSalva.putConstraint(SpringLayout.NORTH, comboBoxAcquari, 0, SpringLayout.NORTH, scrollPane);
+	    sl_panelSalva.putConstraint(SpringLayout.WEST, comboBoxAcquari, 22, SpringLayout.EAST, scrollPane);
 	    sl_panelSalva.putConstraint(SpringLayout.NORTH, scrollPane, 10, SpringLayout.NORTH, panelSalva);
+	    sl_panelSalva.putConstraint(SpringLayout.SOUTH, scrollPane, -10, SpringLayout.SOUTH, panelSalva);
+	    sl_panelSalva.putConstraint(SpringLayout.EAST, scrollPane, -286, SpringLayout.EAST, panelSalva);
 	    sl_panelSalva.putConstraint(SpringLayout.WEST, scrollPane, 10, SpringLayout.WEST, panelSalva);
-	    sl_panelSalva.putConstraint(SpringLayout.SOUTH, scrollPane, 304, SpringLayout.NORTH, panelSalva);
-	    sl_panelSalva.putConstraint(SpringLayout.EAST, scrollPane, 471, SpringLayout.WEST, panelSalva);
 	    panelSalva.add(scrollPane);
 	    
 	    panel = new JPanel();
@@ -275,11 +285,41 @@ public class Window extends JFrame {
 	    panel.setLayout(panelCart);
 	    
 	    panel_1 = new JPanel();
+	    panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 	    panel.add(panel_1);
-	    panel_1.setLayout(new GridLayout(0, 3, 0, 0));
+	    GridBagLayout gbl_panel_1 = new GridBagLayout();
+	    gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
+	    gbl_panel_1.rowHeights = new int[]{0, 0};
+	    gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+	    gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+	    panel_1.setLayout(gbl_panel_1);
 	    
-	    chckbxNewCheckBox_1 = new JCheckBox("New check box");
-	    panel_1.add(chckbxNewCheckBox_1);
+	    chckbxNewCheckBox_1 = new JCheckBox("");
+	    GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
+	    gbc_chckbxNewCheckBox_1.insets = new Insets(0, 0, 0, 5);
+	    gbc_chckbxNewCheckBox_1.anchor = GridBagConstraints.NORTHWEST;
+	    gbc_chckbxNewCheckBox_1.gridx = 0;
+	    gbc_chckbxNewCheckBox_1.gridy = 0;
+	    panel_1.add(chckbxNewCheckBox_1, gbc_chckbxNewCheckBox_1);
+	    
+	    JLabel lblNewLabel = new JLabel("Rotala rotundifollia var \"hraa\"");
+	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+	    gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
+	    gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+	    gbc_lblNewLabel.gridx = 1;
+	    gbc_lblNewLabel.gridy = 0;
+	    panel_1.add(lblNewLabel, gbc_lblNewLabel);
+	    
+	    JComboBox comboBox = new JComboBox();
+	    comboBox.setModel(new DefaultComboBoxModel(new String[] {"Q", "1", "2", "3"}));
+	    comboBox.setEnabled(true);
+	    comboBox.setEditable(false);
+	    GridBagConstraints gbc_comboBox = new GridBagConstraints();
+	    gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+	    gbc_comboBox.gridx = 2;
+	    gbc_comboBox.gridy = 0;
+	    panel_1.add(comboBox, gbc_comboBox);
 	    
 	
 	    
