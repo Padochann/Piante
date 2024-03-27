@@ -18,6 +18,7 @@ import javax.swing.JEditorPane;
 import javax.swing.DropMode;
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import javax.swing.AbstractListModel;
 
 public class Window extends JFrame {
 
@@ -90,7 +91,10 @@ public class Window extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, panelCardMain, 11, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, panelCardMain, -12, SpringLayout.EAST, contentPane);
 		contentPane.add(panelCardMain);
-		panelCardMain.setLayout(new CardLayout(0, 0));
+		CardLayout cardLayout = new CardLayout();
+		panelCardMain.setLayout(cardLayout);
+		
+		
 		
 		panelAcquari = new JPanel();
 		panelCardMain.add(panelAcquari, "name_945515184868000");
@@ -223,7 +227,22 @@ public class Window extends JFrame {
 		SpringLayout sl_panelSalva = new SpringLayout();
 		panelSalva.setLayout(sl_panelSalva);
 		
-		listPlantsCart = new JList();
+		listPlantsCart = new JList<>();
+		listPlantsCart.setModel(new AbstractListModel() {
+		    JComboBox<String>[] values = new JComboBox[] {
+		        new JComboBox<>(new String[]{"1", "2", "3"}),
+		        new JComboBox<>(new String[]{"4", "5", "6"}),
+		        new JComboBox<>(new String[]{"7", "8", "9"})
+		    };
+
+		    public int getSize() {
+		        return values.length;
+		    }
+
+		    public Object getElementAt(int index) {
+		        return values[index];
+		    }
+		});
 		sl_panelSalva.putConstraint(SpringLayout.NORTH, listPlantsCart, 10, SpringLayout.NORTH, panelSalva);
 		sl_panelSalva.putConstraint(SpringLayout.WEST, listPlantsCart, 10, SpringLayout.WEST, panelSalva);
 		sl_panelSalva.putConstraint(SpringLayout.SOUTH, listPlantsCart, 302, SpringLayout.NORTH, panelSalva);
@@ -253,5 +272,15 @@ public class Window extends JFrame {
 		
 		btnSalva = new JButton("Salva");
 		panelSections.add(btnSalva);
+		
+		 // Aggiungi i pannelli al CardLayout
+	    panelCardMain.add(panelAcquari, "panelAcquari");
+	    panelCardMain.add(panelCerca, "panelCerca");
+	    panelCardMain.add(panelSalva, "panelSalva");
+	    
+	 // Aggiungi un ActionListener ai bottoni per cambiare il pannello visualizzato
+	    btnAcquari.addActionListener(e -> cardLayout.show(panelCardMain, "panelAcquari"));
+	    btnCerca.addActionListener(e -> cardLayout.show(panelCardMain, "panelCerca"));
+	    btnSalva.addActionListener(e -> cardLayout.show(panelCardMain, "panelSalva"));
 	}
 }
