@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.SpringLayout;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -311,6 +313,7 @@ public class Window extends JFrame {
 	    gbc_lblNewLabel.gridy = 0;
 	    panel_1.add(lblNewLabel, gbc_lblNewLabel);
 	    
+	    JSpinner s = new JSpinner();
 	    JComboBox comboBox = new JComboBox();
 	    comboBox.setModel(new DefaultComboBoxModel(new String[] {"Q", "1", "2", "3"}));
 	    comboBox.setEnabled(true);
