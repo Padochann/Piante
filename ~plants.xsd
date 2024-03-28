@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns="Piante" targetNamespace="Piante" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
-    <!-- Definizione del tipo di dati per l'enumerazione del tasso di crescita -->
+  <!-- Definizione del tipo di dati per l'enumerazione del tasso di crescita -->
   <xs:simpleType name="tassoCrescitaType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="lento"/>
@@ -27,14 +27,14 @@
   <!-- Definizione del tipo di dati per il link della pagina -->
   <xs:simpleType name="linkType">
     <xs:restriction base="xs:string">
-      <xs:maxLength value="500"/>
+      <xs:maxLength value="800"/>
     </xs:restriction>
   </xs:simpleType>
 
   <!-- Definizione del tipo di dati per il link dell'immagine -->
   <xs:simpleType name="linkImgType">
     <xs:restriction base="xs:string">
-      <xs:maxLength value="255"/>
+      <xs:maxLength value="800"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -101,12 +101,11 @@
     <xs:restriction base="xs:unsignedInt"/>
   </xs:simpleType>
 
-  <!-- Definizione del tipo di dati per l'id di un'immagine -->
-  <xs:element name="immagine_pianta" type="base64Binary"/>
+
 
   <!-- Definizione del tipo di dati per la struttura del nodo "acquario" -->
-  <xs:element name="acquario">
-    <xs:complexType>
+
+    <xs:complexType name="acquarioType">
       <xs:sequence>
         <xs:element name="id_acquario" type="idAcquarioType"/>
         <xs:element name="litri" type="dimensioneType"/>
@@ -116,11 +115,22 @@
         <xs:element name="descrizione" type="testoType"/>
       </xs:sequence>
     </xs:complexType>
-  </xs:element>
+
+  
+  <!-- Definizione del tipo per la tabella `immagini` -->
+
+        <xs:complexType name="immagineType">
+            <xs:sequence>
+                <xs:element name="id_immagine" type="xs:unsignedInt"/>
+                <xs:element name="id_pianta" type="xs:unsignedInt"/>
+                <xs:element name="immagine_pianta" type="base64Binary"/>
+            </xs:sequence>
+        </xs:complexType>
+
 
   <!-- Definizione del tipo di dati per la struttura del nodo "pianta" -->
-  <xs:element name="pianta">
-    <xs:complexType>
+
+    <xs:complexType name="piantaType">
       <xs:sequence>
         <xs:element name="id_pianta" type="idPiantaType"/>
         <xs:element name="nome" type="testoType"/>
@@ -137,18 +147,50 @@
         <xs:element name="difficolta" type="difficoltaType"/>
       </xs:sequence>
     </xs:complexType>
-  </xs:element>
+
 
   <!-- Definizione del tipo di dati per la struttura del nodo "piante_acquari" -->
-  <xs:element name="piante_acquari">
-    <xs:complexType>
+
+    <xs:complexType name="pianta_acquarioType">
       <xs:sequence>
          <xs:element name="id_pianta" type="idPiantaType"/>
          <xs:element name="id_acquario" type="idAcquarioType"/>
          <xs:element name="quantita" type="quantitaType"/>
       </xs:sequence>
     </xs:complexType>
-  </xs:element>
+    
+    <xs:complexType name="pianteType">
+      <xs:sequence>
+          <xs:element name="item" type="piantaType" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="immaginiType">
+      <xs:sequence>
+          <xs:element name="item" type="immagineType" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="acquariType">
+      <xs:sequence>
+          <xs:element name="item" type="acquarioType" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="piante_acquariType">
+      <xs:sequence>
+          <xs:element name="item" type="pianta_acquarioType" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+
+
+
+    <xs:element name="piante" type="pianteType"/>
+    <xs:element name="acquari" type="acquariType"/>
+    <xs:element name="immagini" type="immaginiType"/>
+    <xs:element name="piante_acquari" type="piante_acquariType"/>
+    
 
 </xs:schema>
+
 
