@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="piante">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="item" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="id_pianta" type="xsd:int"/>
+                            <xsd:element name="nome" type="xsd:string"/>
+                            <xsd:element name="link_pagina" type="xsd:string"/>
+                            <xsd:element name="link_img" type="xsd:string"/>
+                            <xsd:element name="tipo" type="xsd:string"/>
+                            <xsd:element name="origine" type="xsd:string"/>
+                            <xsd:element name="tasso_crescita" type="xsd:string"/>
+                            <xsd:element name="altezza_minima" type="xsd:int"/>
+                            <xsd:element name="altezza_massima" type="xsd:int"/>
+                            <xsd:element name="luce" type="xsd:string"/>
+                            <xsd:element name="co2" type="xsd:string"/>
+                            <xsd:element name="link_logo" type="xsd:string"/>
+                            <xsd:element name="difficolta" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
