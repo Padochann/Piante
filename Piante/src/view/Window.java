@@ -42,6 +42,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import piante.TassoCrescitaType;
 
 public class Window extends JFrame {
 
@@ -63,55 +64,58 @@ public class Window extends JFrame {
 	private JButton btnAcquari;
 	private JButton btnCerca;
 	private JButton btnSalva;
-	private JButton btnSalvaAcquario;
-	private JScrollPane scrollPaneDescrizione;
-	private JTextArea textArea;
-	private JTextField textFieldLitraggio;
-	private JTextField textFieldLunghezza;
-	private JTextField textFieldLarghezza;
-	private JTextField textFieldAltezza;
+	private JButton btnSalvaNewAcquario;
+	private JScrollPane scrollPaneNewDescrizione;
+	private JTextArea textAreaNewDescrizione;
+	private JTextField textFieldNewLitraggio;
+	private JTextField textFieldNewLunghezza;
+	private JTextField textFieldNewLarghezza;
+	private JTextField textFieldNewAltezza;
 	private JList listAcquari;
 	private JLabel lblDescrizione;
-	private JLabel lblLitraggio;
-	private JLabel lblLunghezza;
-	private JLabel lblLarghezza;
-	private JLabel lblAltezza;
-	private JComboBox comboBoxAcquari;
-	private JScrollPane scrollPane;
-	private JPanel panel;
+	private JLabel lblNewLitraggio;
+	private JLabel lblNewLunghezza;
+	private JLabel lblNewLarghezza;
+	private JLabel lblNewAltezza;
+	private JComboBox comboBoxSalvaAcquari;
+	private JScrollPane scrollPaneSalvaListaCarrello;
+	private JPanel panelSalvaListaCarrello;
 	private JCheckBox chckbxNewCheckBox;
 	private JPanel panel_1;
 	private JCheckBox chckbxNewCheckBox_1;
 	private JSpinner spinner;
-	private JButton btnAggiungiPiante;
-	private JScrollPane scrollPane_1;
-	private JPanel panel_2;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JScrollPane scrollPane_2;
-	private JTextArea textArea_1;
-	private JLabel lblNewLabel_5;
-	private JScrollPane scrollPane_3;
-	private JList list;
-	private JComboBox comboBox;
-	private JComboBox comboBox_1;
-	private JComboBox comboBox_2;
-	private JComboBox comboBox_3;
-	private JLabel lblNewLabel_6;
-	private JLabel label;
-	private JLabel lblNewLabel_7;
-	private JLabel lblNewLabel_8;
-	private JButton btnNewButton;
-	private JTextField textField_4;
-	private JScrollPane scrollPane_4;
-	private JLabel lblNewLabel_9;
-	private JList list_12;
+	private JButton btnSalvaAggiungiPiante;
+	private JScrollPane scrollPaneView;
+	private JPanel panelViewAcquario;
+	private JTextField textFieldViewLitraggio;
+	private JTextField textFieldViewLunghezza;
+	private JTextField textFieldViewLarghezza;
+	private JTextField textFieldViewAltezza;
+	private JLabel lblViewLitraggio;
+	private JLabel lblViewLunghezza;
+	private JLabel lblViewLarghezza;
+	private JLabel lblViewAltezza;
+	private JScrollPane scrollPaneViewDescrizioneAcquario;
+	private JTextArea textAreaViewDescrizioneAcquario;
+	private JLabel lblViewDescrizione;
+	private JScrollPane scrollPaneViewListaPianteAcquario;
+	private JList listViewPianteAcquario;
+	private JComboBox comboBoxCercaOrigine;
+	private JComboBox comboBoxCercaTassoCrescita;
+	private JComboBox comboBoxCercaLuce;
+	private JComboBox comboBoxCercaCo2;
+	private JLabel lblCercaNome;
+	private JLabel lblCercaOrigine;
+	private JLabel lblCercaTassoCrescita;
+	private JLabel lblCercaLuce;
+	private JButton btnCercaAggiungiPianta;
+	private JTextField textFieldCercaNome;
+	private JScrollPane scrollPaneCercaListaPiante;
+	private JLabel lblCercaCo2;
+	private JList listCercaPiante;
+	private JComboBox comboBoxCercaDifficolta;
+	private JLabel lblCercaDifficolta;
+	private JButton btnCercaPianta;
 
 	/**
 	 * Launch the application.
@@ -134,7 +138,7 @@ public class Window extends JFrame {
 	 */
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 956,446);
+		setBounds(100, 100, 956,530);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -188,182 +192,193 @@ public class Window extends JFrame {
 			}
 		});
 		scrollPaneAcquari.setViewportView(listAcquari);
-		panelCardAcquari.setLayout(new CardLayout(0, 0));
+		CardLayout acquarioLayout= new CardLayout();
+		panelCardAcquari.setLayout(acquarioLayout);
 		
 		panelNew = new JPanel();
-		panelCardAcquari.add(panelNew, "name_507475470980800");
+		panelCardAcquari.add(panelNew, "panelNew");
 		SpringLayout sl_panelNew = new SpringLayout();
 		panelNew.setLayout(sl_panelNew);
 		
-		btnSalvaAcquario = new JButton("Salva");
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, btnSalvaAcquario, -10, SpringLayout.SOUTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.EAST, btnSalvaAcquario, -10, SpringLayout.EAST, panelNew);
-		panelNew.add(btnSalvaAcquario);
+		btnSalvaNewAcquario = new JButton("Salva Acquario");
+		sl_panelNew.putConstraint(SpringLayout.SOUTH, btnSalvaNewAcquario, -10, SpringLayout.SOUTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, btnSalvaNewAcquario, -10, SpringLayout.EAST, panelNew);
+		panelNew.add(btnSalvaNewAcquario);
 		
-		scrollPaneDescrizione = new JScrollPane();
-		sl_panelNew.putConstraint(SpringLayout.WEST, scrollPaneDescrizione, 10, SpringLayout.WEST, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, scrollPaneDescrizione, -6, SpringLayout.NORTH, btnSalvaAcquario);
-		sl_panelNew.putConstraint(SpringLayout.EAST, scrollPaneDescrizione, -10, SpringLayout.EAST, panelNew);
-		panelNew.add(scrollPaneDescrizione);
+		scrollPaneNewDescrizione = new JScrollPane();
+		sl_panelNew.putConstraint(SpringLayout.WEST, scrollPaneNewDescrizione, 10, SpringLayout.WEST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.SOUTH, scrollPaneNewDescrizione, -6, SpringLayout.NORTH, btnSalvaNewAcquario);
+		sl_panelNew.putConstraint(SpringLayout.EAST, scrollPaneNewDescrizione, -10, SpringLayout.EAST, panelNew);
+		panelNew.add(scrollPaneNewDescrizione);
 		
-		textArea = new JTextArea();
-		scrollPaneDescrizione.setViewportView(textArea);
+		textAreaNewDescrizione = new JTextArea();
+		scrollPaneNewDescrizione.setViewportView(textAreaNewDescrizione);
 		
-		textFieldLitraggio = new JTextField();
-		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldLitraggio, 10, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldLitraggio, -153, SpringLayout.EAST, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldLitraggio, 10, SpringLayout.WEST, panelNew);
-		panelNew.add(textFieldLitraggio);
-		textFieldLitraggio.setColumns(10);
+		textFieldNewLitraggio = new JTextField();
+		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldNewLitraggio, 10, SpringLayout.NORTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldNewLitraggio, -153, SpringLayout.EAST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldNewLitraggio, 10, SpringLayout.WEST, panelNew);
+		panelNew.add(textFieldNewLitraggio);
+		textFieldNewLitraggio.setColumns(10);
 		
-		textFieldLunghezza = new JTextField();
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldLitraggio, -17, SpringLayout.NORTH, textFieldLunghezza);
-		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldLunghezza, 0, SpringLayout.EAST, textFieldLitraggio);
-		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldLunghezza, 47, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldLunghezza, 10, SpringLayout.WEST, panelNew);
-		textFieldLunghezza.setColumns(10);
-		panelNew.add(textFieldLunghezza);
+		textFieldNewLunghezza = new JTextField();
+		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldNewLitraggio, -17, SpringLayout.NORTH, textFieldNewLunghezza);
+		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldNewLunghezza, 0, SpringLayout.EAST, textFieldNewLitraggio);
+		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldNewLunghezza, 47, SpringLayout.NORTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldNewLunghezza, 10, SpringLayout.WEST, panelNew);
+		textFieldNewLunghezza.setColumns(10);
+		panelNew.add(textFieldNewLunghezza);
 		
-		textFieldLarghezza = new JTextField();
-		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldLarghezza, 86, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldLarghezza, 10, SpringLayout.WEST, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldLarghezza, 0, SpringLayout.EAST, textFieldLitraggio);
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldLunghezza, -19, SpringLayout.NORTH, textFieldLarghezza);
-		textFieldLarghezza.setColumns(10);
-		panelNew.add(textFieldLarghezza);
+		textFieldNewLarghezza = new JTextField();
+		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldNewLarghezza, 86, SpringLayout.NORTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldNewLarghezza, 10, SpringLayout.WEST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldNewLarghezza, 0, SpringLayout.EAST, textFieldNewLitraggio);
+		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldNewLunghezza, -19, SpringLayout.NORTH, textFieldNewLarghezza);
+		textFieldNewLarghezza.setColumns(10);
+		panelNew.add(textFieldNewLarghezza);
 		
-		textFieldAltezza = new JTextField();
-		sl_panelNew.putConstraint(SpringLayout.NORTH, scrollPaneDescrizione, 20, SpringLayout.SOUTH, textFieldAltezza);
-		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldAltezza, 122, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldLarghezza, -16, SpringLayout.NORTH, textFieldAltezza);
-		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldAltezza, 10, SpringLayout.WEST, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldAltezza, 0, SpringLayout.EAST, textFieldLitraggio);
-		textFieldAltezza.setColumns(10);
-		panelNew.add(textFieldAltezza);
+		textFieldNewAltezza = new JTextField();
+		sl_panelNew.putConstraint(SpringLayout.NORTH, scrollPaneNewDescrizione, 20, SpringLayout.SOUTH, textFieldNewAltezza);
+		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldNewAltezza, 122, SpringLayout.NORTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldNewLarghezza, -16, SpringLayout.NORTH, textFieldNewAltezza);
+		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldNewAltezza, 10, SpringLayout.WEST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldNewAltezza, 0, SpringLayout.EAST, textFieldNewLitraggio);
+		textFieldNewAltezza.setColumns(10);
+		panelNew.add(textFieldNewAltezza);
 		
 		lblDescrizione = new JLabel("Descrizione");
-		sl_panelNew.putConstraint(SpringLayout.NORTH, lblDescrizione, 4, SpringLayout.NORTH, btnSalvaAcquario);
+		sl_panelNew.putConstraint(SpringLayout.NORTH, lblDescrizione, 4, SpringLayout.NORTH, btnSalvaNewAcquario);
 		sl_panelNew.putConstraint(SpringLayout.WEST, lblDescrizione, 10, SpringLayout.WEST, panelNew);
 		panelNew.add(lblDescrizione);
 		
-		lblLitraggio = new JLabel("Litraggio");
-		sl_panelNew.putConstraint(SpringLayout.NORTH, lblLitraggio, 10, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.EAST, lblLitraggio, -10, SpringLayout.EAST, panelNew);
-		panelNew.add(lblLitraggio);
+		lblNewLitraggio = new JLabel("litraggio");
+		sl_panelNew.putConstraint(SpringLayout.NORTH, lblNewLitraggio, 10, SpringLayout.NORTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, lblNewLitraggio, -10, SpringLayout.EAST, panelNew);
+		panelNew.add(lblNewLitraggio);
 		
-		lblLunghezza = new JLabel("Lunghezza");
-		sl_panelNew.putConstraint(SpringLayout.NORTH, lblLunghezza, 23, SpringLayout.SOUTH, lblLitraggio);
-		sl_panelNew.putConstraint(SpringLayout.EAST, lblLunghezza, -10, SpringLayout.EAST, panelNew);
-		panelNew.add(lblLunghezza);
+		lblNewLunghezza = new JLabel("lunghezza");
+		sl_panelNew.putConstraint(SpringLayout.NORTH, lblNewLunghezza, 23, SpringLayout.SOUTH, lblNewLitraggio);
+		sl_panelNew.putConstraint(SpringLayout.EAST, lblNewLunghezza, -10, SpringLayout.EAST, panelNew);
+		panelNew.add(lblNewLunghezza);
 		
-		lblLarghezza = new JLabel("Larghezza");
-		sl_panelNew.putConstraint(SpringLayout.NORTH, lblLarghezza, 25, SpringLayout.SOUTH, lblLunghezza);
-		sl_panelNew.putConstraint(SpringLayout.EAST, lblLarghezza, -10, SpringLayout.EAST, panelNew);
-		panelNew.add(lblLarghezza);
+		lblNewLarghezza = new JLabel("larghezza");
+		sl_panelNew.putConstraint(SpringLayout.NORTH, lblNewLarghezza, 25, SpringLayout.SOUTH, lblNewLunghezza);
+		sl_panelNew.putConstraint(SpringLayout.EAST, lblNewLarghezza, -10, SpringLayout.EAST, panelNew);
+		panelNew.add(lblNewLarghezza);
 		
-		lblAltezza = new JLabel("Altezza");
-		sl_panelNew.putConstraint(SpringLayout.NORTH, lblAltezza, 22, SpringLayout.SOUTH, lblLarghezza);
-		sl_panelNew.putConstraint(SpringLayout.EAST, lblAltezza, -10, SpringLayout.EAST, panelNew);
-		panelNew.add(lblAltezza);
+		lblNewAltezza = new JLabel("altezza");
+		sl_panelNew.putConstraint(SpringLayout.NORTH, lblNewAltezza, 22, SpringLayout.SOUTH, lblNewLarghezza);
+		sl_panelNew.putConstraint(SpringLayout.EAST, lblNewAltezza, -10, SpringLayout.EAST, panelNew);
+		panelNew.add(lblNewAltezza);
 		
 		panelView = new JPanel();
-		panelCardAcquari.add(panelView, "name_507487369534400");
+		panelCardAcquari.add(panelView, "panelView");
 		panelView.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		panelView.add(scrollPane_1);
+		scrollPaneView = new JScrollPane();
+		scrollPaneView.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		panelView.add(scrollPaneView);
 		
-		panel_2 = new JPanel();
-		scrollPane_1.setViewportView(panel_2);
+		panelViewAcquario = new JPanel();
+		scrollPaneView.setViewportView(panelViewAcquario);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		textFieldViewLitraggio = new JTextField();
+		textFieldViewLitraggio.setEditable(false);
+		textFieldViewLitraggio.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		textFieldViewLunghezza = new JTextField();
+		textFieldViewLunghezza.setEditable(false);
+		textFieldViewLunghezza.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		textFieldViewLarghezza = new JTextField();
+		textFieldViewLarghezza.setEditable(false);
+		textFieldViewLarghezza.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		textFieldViewAltezza = new JTextField();
+		textFieldViewAltezza.setEditable(false);
+		textFieldViewAltezza.setColumns(10);
 		
-		lblNewLabel_1 = new JLabel("New label");
+		lblViewLitraggio = new JLabel("litraggio");
 		
-		lblNewLabel_2 = new JLabel("New label");
+		lblViewLunghezza = new JLabel("lunghezza");
 		
-		lblNewLabel_3 = new JLabel("New label");
+		lblViewLarghezza = new JLabel("larghezza");
 		
-		lblNewLabel_4 = new JLabel("New label");
+		lblViewAltezza = new JLabel("altezza");
 		
-		scrollPane_2 = new JScrollPane();
+		scrollPaneViewDescrizioneAcquario = new JScrollPane();
 		
-		lblNewLabel_5 = new JLabel("New label");
+		lblViewDescrizione = new JLabel("descrizione");
 		
-		scrollPane_3 = new JScrollPane();
-		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-						.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-							.addGap(81)
-							.addComponent(lblNewLabel_1))
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-							.addGap(81)
-							.addComponent(lblNewLabel_2))
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-							.addGap(81)
-							.addComponent(lblNewLabel_3))
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-							.addGap(81)
-							.addComponent(lblNewLabel_4))
-						.addComponent(lblNewLabel_5))
-					.addContainerGap())
+		scrollPaneViewListaPianteAcquario = new JScrollPane();
+		
+		listViewPianteAcquario = new JList();
+		scrollPaneViewListaPianteAcquario.setViewportView(listViewPianteAcquario);
+		
+		textAreaViewDescrizioneAcquario = new JTextArea();
+		textAreaViewDescrizioneAcquario.setEditable(false);
+		scrollPaneViewDescrizioneAcquario.setViewportView(textAreaViewDescrizioneAcquario);
+		GroupLayout gl_panelViewAcquario = new GroupLayout(panelViewAcquario);
+		gl_panelViewAcquario.setHorizontalGroup(
+			gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelViewAcquario.createSequentialGroup()
+					.addGap(10)
+					.addGroup(gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelViewAcquario.createSequentialGroup()
+							.addComponent(textFieldViewLitraggio, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addGap(98)
+							.addComponent(lblViewLitraggio))
+						.addGroup(gl_panelViewAcquario.createSequentialGroup()
+							.addComponent(textFieldViewLunghezza, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addGap(88)
+							.addComponent(lblViewLunghezza))
+						.addGroup(gl_panelViewAcquario.createSequentialGroup()
+							.addComponent(textFieldViewLarghezza, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addGap(90)
+							.addComponent(lblViewLarghezza))
+						.addGroup(gl_panelViewAcquario.createSequentialGroup()
+							.addComponent(textFieldViewAltezza, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addGap(102)
+							.addComponent(lblViewAltezza))
+						.addComponent(scrollPaneViewDescrizioneAcquario, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblViewDescrizione)
+						.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)))
 		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1))
+		gl_panelViewAcquario.setVerticalGroup(
+			gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelViewAcquario.createSequentialGroup()
+					.addGap(11)
+					.addGroup(gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
+						.addComponent(textFieldViewLitraggio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelViewAcquario.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblViewLitraggio)))
 					.addGap(18)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_2))
+					.addGroup(gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
+						.addComponent(textFieldViewLunghezza, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelViewAcquario.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblViewLunghezza)))
 					.addGap(18)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_3))
+					.addGroup(gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
+						.addComponent(textFieldViewLarghezza, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelViewAcquario.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblViewLarghezza)))
 					.addGap(18)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_4))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_5)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-					.addContainerGap())
+					.addGroup(gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
+						.addComponent(textFieldViewAltezza, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelViewAcquario.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblViewAltezza)))
+					.addGap(11)
+					.addComponent(scrollPaneViewDescrizioneAcquario, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+					.addGap(6)
+					.addComponent(lblViewDescrizione)
+					.addGap(6)
+					.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
 		);
-		
-		list = new JList();
-		scrollPane_3.setViewportView(list);
-		
-		textArea_1 = new JTextArea();
-		textArea_1.setEditable(false);
-		scrollPane_2.setViewportView(textArea_1);
-		panel_2.setLayout(gl_panel_2);
+		panelViewAcquario.setLayout(gl_panelViewAcquario);
 		panelAcquari.add(panelBtnAcquari);
 		panelBtnAcquari.setLayout(new GridLayout(3, 0, 0, 0));
 		
@@ -384,12 +399,12 @@ public class Window extends JFrame {
 		SpringLayout sl_panelSalva = new SpringLayout();
 		panelSalva.setLayout(sl_panelSalva);
 		
-		comboBoxAcquari = new JComboBox();
-		comboBoxAcquari.setMaximumRowCount(12);
-		comboBoxAcquari.setModel(new DefaultComboBoxModel(new String[] {"SELEZIONA ACQUARIO", "1", "2", "3", "4", "5", "6", "7", "8"}));
-		comboBoxAcquari.setToolTipText("Selezione acquario");
-		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxAcquari, -41, SpringLayout.EAST, panelSalva);
-		panelSalva.add(comboBoxAcquari);
+		comboBoxSalvaAcquari = new JComboBox();
+		comboBoxSalvaAcquari.setMaximumRowCount(12);
+		comboBoxSalvaAcquari.setModel(new DefaultComboBoxModel(new String[] {"SELEZIONA ACQUARIO", "1", "2", "3", "4", "5", "6", "7", "8"}));
+		comboBoxSalvaAcquari.setToolTipText("Selezione acquario");
+		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxSalvaAcquari, -41, SpringLayout.EAST, panelSalva);
+		panelSalva.add(comboBoxSalvaAcquari);
 		
 		panelSections = new JPanel();
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, panelCardMain, -24, SpringLayout.NORTH, panelSections);
@@ -413,119 +428,129 @@ public class Window extends JFrame {
 	    panelCardMain.add(panelAcquari, "panelAcquari");
 	    panelCardMain.add(panelCerca, "panelCerca");
 	    
-	    comboBox = new JComboBox();
+	    comboBoxCercaOrigine = new JComboBox();
+	    comboBoxCercaOrigine.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Cosmopolitan", "Cultivar", "South America", "Africa", "North America", "Asia", "Europe/Asia", "Australia"}));
 	    
-	    comboBox_1 = new JComboBox();
+	    comboBoxCercaTassoCrescita = new JComboBox();
+	    comboBoxCercaTassoCrescita.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Lento", "Medio", "Veloce"}));
 	    
-	    comboBox_2 = new JComboBox();
+	    comboBoxCercaLuce = new JComboBox();
+	    comboBoxCercaLuce.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Poca", "Media", "Tanta"}));
 	    
-	    comboBox_3 = new JComboBox();
+	    comboBoxCercaCo2 = new JComboBox();
+	    comboBoxCercaCo2.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Poca", "Media", "Tanta"}));
 	    
-	    lblNewLabel_6 = new JLabel("New label");
+	    lblCercaNome = new JLabel("nome");
 	    
-	    label = new JLabel("New label");
+	    lblCercaOrigine = new JLabel("origine");
 	    
-	    lblNewLabel_7 = new JLabel("New label");
+	    lblCercaTassoCrescita = new JLabel("tasso crescita");
 	    
-	    lblNewLabel_8 = new JLabel("New label");
+	    lblCercaLuce = new JLabel("luce");
 	    
-	    btnNewButton = new JButton("New button");
+	    btnCercaAggiungiPianta = new JButton("Aggiungi Piante");
 	    
-	    textField_4 = new JTextField();
-	    textField_4.setColumns(10);
+	    textFieldCercaNome = new JTextField();
+	    textFieldCercaNome.setColumns(10);
 	    
-	    scrollPane_4 = new JScrollPane();
+	    scrollPaneCercaListaPiante = new JScrollPane();
 	    
-	    lblNewLabel_9 = new JLabel("New label");
+	    lblCercaCo2 = new JLabel("co2");
+	    
+	    comboBoxCercaDifficolta = new JComboBox();
+	    comboBoxCercaDifficolta.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Easy", "Medium", "Hard"}));
+	    
+	    lblCercaDifficolta = new JLabel("difficoltà");
+	    
+	    btnCercaPianta = new JButton("Cerca Pianta");
 	    GroupLayout gl_panelCerca = new GroupLayout(panelCerca);
 	    gl_panelCerca.setHorizontalGroup(
 	    	gl_panelCerca.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_panelCerca.createSequentialGroup()
 	    			.addContainerGap()
 	    			.addGroup(gl_panelCerca.createParallelGroup(Alignment.LEADING)
-	    				.addGroup(gl_panelCerca.createParallelGroup(Alignment.LEADING)
-	    					.addGroup(gl_panelCerca.createSequentialGroup()
-	    						.addComponent(label)
-	    						.addGap(104))
-	    					.addGroup(gl_panelCerca.createSequentialGroup()
-	    						.addComponent(lblNewLabel_6)
-	    						.addPreferredGap(ComponentPlacement.RELATED))
-	    					.addGroup(gl_panelCerca.createSequentialGroup()
-	    						.addComponent(lblNewLabel_7)
-	    						.addPreferredGap(ComponentPlacement.RELATED))
-	    					.addGroup(gl_panelCerca.createSequentialGroup()
-	    						.addComponent(lblNewLabel_8)
-	    						.addPreferredGap(ComponentPlacement.RELATED))
-	    					.addGroup(gl_panelCerca.createSequentialGroup()
-	    						.addGroup(gl_panelCerca.createParallelGroup(Alignment.TRAILING, false)
-	    							.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	    							.addComponent(comboBox_3, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	    							.addComponent(comboBox_2, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	    							.addComponent(comboBox_1, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	    							.addComponent(comboBox, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	    							.addComponent(textField_4, Alignment.LEADING, 166, 166, Short.MAX_VALUE))
-	    						.addPreferredGap(ComponentPlacement.RELATED)))
 	    				.addGroup(gl_panelCerca.createSequentialGroup()
-	    					.addComponent(lblNewLabel_9)
-	    					.addPreferredGap(ComponentPlacement.RELATED)))
-	    			.addComponent(scrollPane_4, GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+	    					.addComponent(lblCercaOrigine)
+	    					.addGap(104))
+	    				.addComponent(lblCercaNome)
+	    				.addComponent(lblCercaTassoCrescita)
+	    				.addComponent(lblCercaLuce)
+	    				.addComponent(comboBoxCercaCo2, 0, 176, Short.MAX_VALUE)
+	    				.addComponent(comboBoxCercaLuce, 0, 176, Short.MAX_VALUE)
+	    				.addComponent(comboBoxCercaTassoCrescita, 0, 176, Short.MAX_VALUE)
+	    				.addComponent(comboBoxCercaOrigine, 0, 176, Short.MAX_VALUE)
+	    				.addComponent(textFieldCercaNome, 166, 176, Short.MAX_VALUE)
+	    				.addComponent(comboBoxCercaDifficolta, Alignment.TRAILING, 0, 176, Short.MAX_VALUE)
+	    				.addComponent(lblCercaCo2)
+	    				.addComponent(lblCercaDifficolta)
+	    				.addGroup(gl_panelCerca.createSequentialGroup()
+	    					.addComponent(btnCercaPianta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(btnCercaAggiungiPianta, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)))
+	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addComponent(scrollPaneCercaListaPiante, GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
 	    			.addContainerGap())
 	    );
 	    gl_panelCerca.setVerticalGroup(
-	    	gl_panelCerca.createParallelGroup(Alignment.LEADING)
-	    		.addGroup(gl_panelCerca.createSequentialGroup()
+	    	gl_panelCerca.createParallelGroup(Alignment.TRAILING)
+	    		.addGroup(Alignment.LEADING, gl_panelCerca.createSequentialGroup()
 	    			.addGap(6)
 	    			.addGroup(gl_panelCerca.createParallelGroup(Alignment.LEADING)
+	    				.addComponent(scrollPaneCercaListaPiante, GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
 	    				.addGroup(gl_panelCerca.createSequentialGroup()
+	    					.addComponent(textFieldCercaNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(lblNewLabel_6)
+	    					.addComponent(lblCercaNome)
 	    					.addGap(11)
-	    					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addComponent(comboBoxCercaOrigine, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    					.addGap(4)
-	    					.addComponent(label)
+	    					.addComponent(lblCercaOrigine)
 	    					.addPreferredGap(ComponentPlacement.UNRELATED)
-	    					.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addComponent(comboBoxCercaTassoCrescita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(lblNewLabel_7)
+	    					.addComponent(lblCercaTassoCrescita)
 	    					.addPreferredGap(ComponentPlacement.UNRELATED)
-	    					.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addComponent(comboBoxCercaLuce, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(lblNewLabel_8)
+	    					.addComponent(lblCercaLuce)
 	    					.addPreferredGap(ComponentPlacement.UNRELATED)
-	    					.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addComponent(comboBoxCercaCo2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(lblNewLabel_9)
-	    					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-	    					.addComponent(btnNewButton))
-	    				.addComponent(scrollPane_4, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
-	    			.addGap(26))
+	    					.addComponent(lblCercaCo2)
+	    					.addPreferredGap(ComponentPlacement.UNRELATED)
+	    					.addComponent(comboBoxCercaDifficolta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(lblCercaDifficolta)
+	    					.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+	    					.addGroup(gl_panelCerca.createParallelGroup(Alignment.BASELINE)
+	    						.addComponent(btnCercaAggiungiPianta)
+	    						.addComponent(btnCercaPianta))))
+	    			.addContainerGap())
 	    );
 	    
-	    list_12 = new JList();
-	    scrollPane_4.setViewportView(list_12);
+	    listCercaPiante = new JList();
+	    scrollPaneCercaListaPiante.setViewportView(listCercaPiante);
 	    panelCerca.setLayout(gl_panelCerca);
 	    panelCardMain.add(panelSalva, "panelSalva");
 	    
-	    scrollPane = new JScrollPane();
-	    sl_panelSalva.putConstraint(SpringLayout.NORTH, comboBoxAcquari, 0, SpringLayout.NORTH, scrollPane);
-	    sl_panelSalva.putConstraint(SpringLayout.WEST, comboBoxAcquari, 22, SpringLayout.EAST, scrollPane);
-	    sl_panelSalva.putConstraint(SpringLayout.NORTH, scrollPane, 10, SpringLayout.NORTH, panelSalva);
-	    sl_panelSalva.putConstraint(SpringLayout.SOUTH, scrollPane, -10, SpringLayout.SOUTH, panelSalva);
-	    sl_panelSalva.putConstraint(SpringLayout.EAST, scrollPane, -286, SpringLayout.EAST, panelSalva);
-	    sl_panelSalva.putConstraint(SpringLayout.WEST, scrollPane, 10, SpringLayout.WEST, panelSalva);
-	    panelSalva.add(scrollPane);
+	    scrollPaneSalvaListaCarrello = new JScrollPane();
+	    sl_panelSalva.putConstraint(SpringLayout.NORTH, comboBoxSalvaAcquari, 0, SpringLayout.NORTH, scrollPaneSalvaListaCarrello);
+	    sl_panelSalva.putConstraint(SpringLayout.WEST, comboBoxSalvaAcquari, 22, SpringLayout.EAST, scrollPaneSalvaListaCarrello);
+	    sl_panelSalva.putConstraint(SpringLayout.NORTH, scrollPaneSalvaListaCarrello, 10, SpringLayout.NORTH, panelSalva);
+	    sl_panelSalva.putConstraint(SpringLayout.SOUTH, scrollPaneSalvaListaCarrello, -10, SpringLayout.SOUTH, panelSalva);
+	    sl_panelSalva.putConstraint(SpringLayout.EAST, scrollPaneSalvaListaCarrello, -286, SpringLayout.EAST, panelSalva);
+	    sl_panelSalva.putConstraint(SpringLayout.WEST, scrollPaneSalvaListaCarrello, 10, SpringLayout.WEST, panelSalva);
+	    panelSalva.add(scrollPaneSalvaListaCarrello);
 	    
-	    panel = new JPanel();
-	    panel.setToolTipText("Carrello piante");
-	    scrollPane.setViewportView(panel);
-	    GridLayout panelCart= new GridLayout(30, 1, 0, 0);
-	    panel.setLayout(panelCart);
+	    panelSalvaListaCarrello = new JPanel();
+	    panelSalvaListaCarrello.setToolTipText("Carrello piante");
+	    scrollPaneSalvaListaCarrello.setViewportView(panelSalvaListaCarrello);
+	    GridLayout gl_panelSalvaListaCarrello= new GridLayout(30, 1, 0, 0);
+	    panelSalvaListaCarrello.setLayout(gl_panelSalvaListaCarrello);
 	    
 	    panel_1 = new JPanel();
 	    panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-	    panel.add(panel_1);
+	    panelSalvaListaCarrello.add(panel_1);
 	    GridBagLayout gbl_panel_1 = new GridBagLayout();
 	    gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
 	    gbl_panel_1.rowHeights = new int[]{0, 0};
@@ -557,10 +582,10 @@ public class Window extends JFrame {
 	    gbc_spinner.gridy = 0;
 	    panel_1.add(spinner, gbc_spinner);
 	    
-	    btnAggiungiPiante = new JButton("Aggiungi Piante");
-	    sl_panelSalva.putConstraint(SpringLayout.WEST, btnAggiungiPiante, 85, SpringLayout.EAST, scrollPane);
-	    sl_panelSalva.putConstraint(SpringLayout.SOUTH, btnAggiungiPiante, -39, SpringLayout.SOUTH, panelSalva);
-	    panelSalva.add(btnAggiungiPiante);
+	    btnSalvaAggiungiPiante = new JButton("Aggiungi Piante");
+	    sl_panelSalva.putConstraint(SpringLayout.WEST, btnSalvaAggiungiPiante, 85, SpringLayout.EAST, scrollPaneSalvaListaCarrello);
+	    sl_panelSalva.putConstraint(SpringLayout.SOUTH, btnSalvaAggiungiPiante, -39, SpringLayout.SOUTH, panelSalva);
+	    panelSalva.add(btnSalvaAggiungiPiante);
 	    
 	
 	    
@@ -568,5 +593,7 @@ public class Window extends JFrame {
 	    btnAcquari.addActionListener(e -> cardLayout.show(panelCardMain, "panelAcquari"));
 	    btnCerca.addActionListener(e -> cardLayout.show(panelCardMain, "panelCerca"));
 	    btnSalva.addActionListener(e -> cardLayout.show(panelCardMain, "panelSalva"));
+	    btnNew.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelNew"));
+	    btnView.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelView"));
 	}
 }
