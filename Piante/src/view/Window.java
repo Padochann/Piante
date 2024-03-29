@@ -33,6 +33,15 @@ import java.awt.Insets;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import javax.swing.SpinnerNumberModel;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Window extends JFrame {
 
@@ -67,13 +76,29 @@ public class Window extends JFrame {
 	private JLabel lblLunghezza;
 	private JLabel lblLarghezza;
 	private JLabel lblAltezza;
-	private JList listPlants;
 	private JComboBox comboBoxAcquari;
 	private JScrollPane scrollPane;
 	private JPanel panel;
 	private JCheckBox chckbxNewCheckBox;
 	private JPanel panel_1;
 	private JCheckBox chckbxNewCheckBox_1;
+	private JSpinner spinner;
+	private JButton btnAggiungiPiante;
+	private JScrollPane scrollPane_1;
+	private JPanel panel_2;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JScrollPane scrollPane_2;
+	private JTextArea textArea_1;
+	private JLabel lblNewLabel_5;
+	private JScrollPane scrollPane_3;
+	private JList list;
 
 	/**
 	 * Launch the application.
@@ -96,7 +121,7 @@ public class Window extends JFrame {
 	 */
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 956, 440);
+		setBounds(100, 100, 956,440);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -140,6 +165,15 @@ public class Window extends JFrame {
 		sl_panelAcquari.putConstraint(SpringLayout.EAST, panelBtnAcquari, -6, SpringLayout.WEST, panelCardAcquari);
 		
 		listAcquari = new JList();
+		listAcquari.setModel(new AbstractListModel() {
+			String[] values = new String[] {};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
 		scrollPaneAcquari.setViewportView(listAcquari);
 		panelCardAcquari.setLayout(new CardLayout(0, 0));
 		
@@ -149,13 +183,13 @@ public class Window extends JFrame {
 		panelNew.setLayout(sl_panelNew);
 		
 		btnSalvaAcquario = new JButton("Salva");
-		sl_panelNew.putConstraint(SpringLayout.NORTH, btnSalvaAcquario, 227, SpringLayout.NORTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.SOUTH, btnSalvaAcquario, -10, SpringLayout.SOUTH, panelNew);
 		sl_panelNew.putConstraint(SpringLayout.EAST, btnSalvaAcquario, -10, SpringLayout.EAST, panelNew);
 		panelNew.add(btnSalvaAcquario);
 		
 		scrollPaneDescrizione = new JScrollPane();
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, scrollPaneDescrizione, -6, SpringLayout.NORTH, btnSalvaAcquario);
 		sl_panelNew.putConstraint(SpringLayout.WEST, scrollPaneDescrizione, 10, SpringLayout.WEST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.SOUTH, scrollPaneDescrizione, -6, SpringLayout.NORTH, btnSalvaAcquario);
 		sl_panelNew.putConstraint(SpringLayout.EAST, scrollPaneDescrizione, -10, SpringLayout.EAST, panelNew);
 		panelNew.add(scrollPaneDescrizione);
 		
@@ -195,7 +229,7 @@ public class Window extends JFrame {
 		panelNew.add(textFieldAltezza);
 		
 		lblDescrizione = new JLabel("Descrizione");
-		sl_panelNew.putConstraint(SpringLayout.NORTH, lblDescrizione, 231, SpringLayout.NORTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.NORTH, lblDescrizione, 4, SpringLayout.NORTH, btnSalvaAcquario);
 		sl_panelNew.putConstraint(SpringLayout.WEST, lblDescrizione, 10, SpringLayout.WEST, panelNew);
 		panelNew.add(lblDescrizione);
 		
@@ -223,8 +257,100 @@ public class Window extends JFrame {
 		panelCardAcquari.add(panelView, "name_507487369534400");
 		panelView.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		listPlants = new JList();
-		panelView.add(listPlants);
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		panelView.add(scrollPane_1);
+		
+		panel_2 = new JPanel();
+		scrollPane_1.setViewportView(panel_2);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		
+		lblNewLabel_1 = new JLabel("New label");
+		
+		lblNewLabel_2 = new JLabel("New label");
+		
+		lblNewLabel_3 = new JLabel("New label");
+		
+		lblNewLabel_4 = new JLabel("New label");
+		
+		scrollPane_2 = new JScrollPane();
+		
+		lblNewLabel_5 = new JLabel("New label");
+		
+		scrollPane_3 = new JScrollPane();
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+						.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+							.addGap(81)
+							.addComponent(lblNewLabel_1))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+							.addGap(81)
+							.addComponent(lblNewLabel_2))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+							.addGap(81)
+							.addComponent(lblNewLabel_3))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+							.addGap(81)
+							.addComponent(lblNewLabel_4))
+						.addComponent(lblNewLabel_5))
+					.addContainerGap())
+		);
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_1))
+					.addGap(18)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2))
+					.addGap(18)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_3))
+					.addGap(18)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_4))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel_5)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		list = new JList();
+		scrollPane_3.setViewportView(list);
+		
+		textArea_1 = new JTextArea();
+		textArea_1.setEditable(false);
+		scrollPane_2.setViewportView(textArea_1);
+		panel_2.setLayout(gl_panel_2);
 		panelAcquari.add(panelBtnAcquari);
 		panelBtnAcquari.setLayout(new GridLayout(3, 0, 0, 0));
 		
@@ -246,6 +372,9 @@ public class Window extends JFrame {
 		panelSalva.setLayout(sl_panelSalva);
 		
 		comboBoxAcquari = new JComboBox();
+		comboBoxAcquari.setMaximumRowCount(12);
+		comboBoxAcquari.setModel(new DefaultComboBoxModel(new String[] {"SELEZIONA ACQUARIO", "1", "2", "3", "4", "5", "6", "7", "8"}));
+		comboBoxAcquari.setToolTipText("Selezione acquario");
 		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxAcquari, -41, SpringLayout.EAST, panelSalva);
 		panelSalva.add(comboBoxAcquari);
 		
@@ -282,6 +411,7 @@ public class Window extends JFrame {
 	    panelSalva.add(scrollPane);
 	    
 	    panel = new JPanel();
+	    panel.setToolTipText("Carrello piante");
 	    scrollPane.setViewportView(panel);
 	    GridLayout panelCart= new GridLayout(30, 1, 0, 0);
 	    panel.setLayout(panelCart);
@@ -293,13 +423,13 @@ public class Window extends JFrame {
 	    gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
 	    gbl_panel_1.rowHeights = new int[]{0, 0};
 	    gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-	    gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+	    gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 	    panel_1.setLayout(gbl_panel_1);
 	    
 	    chckbxNewCheckBox_1 = new JCheckBox("");
 	    GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
+	    gbc_chckbxNewCheckBox_1.fill = GridBagConstraints.VERTICAL;
 	    gbc_chckbxNewCheckBox_1.insets = new Insets(0, 0, 0, 5);
-	    gbc_chckbxNewCheckBox_1.anchor = GridBagConstraints.NORTHWEST;
 	    gbc_chckbxNewCheckBox_1.gridx = 0;
 	    gbc_chckbxNewCheckBox_1.gridy = 0;
 	    panel_1.add(chckbxNewCheckBox_1, gbc_chckbxNewCheckBox_1);
@@ -307,22 +437,23 @@ public class Window extends JFrame {
 	    JLabel lblNewLabel = new JLabel("Rotala rotundifollia var \"hraa\"");
 	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	    GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-	    gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
 	    gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
 	    gbc_lblNewLabel.gridx = 1;
 	    gbc_lblNewLabel.gridy = 0;
 	    panel_1.add(lblNewLabel, gbc_lblNewLabel);
 	    
-	    JSpinner s = new JSpinner();
-	    JComboBox comboBox = new JComboBox();
-	    comboBox.setModel(new DefaultComboBoxModel(new String[] {"Q", "1", "2", "3"}));
-	    comboBox.setEnabled(true);
-	    comboBox.setEditable(false);
-	    GridBagConstraints gbc_comboBox = new GridBagConstraints();
-	    gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-	    gbc_comboBox.gridx = 2;
-	    gbc_comboBox.gridy = 0;
-	    panel_1.add(comboBox, gbc_comboBox);
+	    spinner = new JSpinner();
+	    spinner.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
+	    GridBagConstraints gbc_spinner = new GridBagConstraints();
+	    gbc_spinner.fill = GridBagConstraints.VERTICAL;
+	    gbc_spinner.gridx = 2;
+	    gbc_spinner.gridy = 0;
+	    panel_1.add(spinner, gbc_spinner);
+	    
+	    btnAggiungiPiante = new JButton("Aggiungi Piante");
+	    sl_panelSalva.putConstraint(SpringLayout.WEST, btnAggiungiPiante, 85, SpringLayout.EAST, scrollPane);
+	    sl_panelSalva.putConstraint(SpringLayout.SOUTH, btnAggiungiPiante, -39, SpringLayout.SOUTH, panelSalva);
+	    panelSalva.add(btnAggiungiPiante);
 	    
 	
 	    
