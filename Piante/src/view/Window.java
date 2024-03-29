@@ -99,6 +99,19 @@ public class Window extends JFrame {
 	private JLabel lblNewLabel_5;
 	private JScrollPane scrollPane_3;
 	private JList list;
+	private JComboBox comboBox;
+	private JComboBox comboBox_1;
+	private JComboBox comboBox_2;
+	private JComboBox comboBox_3;
+	private JLabel lblNewLabel_6;
+	private JLabel label;
+	private JLabel lblNewLabel_7;
+	private JLabel lblNewLabel_8;
+	private JButton btnNewButton;
+	private JTextField textField_4;
+	private JScrollPane scrollPane_4;
+	private JLabel lblNewLabel_9;
+	private JList list_12;
 
 	/**
 	 * Launch the application.
@@ -121,7 +134,7 @@ public class Window extends JFrame {
 	 */
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 956,440);
+		setBounds(100, 100, 956,446);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -399,6 +412,100 @@ public class Window extends JFrame {
 		 // Aggiungi i pannelli al CardLayout
 	    panelCardMain.add(panelAcquari, "panelAcquari");
 	    panelCardMain.add(panelCerca, "panelCerca");
+	    
+	    comboBox = new JComboBox();
+	    
+	    comboBox_1 = new JComboBox();
+	    
+	    comboBox_2 = new JComboBox();
+	    
+	    comboBox_3 = new JComboBox();
+	    
+	    lblNewLabel_6 = new JLabel("New label");
+	    
+	    label = new JLabel("New label");
+	    
+	    lblNewLabel_7 = new JLabel("New label");
+	    
+	    lblNewLabel_8 = new JLabel("New label");
+	    
+	    btnNewButton = new JButton("New button");
+	    
+	    textField_4 = new JTextField();
+	    textField_4.setColumns(10);
+	    
+	    scrollPane_4 = new JScrollPane();
+	    
+	    lblNewLabel_9 = new JLabel("New label");
+	    GroupLayout gl_panelCerca = new GroupLayout(panelCerca);
+	    gl_panelCerca.setHorizontalGroup(
+	    	gl_panelCerca.createParallelGroup(Alignment.LEADING)
+	    		.addGroup(gl_panelCerca.createSequentialGroup()
+	    			.addContainerGap()
+	    			.addGroup(gl_panelCerca.createParallelGroup(Alignment.LEADING)
+	    				.addGroup(gl_panelCerca.createParallelGroup(Alignment.LEADING)
+	    					.addGroup(gl_panelCerca.createSequentialGroup()
+	    						.addComponent(label)
+	    						.addGap(104))
+	    					.addGroup(gl_panelCerca.createSequentialGroup()
+	    						.addComponent(lblNewLabel_6)
+	    						.addPreferredGap(ComponentPlacement.RELATED))
+	    					.addGroup(gl_panelCerca.createSequentialGroup()
+	    						.addComponent(lblNewLabel_7)
+	    						.addPreferredGap(ComponentPlacement.RELATED))
+	    					.addGroup(gl_panelCerca.createSequentialGroup()
+	    						.addComponent(lblNewLabel_8)
+	    						.addPreferredGap(ComponentPlacement.RELATED))
+	    					.addGroup(gl_panelCerca.createSequentialGroup()
+	    						.addGroup(gl_panelCerca.createParallelGroup(Alignment.TRAILING, false)
+	    							.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    							.addComponent(comboBox_3, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    							.addComponent(comboBox_2, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    							.addComponent(comboBox_1, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    							.addComponent(comboBox, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	    							.addComponent(textField_4, Alignment.LEADING, 166, 166, Short.MAX_VALUE))
+	    						.addPreferredGap(ComponentPlacement.RELATED)))
+	    				.addGroup(gl_panelCerca.createSequentialGroup()
+	    					.addComponent(lblNewLabel_9)
+	    					.addPreferredGap(ComponentPlacement.RELATED)))
+	    			.addComponent(scrollPane_4, GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+	    			.addContainerGap())
+	    );
+	    gl_panelCerca.setVerticalGroup(
+	    	gl_panelCerca.createParallelGroup(Alignment.LEADING)
+	    		.addGroup(gl_panelCerca.createSequentialGroup()
+	    			.addGap(6)
+	    			.addGroup(gl_panelCerca.createParallelGroup(Alignment.LEADING)
+	    				.addGroup(gl_panelCerca.createSequentialGroup()
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(lblNewLabel_6)
+	    					.addGap(11)
+	    					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addGap(4)
+	    					.addComponent(label)
+	    					.addPreferredGap(ComponentPlacement.UNRELATED)
+	    					.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(lblNewLabel_7)
+	    					.addPreferredGap(ComponentPlacement.UNRELATED)
+	    					.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(lblNewLabel_8)
+	    					.addPreferredGap(ComponentPlacement.UNRELATED)
+	    					.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(lblNewLabel_9)
+	    					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+	    					.addComponent(btnNewButton))
+	    				.addComponent(scrollPane_4, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
+	    			.addGap(26))
+	    );
+	    
+	    list_12 = new JList();
+	    scrollPane_4.setViewportView(list_12);
+	    panelCerca.setLayout(gl_panelCerca);
 	    panelCardMain.add(panelSalva, "panelSalva");
 	    
 	    scrollPane = new JScrollPane();
