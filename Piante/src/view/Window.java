@@ -44,7 +44,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import piante.TassoCrescitaType;
 
-public class Window extends JFrame{
+public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -560,11 +560,9 @@ public class Window extends JFrame{
 	    gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 	    panel_1.setLayout(gbl_panel_1);
 	    
-	    JPanel panel_2= new JPanel();
-	    panel_2.setBorder(borderPanelSalvaListaPiante);
-	    panelSalvaListaCarrello.add(panel_2);
-	    GridBagLayout gb2 = gbl_panel_1;
-	 
+	    
+	    
+	    
 	    
 	    chckbxNewCheckBox_1 = new JCheckBox("");
 	    GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
@@ -604,4 +602,7 @@ public class Window extends JFrame{
 	    btnNew.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelNew"));
 	    btnView.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelView"));
 	}
+	
+	
+	
 }
