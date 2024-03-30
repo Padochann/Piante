@@ -44,7 +44,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import piante.TassoCrescitaType;
 
-public class Window extends JFrame {
+public class Window extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -547,9 +547,11 @@ public class Window extends JFrame {
 	    scrollPaneSalvaListaCarrello.setViewportView(panelSalvaListaCarrello);
 	    GridLayout gl_panelSalvaListaCarrello= new GridLayout(30, 1, 0, 0);
 	    panelSalvaListaCarrello.setLayout(gl_panelSalvaListaCarrello);
-	    
+	    panelSalvaListaCarrello.setLayout(gl_panelSalvaListaCarrello);
+	
 	    panel_1 = new JPanel();
-	    panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+	    MatteBorder borderPanelSalvaListaPiante = new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0));
+	    panel_1.setBorder(borderPanelSalvaListaPiante);
 	    panelSalvaListaCarrello.add(panel_1);
 	    GridBagLayout gbl_panel_1 = new GridBagLayout();
 	    gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
@@ -557,6 +559,12 @@ public class Window extends JFrame {
 	    gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 	    gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 	    panel_1.setLayout(gbl_panel_1);
+	    
+	    JPanel panel_2= new JPanel();
+	    panel_2.setBorder(borderPanelSalvaListaPiante);
+	    panelSalvaListaCarrello.add(panel_2);
+	    GridBagLayout gb2 = gbl_panel_1;
+	 
 	    
 	    chckbxNewCheckBox_1 = new JCheckBox("");
 	    GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
