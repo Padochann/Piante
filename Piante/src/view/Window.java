@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JEditorPane;
 import javax.swing.DropMode;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.AbstractListModel;
 import javax.swing.JTextPane;
@@ -37,6 +38,9 @@ import javax.swing.SpinnerNumberModel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import control.Controller;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
@@ -116,7 +120,8 @@ public class Window extends JFrame {
 	private JComboBox comboBoxCercaDifficolta;
 	private JLabel lblCercaDifficolta;
 	private JButton btnCercaPianta;
-
+	private CardLayout cardLayout;
+	private CardLayout acquarioLayout;
 	/**
 	 * Launch the application.
 	 */
@@ -126,6 +131,7 @@ public class Window extends JFrame {
 				try {
 					Window frame = new Window();
 					frame.setVisible(true);
+					Controller controller = new Controller(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -151,7 +157,7 @@ public class Window extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.WEST, panelCardMain, 11, SpringLayout.WEST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.EAST, panelCardMain, -12, SpringLayout.EAST, contentPane);
 		contentPane.add(panelCardMain);
-		CardLayout cardLayout = new CardLayout();
+		cardLayout = new CardLayout();
 		panelCardMain.setLayout(cardLayout);
 		
 		
@@ -192,7 +198,7 @@ public class Window extends JFrame {
 			}
 		});
 		scrollPaneAcquari.setViewportView(listAcquari);
-		CardLayout acquarioLayout= new CardLayout();
+		acquarioLayout= new CardLayout();
 		panelCardAcquari.setLayout(acquarioLayout);
 		
 		panelNew = new JPanel();
@@ -595,12 +601,134 @@ public class Window extends JFrame {
 	    
 	
 	    
-	 // Aggiungi un ActionListener ai bottoni per cambiare il pannello visualizzato
+	 /*Aggiungi un ActionListener ai bottoni per cambiare il pannello visualizzato
 	    btnAcquari.addActionListener(e -> cardLayout.show(panelCardMain, "panelAcquari"));
 	    btnCerca.addActionListener(e -> cardLayout.show(panelCardMain, "panelCerca"));
 	    btnSalva.addActionListener(e -> cardLayout.show(panelCardMain, "panelSalva"));
 	    btnNew.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelNew"));
-	    btnView.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelView"));
+	    btnView.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelView"));*/
+	}
+	
+	
+
+	/**
+	 * @return the btnNew
+	 */
+	public JButton getBtnNew() {
+		return btnNew;
+	}
+
+	/**
+	 * @return the btnView
+	 */
+	public JButton getBtnView() {
+		return btnView;
+	}
+
+	/**
+	 * @return the btnDelete
+	 */
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	/**
+	 * @return the btnAcquari
+	 */
+	public JButton getBtnAcquari() {
+		return btnAcquari;
+	}
+
+	/**
+	 * @return the btnCerca
+	 */
+	public JButton getBtnCerca() {
+		return btnCerca;
+	}
+
+	/**
+	 * @return the btnSalva
+	 */
+	public JButton getBtnSalva() {
+		return btnSalva;
+	}
+
+	/**
+	 * @return the btnSalvaNewAcquario
+	 */
+	public JButton getBtnSalvaNewAcquario() {
+		return btnSalvaNewAcquario;
+	}
+
+	/**
+	 * @return the spinner
+	 */
+	public JSpinner getSpinner() {
+		return spinner;
+	}
+
+	/**
+	 * @return the btnSalvaAggiungiPiante
+	 */
+	public JButton getBtnSalvaAggiungiPiante() {
+		return btnSalvaAggiungiPiante;
+	}
+
+	/**
+	 * @return the btnCercaAggiungiPianta
+	 */
+	public JButton getBtnCercaAggiungiPianta() {
+		return btnCercaAggiungiPianta;
+	}
+
+	/**
+	 * @return the btnCercaPianta
+	 */
+	public JButton getBtnCercaPianta() {
+		return btnCercaPianta;
+	}
+
+	/**
+	 * This method add to all buttons the reference of the class who manage the actions.
+	 * @param c the reference of the class.
+	 */
+	public void registerEvent(Controller controller) {
+		// TODO Auto-generated method stub
+		btnAcquari.addActionListener(controller);
+	    btnCerca.addActionListener(controller);
+	    btnSalva.addActionListener(controller);
+	    btnNew.addActionListener(controller);
+	    btnView.addActionListener(controller);
+	}
+	
+	/**
+	 * Displays the specified panel within the given layout.
+	 *
+	 * @param layoutName The name of the layout to use ("cardLayout" or "acquarioLayout").
+	 * @param panelName The name of the panel to display within the specified layout.
+	 *
+	 * @throws IllegalArgumentException if the provided layout name is neither "cardLayout" nor "acquarioLayout".
+	 */
+	public void showPanel(String layoutName, String panelName) throws Exception {
+	    switch (layoutName) {
+	        case "cardLayout":
+	            this.cardLayout.show(panelCardMain, panelName);
+	            break;
+	        case "acquarioLayout":
+	            this.acquarioLayout.show(panelCardAcquari, panelName);
+	            break;
+	        default:
+	            throw new IllegalArgumentException("Layout non valido: " + layoutName);
+	    }
+	}
+
+
+	/**
+	 * This method create a message dialog.
+	 * @param message the string that will be shown.
+	 */
+	public void messageDialog(String message) {
+		JOptionPane.showMessageDialog(this, message);
 	}
 	
 	
