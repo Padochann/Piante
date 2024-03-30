@@ -5,10 +5,11 @@ set_time_limit(300);
 // Percorso della cartella delle immagini
 $imageFolder = "D:/informatica/images/";
 
+//credenziali db
 $servername = "localhost";
-$username = "root"; // Cambia con il tuo username
-$password = ""; // Cambia con la tua password
-$dbname = "piante"; // Cambia con il nome del tuo database
+$username = "root";
+$password = ""; 
+$dbname = "progetto_padoan_rossetti"; 
 
 // Crea la connessione
 $conn = new mysqli($servername, $username, $password, $dbname);

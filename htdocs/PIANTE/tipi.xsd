@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="Piante" targetNamespace="Piante" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
+
+  <!-- Definizione dei tipi di dati -->
+
+  <!-- Tipo di dati per l'enumerazione del tasso di crescita -->
+  <xs:simpleType name="tassoCrescitaType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="lento"/>
+      <xs:enumeration value="medio"/>
+      <xs:enumeration value="veloce"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per l'enumerazione della quantità di luce e di CO2 -->
+  <xs:simpleType name="luceCO2Type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="poca"/>
+      <xs:enumeration value="media"/>
+      <xs:enumeration value="tanta"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per l'immagine in formato base64 -->
+  <xs:simpleType name="base64Binary">
+    <xs:restriction base="xs:base64Binary"/>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per il link della pagina -->
+  <xs:simpleType name="linkType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="800"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per il link dell'immagine -->
+  <xs:simpleType name="linkImgType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="800"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per il link del logo -->
+  <xs:simpleType name="linkLogoType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per la difficoltà -->
+  <xs:simpleType name="difficoltaType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per l'id di un acquario -->
+  <xs:simpleType name="idAcquarioType">
+    <xs:restriction base="xs:unsignedInt"/>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per l'id di un'immagine -->
+  <xs:simpleType name="idImmagineType">
+    <xs:restriction base="xs:unsignedInt"/>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per l'id di una pianta -->
+  <xs:simpleType name="idPiantaType">
+    <xs:restriction base="xs:unsignedInt"/>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per la quantità -->
+  <xs:simpleType name="quantitaType">
+    <xs:restriction base="xs:unsignedInt"/>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per la lunghezza, larghezza, altezza -->
+  <xs:simpleType name="dimensioneType">
+    <xs:restriction base="xs:unsignedInt"/>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per il testo -->
+  <xs:simpleType name="testoType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per il tipo di pianta -->
+  <xs:simpleType name="tipoPiantaType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per l'origine della pianta -->
+  <xs:simpleType name="origineType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tipo di dati per l'altezza minima e massima -->
+  <xs:simpleType name="altezzaType">
+    <xs:restriction base="xs:unsignedInt"/>
+  </xs:simpleType>
+
+  <!-- Definizione dei tipi complessi -->
+
+  <!-- Tipo complesso per la struttura del nodo "acquario" -->
+  <xs:complexType name="acquarioType">
+    <xs:sequence>
+      <xs:element name="id_acquario" type="idAcquarioType"/>
+      <xs:element name="litri" type="dimensioneType"/>
+      <xs:element name="larghezza" type="dimensioneType"/>
+      <xs:element name="lunghezza" type="dimensioneType"/>
+      <xs:element name="altezza" type="dimensioneType"/>
+      <xs:element name="descrizione" type="testoType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Tipo complesso per la tabella `immagini` -->
+  <xs:complexType name="immagineType">
+    <xs:sequence>
+      <xs:element name="id_immagine" type="idImmagineType"/>
+      <xs:element name="id_pianta" type="idPiantaType"/>
+      <xs:element name="immagine_pianta" type="base64Binary"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Tipo complesso per la struttura del nodo "pianta" -->
+  <xs:complexType name="piantaType">
+    <xs:sequence>
+      <xs:element name="id_pianta" type="idPiantaType"/>
+      <xs:element name="nome" type="testoType"/>
+      <xs:element name="link_pagina" type="linkType"/>
+      <xs:element name="link_img" type="linkImgType"/>
+      <xs:element name="tipo" type="tipoPiantaType"/>
+      <xs:element name="origine" type="origineType"/>
+      <xs:element name="tasso_crescita" type="tassoCrescitaType"/>
+      <xs:element name="altezza_minima" type="altezzaType"/>
+      <xs:element name="altezza_massima" type="altezzaType"/>
+      <xs:element name="luce" type="luceCO2Type"/>
+      <xs:element name="co2" type="luceCO2Type"/>
+      <xs:element name="link_logo" type="linkLogoType"/>
+      <xs:element name="difficolta" type="difficoltaType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Tipo complesso per la struttura del nodo "piante_acquari" -->
+  <xs:complexType name="pianta_acquarioType">
+    <xs:sequence>
+      <xs:element name="id_pianta" type="idPiantaType"/>
+      <xs:element name="id_acquario" type="idAcquarioType"/>
+      <xs:element name="quantita" type="quantitaType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Definizione dei tipi complessi per le collezioni -->
+
+  <!-- Tipo complesso per la collezione di piante -->
+  <xs:complexType name="pianteType">
+    <xs:sequence>
+      <xs:element name="item" type="piantaType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Tipo complesso per la collezione di immagini -->
+  <xs:complexType name="immaginiType">
+    <xs:sequence>
+      <xs:element name="item" type="immagineType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Tipo complesso per la collezione di acquari -->
+  <xs:complexType name="acquariType">
+    <xs:sequence>
+      <xs:element name="item" type="acquarioType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Tipo complesso per la collezione di piante_acquari -->
+  <xs:complexType name="piante_acquariType">
+    <xs:sequence>
+      <xs:element name="item" type="pianta_acquarioType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Definizione degli elementi radice -->
+
+  <xs:element name="piante" type="pianteType"/>
+  <xs:element name="acquari" type="acquariType"/>
+  <xs:element name="immagini" type="immaginiType"/>
+  <xs:element name="piante_acquari" type="piante_acquariType"/>
+
+</xs:schema>

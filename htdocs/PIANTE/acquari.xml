@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <acquari>
-  <item>
-    <id_acquario>0</id_acquario>
-    <litri>18</litri>
-    <larghezza>33</larghezza>
-    <lunghezza>22</lunghezza>
-    <altezza>24</altezza>
-    <descrizione>questo acquario è per il capolavor d'esame di padochann</descrizione>
-  </item>
+ <item>
+  <id_acquario>9</id_acquario>
+  <litri>18</litri>
+  <larghezza>33</larghezza>
+  <lunghezza>22</lunghezza>
+  <altezza>24</altezza>
+  <descrizione>questo acquario è per il capolavor d'esame di padochann</descrizione>
+ </item>
 </acquari>
