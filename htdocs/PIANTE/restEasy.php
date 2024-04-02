@@ -4,7 +4,7 @@
     $xsdPath = 'plants.xsd';
 
     
-// Connessione al database (sostituisci con i tuoi dati di connessione)
+// Connessione al database 
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -17,49 +17,38 @@ if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
 }
 
-// Recupera i parametri dalla query string
-$table = $_GET['table'];
+if(isset($_GET['table'])){
+    // Recupera i parametri GET
+    $table = $_GET['table'];
 
-$nome = isset($_GET['nome']) ? $_GET['nome'] : null;
-$origine = isset($_GET['origine']) ? $_GET['origine'] : null;
-$tasso_crescita = isset($_GET['tasso_crescita']) ? $_GET['tasso_crescita'] : null;
-$luce = isset($_GET['luce']) ? $_GET['luce'] : null;
-$co2 = isset($_GET['co2']) ? $_GET['co2'] : null;
-$difficolta = isset($_GET['difficolta']) ? $_GET['difficolta'] : null;
-
-// Costruisci la query SQL dinamicamente
-$sql = "SELECT * FROM $table WHERE 1=1";
-
-if ($nome !== null) {
-    $sql .= " AND nome LIKE '%$nome%'";
+    $nome = isset($_GET['nome']) ? $_GET['nome'] : null;
+    $origine = isset($_GET['origine']) ? $_GET['origine'] : null;
+    $tasso_crescita = isset($_GET['tasso_crescita']) ? $_GET['tasso_crescita'] : null;
+    $luce = isset($_GET['luce']) ? $_GET['luce'] : null;
+    $co2 = isset($_GET['co2']) ? $_GET['co2'] : null;
+    $difficolta = isset($_GET['difficolta']) ? $_GET['difficolta'] : null;
+    $id_pianta = isset($_GET['id_pianta']) ? $_GET['id_pianta'] : null;
+    $id_acquario = isset($_GET['id_acquario']) ? $_GET['id_acquario'] : null;
+    // Costruisci la query SQL dinamicamente
+    $sql = createQuery($table, $nome, $origine, $tasso_crescita, $luce, $co2, $difficolta, $id_pianta, $id_acquario);
+    // Esegui la query
+    $result = $conn->query($sql);
+    // Genera il documento XML
+    $xmlStringPiante = generateXmlFromResultSet($result, $xsdPath, $table, 'Piante');
+    // Invia il documento XML al client 
+    echo $xmlStringPiante;
+    // Salva il documento XML su file per debug in locale
+    file_put_contents("$table.xml", $xmlStringPiante);
+    
 }
-if ($origine !== null) {
-    $sql .= " AND origine = '$origine'";
-}
-if ($tasso_crescita !== null) {
-    $sql .= " AND tasso_crescita = '$tasso_crescita'";
-}
-if ($luce !== null) {
-    $sql .= " AND luce = '$luce'";
-}
-if ($co2 !== null) {
-    $sql .= " AND co2 = '$co2'";
-}
-if ($difficolta !== null) {
-    $sql .= " AND difficolta LIKE '%$difficolta%'";
-}
+// Leggi l'XML inviato
+$xmlString = file_get_contents('php://input');
 
-// Esegui la query SQL
-$result = $conn->query($sql);
-
-$xmlStringPiante= generateXmlFromResultSet($result,$xsdPath,'piante','Piante');
-echo $xmlStringPiante;
-
-// Aggiungi l'attributo xmlns al tag radice nel XML string
-//$xmlStringPiante = str_replace('<piante>', '<piante xmlns="Piante">', $xmlStringPiante);
-
-// Salva il contenuto nel file
-file_put_contents('piante.xml', $xmlStringPiante);
+// Verifica se l'XML è stato inviato e se è un XML valido
+if (!empty($xmlString) ) {
+    // Inserisci XML nel database
+    insertXmlIntoDatabase($xmlString, $conn);
+} 
 
 
 // Chiudi la connessione al database

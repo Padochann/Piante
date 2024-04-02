@@ -1,8 +1,10 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -72,7 +74,63 @@ public class RestEasyPlantsClient {
         }
     }
     
+	public void sendDataToApi(Object obj) throws Exception {
+		
+		// Decidi il tipo di classe JAXB da utilizzare per la deserializzazione in base alla tabella
+        Class<?> requestClass ;
+		if(obj instanceof PianteAcquariType)
+		{
+			requestClass = PianteAcquariType.class;
+			
+		}else if(obj instanceof AcquariType)
+		{
+			requestClass = AcquariType.class;
+		}else
+		{
+			throw new Exception("Errore, classe non supportata");
+		}
+		
+		
+		JAXBContext context = JAXBContext.newInstance(requestClass);
+		Marshaller marshaller= context.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		
+		// Convertire l'oggetto in XML e ottenere i dati come array di byte
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        marshaller.marshal(requestClass.cast(obj), byteArrayOutputStream);
+        
+        
+     // Convertire i dati in una stringa
+        String xmlString = new String(byteArrayOutputStream.toByteArray(), "UTF-8");
 
+        // Creare una connessione HTTP
+        URL url = new URL(API_URL);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+
+        // Invia l'XML come corpo della richiesta
+        OutputStream out = connection.getOutputStream();
+        out.write(xmlString.getBytes("UTF-8"));
+        out.close();
+
+     // Leggere la risposta (se necessario)
+        InputStream in = connection.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+
+        reader.close();
+        in.close();
+
+
+        connection.disconnect();
+        
+	}
+	
     private Map<String, String> extractParameters(String queryString) {
         Map<String, String> params = new HashMap<>();
         String[] keyValuePairs = queryString.split("&");

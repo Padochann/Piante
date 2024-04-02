@@ -25,8 +25,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
  *         <element name="id_immagine" type="{http://www.w3.org/2001/XMLSchema}unsignedInt"/>
- *         <element name="id_pianta" type="{http://www.w3.org/2001/XMLSchema}unsignedInt"/>
  *         <element name="immagine_pianta" type="{Piante}base64Binary"/>
+ *         <element name="id_pianta" type="{http://www.w3.org/2001/XMLSchema}unsignedInt"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -38,19 +38,19 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "immagineType", propOrder = {
     "idImmagine",
-    "idPianta",
-    "immaginePianta"
+    "immaginePianta",
+    "idPianta"
 })
 public class ImmagineType {
 
     @XmlElement(name = "id_immagine")
     @XmlSchemaType(name = "unsignedInt")
     protected long idImmagine;
+    @XmlElement(name = "immagine_pianta", required = true)
+    protected byte[] immaginePianta;
     @XmlElement(name = "id_pianta")
     @XmlSchemaType(name = "unsignedInt")
     protected long idPianta;
-    @XmlElement(name = "immagine_pianta", required = true)
-    protected byte[] immaginePianta;
 
     /**
      * Recupera il valore della proprietà idImmagine.
@@ -68,21 +68,6 @@ public class ImmagineType {
         this.idImmagine = value;
     }
 
-    /**
-     * Recupera il valore della proprietà idPianta.
-     * 
-     */
-    public long getIdPianta() {
-        return idPianta;
-    }
-
-    /**
-     * Imposta il valore della proprietà idPianta.
-     * 
-     */
-    public void setIdPianta(long value) {
-        this.idPianta = value;
-    }
 
     /**
      * Recupera il valore della proprietà immaginePianta.
@@ -106,4 +91,19 @@ public class ImmagineType {
         this.immaginePianta = value;
     }
 
+    /**
+     * Recupera il valore della proprietà idPianta.
+     * 
+     */
+    public long getIdPianta() {
+    	return idPianta;
+    }
+    
+    /**
+     * Imposta il valore della proprietà idPianta.
+     * 
+     */
+    public void setIdPianta(long value) {
+    	this.idPianta = value;
+    }
 }

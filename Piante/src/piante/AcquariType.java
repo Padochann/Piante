@@ -35,8 +35,8 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@XmlRootElement(name = "acquari")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "acquari")
 @XmlType(name = "acquariType", propOrder = {
     "item"
 })

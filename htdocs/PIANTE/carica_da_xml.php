@@ -1,13 +1,16 @@
 <?php
 //stringa di test per verificare il funzionamento 
 $xmlString='<?xml version="1.0" encoding="utf-8"?>
-<piante_acquari >
+<acquari>
   <item>
-    <id_pianta>203</id_pianta>
-    <id_acquario>9</id_acquario>
-    <quantita>2</quantita>
+    <id_acquario>0</id_acquario>
+    <litri>100</litri>
+    <larghezza>100</larghezza>
+    <lunghezza>100</lunghezza>
+    <altezza>100</altezza>
+    <descrizione>acquario di test</descrizione>
   </item>
-</piante_acquari>
+</acquari>
 ';
 
 //credenziali accesso al db

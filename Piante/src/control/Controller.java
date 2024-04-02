@@ -2,6 +2,8 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -13,11 +15,12 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import model.RestEasyPlantsClient;
+import piante.AcquarioType;
 import piante.PiantaType;
 import piante.PianteType;
 import view.Window;
 
-public class Controller implements ActionListener, ChangeListener{
+public class Controller implements ActionListener, MouseListener{
 	
 	private Window w;
 	private RestEasyPlantsClient requester;
@@ -44,6 +47,8 @@ public class Controller implements ActionListener, ChangeListener{
 			if(e.getSource() == w.getBtnSalva())
 			{
 				w.showPanel("cardLayout", "panelSalva");
+				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
+				//metodo che aggiunge al comboBoxAcquario i litri + id
 			}
 			if(e.getSource() == w.getBtnView())
 			{
@@ -96,15 +101,7 @@ public class Controller implements ActionListener, ChangeListener{
 		}
 	}
 
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource() == w.getSpinner())
-		{
-			//devo fare un array di spinner variabile 
-			
-		}
-	}
+	
 
 	private void cercaPianta() throws Exception {
 	    // Costruisci la query string in base ai valori ottenuti dai metodi
@@ -142,6 +139,52 @@ public class Controller implements ActionListener, ChangeListener{
 	    PianteType pianteData = (PianteType) requester.fetchDataFromApi(queryString);
 	    System.out.println(pianteData.getItem().toString());
 	    w.addItemsToListCercaPiante(pianteData.getItem());
+	}
+
+	private List<AcquarioType> getAcquariList() throws Exception{
+		
+		
+		return null;
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		// Verifica se il tasto CTRL è premuto
+        if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1) {
+            // Ottieni l'indice dell'elemento cliccato
+            int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
+            
+            // Verifica se l'indice è valido
+            if (index != -1) {
+                // Apri una nuova finestra Java e mostra l'indice
+                w.messageDialog("trovato a indice "+ index);;
+            }
+        }
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

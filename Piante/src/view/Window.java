@@ -33,6 +33,7 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -431,7 +432,6 @@ public class Window extends JFrame {
 		
 		comboBoxSalvaAcquari = new JComboBox<String>();
 		comboBoxSalvaAcquari.setMaximumRowCount(12);
-		comboBoxSalvaAcquari.setModel(new DefaultComboBoxModel<String>(new String[] {"SELEZIONA ACQUARIO", "1", "2", "3", "4", "5", "6", "7", "8"}));
 		comboBoxSalvaAcquari.setToolTipText("Selezione acquario");
 		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxSalvaAcquari, -41, SpringLayout.EAST, panelSalva);
 		panelSalva.add(comboBoxSalvaAcquari);
@@ -985,6 +985,7 @@ public class Window extends JFrame {
 	    //spinner.addChangeListener(controller);//devo mettere questo nel metodo crea panel with components
 	    btnSalvaAggiungiPiante.addActionListener(controller);
 	    
+	    listCercaPiante.addMouseListener(controller);
 	    
 	    
 	}
@@ -1019,6 +1020,9 @@ public class Window extends JFrame {
 		JOptionPane.showMessageDialog(this, message);
 	}
 	
+	public int getIndexOfElemenListCercaPiantaForMouseClick(Point p) {
+		return listCercaPiante.locationToIndex(p);
+	}
 	
 	
 }

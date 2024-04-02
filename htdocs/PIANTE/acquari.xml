@@ -1,11 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<acquari>
+<acquari xmlns="Piante">
  <item>
-  <id_acquario>9</id_acquario>
-  <litri>18</litri>
-  <larghezza>33</larghezza>
-  <lunghezza>22</lunghezza>
-  <altezza>24</altezza>
-  <descrizione>questo acquario è per il capolavor d'esame di padochann</descrizione>
+  <id_acquario>10</id_acquario>
+  <litri>3</litri>
+  <larghezza>3</larghezza>
+  <lunghezza>3</lunghezza>
+  <altezza>3</altezza>
+  <descrizione>c</descrizione>
+ </item>
+ <item>
+  <id_acquario>11</id_acquario>
+  <litri>100</litri>
+  <larghezza>100</larghezza>
+  <lunghezza>100</lunghezza>
+  <altezza>100</altezza>
+  <descrizione>acquario di test</descrizione>
+ </item>
+ <item>
+  <id_acquario>12</id_acquario>
+  <litri>100</litri>
+  <larghezza>100</larghezza>
+  <lunghezza>100</lunghezza>
+  <altezza>100</altezza>
+  <descrizione>acquario di test</descrizione>
+ </item>
+ <item>
+  <id_acquario>13</id_acquario>
+  <litri>100</litri>
+  <larghezza>100</larghezza>
+  <lunghezza>100</lunghezza>
+  <altezza>100</altezza>
+  <descrizione>acquario di test</descrizione>
+ </item>
+ <item>
+  <id_acquario>14</id_acquario>
+  <litri>20</litri>
+  <larghezza>3</larghezza>
+  <lunghezza>3</lunghezza>
+  <altezza>3</altezza>
+  <descrizione>ciao cino</descrizione>
+ </item>
+ <item>
+  <id_acquario>15</id_acquario>
+  <litri>20</litri>
+  <larghezza>3</larghezza>
+  <lunghezza>3</lunghezza>
+  <altezza>3</altezza>
+  <descrizione>ciao cino</descrizione>
+ </item>
+ <item>
+  <id_acquario>16</id_acquario>
+  <litri>20</litri>
+  <larghezza>3</larghezza>
+  <lunghezza>3</lunghezza>
+  <altezza>3</altezza>
+  <descrizione>ciao piove</descrizione>
+ </item>
+ <item>
+  <id_acquario>17</id_acquario>
+  <litri>20</litri>
+  <larghezza>3</larghezza>
+  <lunghezza>3</lunghezza>
+  <altezza>3</altezza>
+  <descrizione>ciao cino</descrizione>
+ </item>
+ <item>
+  <id_acquario>18</id_acquario>
+  <litri>20</litri>
+  <larghezza>3</larghezza>
+  <lunghezza>3</lunghezza>
+  <altezza>3</altezza>
+  <descrizione>ciao guzzo</descrizione>
+ </item>
+ <item>
+  <id_acquario>19</id_acquario>
+  <litri>20</litri>
+  <larghezza>3</larghezza>
+  <lunghezza>3</lunghezza>
+  <altezza>3</altezza>
+  <descrizione>ciao piove</descrizione>
  </item>
 </acquari>

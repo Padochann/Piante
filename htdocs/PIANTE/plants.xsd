@@ -122,8 +122,8 @@
         <xs:complexType name="immagineType">
             <xs:sequence>
                 <xs:element name="id_immagine" type="xs:unsignedInt"/>
-                <xs:element name="id_pianta" type="xs:unsignedInt"/>
                 <xs:element name="immagine_pianta" type="base64Binary"/>
+                <xs:element name="id_pianta" type="xs:unsignedInt"/>
             </xs:sequence>
         </xs:complexType>
 
@@ -192,5 +192,6 @@
     
 
 </xs:schema>
+
 
 
