@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<piante>
+<piante xmlns="Piante">
  <item>
   <id_pianta>1</id_pianta>
   <nome>Aegagropila linnaei</nome>
@@ -1521,7 +1521,7 @@
   <link_pagina>https%3A%2F%2Ftropica.com%2F%2Fen%2Fplants%2Fplantdetails%2FFissidensfontanus%28002F%29%2F4390</link_pagina>
   <link_img>https%3A%2F%2Ftropica.com%2Fimagegen.ashx%3Fwidth%3D200%26image%3D%2FPlants%2F002F%2F2.png%26crop%3Dresize%26class%3Dproduct</link_img>
   <tipo>Moss</tipo>
-  <origine></origine>
+  <origine>Cultivar</origine>
   <tasso_crescita>lento</tasso_crescita>
   <altezza_minima>3</altezza_minima>
   <altezza_massima>5</altezza_massima>
@@ -2392,7 +2392,7 @@
   <link_img>https%3A%2F%2Ftropica.com%2Fimagegen.ashx%3Fwidth%3D200%26image%3D%2FPlants%2F048%20ST%2F2.png%26crop%3Dresize%26class%3Dproduct</link_img>
   <tipo>Stem</tipo>
   <origine>North America</origine>
-  <tasso_crescita></tasso_crescita>
+  <tasso_crescita>veloce</tasso_crescita>
   <altezza_minima>10</altezza_minima>
   <altezza_massima>15</altezza_massima>
   <luce>media</luce>
@@ -2601,7 +2601,7 @@
   <link_pagina>https%3A%2F%2Ftropica.com%2F%2Fen%2Fplants%2Fplantdetails%2FMicrosorumpteropus%27Trident%27%28008GZWS%29%2F19275</link_pagina>
   <link_img>https%3A%2F%2Ftropica.com%2Fimagegen.ashx%3Fwidth%3D200%26image%3D%2FPlants%2F008G%20ZWS%2F2.png%26crop%3Dresize%26class%3Dproduct</link_img>
   <tipo>Rhizomatous</tipo>
-  <origine></origine>
+  <origine>Cultivar</origine>
   <tasso_crescita>lento</tasso_crescita>
   <altezza_minima>15</altezza_minima>
   <altezza_massima>20</altezza_massima>

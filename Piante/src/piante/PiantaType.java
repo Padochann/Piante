@@ -384,4 +384,16 @@ public class PiantaType {
         this.difficolta = value;
     }
 
+	@Override
+	public String toString() {
+		return "PiantaType [idPianta=" + idPianta + ", nome=" + nome + ", linkPagina=" + linkPagina + ", linkImg="
+				+ linkImg + ", tipo=" + tipo + ", origine=" + origine + ", tassoCrescita=" + tassoCrescita
+				+ ", altezzaMinima=" + altezzaMinima + ", altezzaMassima=" + altezzaMassima + ", luce=" + luce
+				+ ", co2=" + co2 + ", linkLogo=" + linkLogo + ", difficolta=" + difficolta + "]";
+	}
+
+	
+    
+    
+
 }

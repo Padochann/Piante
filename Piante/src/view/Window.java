@@ -31,7 +31,12 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.SpinnerNumberModel;
@@ -46,7 +51,10 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import piante.PiantaType;
 import piante.TassoCrescitaType;
+import javax.swing.ListSelectionModel;
 
 public class Window extends JFrame {
 
@@ -75,13 +83,13 @@ public class Window extends JFrame {
 	private JTextField textFieldNewLunghezza;
 	private JTextField textFieldNewLarghezza;
 	private JTextField textFieldNewAltezza;
-	private JList listAcquari;
+	private JList<String> listAcquari;
 	private JLabel lblDescrizione;
 	private JLabel lblNewLitraggio;
 	private JLabel lblNewLunghezza;
 	private JLabel lblNewLarghezza;
 	private JLabel lblNewAltezza;
-	private JComboBox comboBoxSalvaAcquari;
+	private JComboBox<String> comboBoxSalvaAcquari;
 	private JScrollPane scrollPaneSalvaListaCarrello;
 	private JPanel panelSalvaListaCarrello;
 	private JCheckBox chckbxNewCheckBox;
@@ -103,11 +111,11 @@ public class Window extends JFrame {
 	private JTextArea textAreaViewDescrizioneAcquario;
 	private JLabel lblViewDescrizione;
 	private JScrollPane scrollPaneViewListaPianteAcquario;
-	private JList listViewPianteAcquario;
-	private JComboBox comboBoxCercaOrigine;
-	private JComboBox comboBoxCercaTassoCrescita;
-	private JComboBox comboBoxCercaLuce;
-	private JComboBox comboBoxCercaCo2;
+	private JList<String> listViewPianteAcquario;
+	private JComboBox<String> comboBoxCercaOrigine;
+	private JComboBox<String> comboBoxCercaTassoCrescita;
+	private JComboBox<String> comboBoxCercaLuce;
+	private JComboBox<String> comboBoxCercaCo2;
 	private JLabel lblCercaNome;
 	private JLabel lblCercaOrigine;
 	private JLabel lblCercaTassoCrescita;
@@ -116,12 +124,16 @@ public class Window extends JFrame {
 	private JTextField textFieldCercaNome;
 	private JScrollPane scrollPaneCercaListaPiante;
 	private JLabel lblCercaCo2;
-	private JList listCercaPiante;
-	private JComboBox comboBoxCercaDifficolta;
+	private JList<String> listCercaPiante;
+	private JComboBox<String> comboBoxCercaDifficolta;
 	private JLabel lblCercaDifficolta;
 	private JButton btnCercaPianta;
 	private CardLayout cardLayout;
 	private CardLayout acquarioLayout;
+	private List<JPanel> arrayPanelsListaCarrello = new ArrayList<JPanel>();
+	private List<PiantaType> arrayListaCarrello = new ArrayList<PiantaType>();
+	private List<PiantaType> arrayListCercaPiante = new ArrayList<PiantaType>();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -147,7 +159,7 @@ public class Window extends JFrame {
 		setBounds(100, 100, 956,530);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		 
 		setContentPane(contentPane);
 		SpringLayout sl_contentPane = new SpringLayout();
 		contentPane.setLayout(sl_contentPane);
@@ -187,13 +199,17 @@ public class Window extends JFrame {
 		sl_panelAcquari.putConstraint(SpringLayout.WEST, panelBtnAcquari, 456, SpringLayout.WEST, panelAcquari);
 		sl_panelAcquari.putConstraint(SpringLayout.EAST, panelBtnAcquari, -6, SpringLayout.WEST, panelCardAcquari);
 		
-		listAcquari = new JList();
-		listAcquari.setModel(new AbstractListModel() {
+		listAcquari = new JList<String>();
+		listAcquari.setModel(new AbstractListModel<String>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			String[] values = new String[] {};
 			public int getSize() {
 				return values.length;
 			}
-			public Object getElementAt(int index) {
+			public String getElementAt(int index) {
 				return values[index];
 			}
 		});
@@ -318,7 +334,7 @@ public class Window extends JFrame {
 		
 		scrollPaneViewListaPianteAcquario = new JScrollPane();
 		
-		listViewPianteAcquario = new JList();
+		listViewPianteAcquario = new JList<String>();
 		scrollPaneViewListaPianteAcquario.setViewportView(listViewPianteAcquario);
 		
 		textAreaViewDescrizioneAcquario = new JTextArea();
@@ -405,9 +421,9 @@ public class Window extends JFrame {
 		SpringLayout sl_panelSalva = new SpringLayout();
 		panelSalva.setLayout(sl_panelSalva);
 		
-		comboBoxSalvaAcquari = new JComboBox();
+		comboBoxSalvaAcquari = new JComboBox<String>();
 		comboBoxSalvaAcquari.setMaximumRowCount(12);
-		comboBoxSalvaAcquari.setModel(new DefaultComboBoxModel(new String[] {"SELEZIONA ACQUARIO", "1", "2", "3", "4", "5", "6", "7", "8"}));
+		comboBoxSalvaAcquari.setModel(new DefaultComboBoxModel<String>(new String[] {"SELEZIONA ACQUARIO", "1", "2", "3", "4", "5", "6", "7", "8"}));
 		comboBoxSalvaAcquari.setToolTipText("Selezione acquario");
 		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxSalvaAcquari, -41, SpringLayout.EAST, panelSalva);
 		panelSalva.add(comboBoxSalvaAcquari);
@@ -434,17 +450,17 @@ public class Window extends JFrame {
 	    panelCardMain.add(panelAcquari, "panelAcquari");
 	    panelCardMain.add(panelCerca, "panelCerca");
 	    
-	    comboBoxCercaOrigine = new JComboBox();
-	    comboBoxCercaOrigine.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Cosmopolitan", "Cultivar", "South America", "Africa", "North America", "Asia", "Europe/Asia", "Australia"}));
+	    comboBoxCercaOrigine = new JComboBox<String>();
+	    comboBoxCercaOrigine.setModel(new DefaultComboBoxModel<String>(new String[] {"Qualsiasi", "Cosmopolitan", "Cultivar", "South America", "Africa", "North America", "Asia", "Europe/Asia", "Australia"}));
 	    
-	    comboBoxCercaTassoCrescita = new JComboBox();
-	    comboBoxCercaTassoCrescita.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Lento", "Medio", "Veloce"}));
+	    comboBoxCercaTassoCrescita = new JComboBox<String>();
+	    comboBoxCercaTassoCrescita.setModel(new DefaultComboBoxModel<String>(new String[] {"Qualsiasi", "Lento", "Medio", "Veloce"}));
 	    
-	    comboBoxCercaLuce = new JComboBox();
-	    comboBoxCercaLuce.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Poca", "Media", "Tanta"}));
+	    comboBoxCercaLuce = new JComboBox<String>();
+	    comboBoxCercaLuce.setModel(new DefaultComboBoxModel<String>(new String[] {"Qualsiasi", "Poca", "Media", "Tanta"}));
 	    
-	    comboBoxCercaCo2 = new JComboBox();
-	    comboBoxCercaCo2.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Poca", "Media", "Tanta"}));
+	    comboBoxCercaCo2 = new JComboBox<String>();
+	    comboBoxCercaCo2.setModel(new DefaultComboBoxModel<String>(new String[] {"Qualsiasi", "Poca", "Media", "Tanta"}));
 	    
 	    lblCercaNome = new JLabel("nome");
 	    
@@ -463,8 +479,8 @@ public class Window extends JFrame {
 	    
 	    lblCercaCo2 = new JLabel("co2");
 	    
-	    comboBoxCercaDifficolta = new JComboBox();
-	    comboBoxCercaDifficolta.setModel(new DefaultComboBoxModel(new String[] {"Qualsiasi", "Easy", "Medium", "Hard"}));
+	    comboBoxCercaDifficolta = new JComboBox<String>();
+	    comboBoxCercaDifficolta.setModel(new DefaultComboBoxModel<String>(new String[] {"Qualsiasi", "Easy", "Medium", "Hard"}));
 	    
 	    lblCercaDifficolta = new JLabel("difficoltà");
 	    
@@ -534,7 +550,36 @@ public class Window extends JFrame {
 	    			.addContainerGap())
 	    );
 	    
-	    listCercaPiante = new JList();
+	    listCercaPiante = new JList<String>();
+	    listCercaPiante.setVisibleRowCount(1000);
+	    listCercaPiante.setModel(new DefaultListModel<String>() {
+	        /**
+	         * 
+	         */
+	    		
+	        private static final long serialVersionUID = 1L;
+	        @Override
+            public int getSize() {
+                return arrayListCercaPiante.size();
+            }
+
+            @Override
+            public String getElementAt(int index) {
+                return arrayListCercaPiante.get(index).getNome();
+            }
+
+			@Override
+			public void fireIntervalAdded(Object source, int index0, int index1) {
+				// TODO Auto-generated method stub
+				super.fireIntervalAdded(source, index0, index1);
+			}
+
+            
+	        
+	        
+	    });
+
+
 	    scrollPaneCercaListaPiante.setViewportView(listCercaPiante);
 	    panelCerca.setLayout(gl_panelCerca);
 	    panelCardMain.add(panelSalva, "panelSalva");
@@ -553,7 +598,8 @@ public class Window extends JFrame {
 	    scrollPaneSalvaListaCarrello.setViewportView(panelSalvaListaCarrello);
 	    GridLayout gl_panelSalvaListaCarrello= new GridLayout(30, 1, 0, 0);
 	    panelSalvaListaCarrello.setLayout(gl_panelSalvaListaCarrello);
-	    panelSalvaListaCarrello.setLayout(gl_panelSalvaListaCarrello);
+	    
+	    //((GridLayout)panelSalvaListaCarrello.getLayout()).setRows(((GridLayout)panelSalvaListaCarrello.getLayout()).getRows()+30);
 	
 	    panel_1 = new JPanel();
 	    MatteBorder borderPanelSalvaListaPiante = new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0));
@@ -565,7 +611,6 @@ public class Window extends JFrame {
 	    gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 	    gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 	    panel_1.setLayout(gbl_panel_1);
-	    
 	    
 	    
 	    
@@ -607,6 +652,9 @@ public class Window extends JFrame {
 	    btnSalva.addActionListener(e -> cardLayout.show(panelCardMain, "panelSalva"));
 	    btnNew.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelNew"));
 	    btnView.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelView"));*/
+	    
+	    
+	    
 	}
 	
 	
@@ -687,7 +735,104 @@ public class Window extends JFrame {
 	public JButton getBtnCercaPianta() {
 		return btnCercaPianta;
 	}
+	
+	public String getTxtCercaNome() {
+		if(textFieldCercaNome.getText().equals(""))
+			return null;
+		return textFieldCercaNome.getText();
+	}
+	
+	public String getItemComboBoxCercaOrigine() {
+		if(comboBoxCercaOrigine.getSelectedItem().toString().equals("Qualsiasi"))
+			return null;
+		return comboBoxCercaOrigine.getSelectedItem().toString();
+	}
+	
+	public String getItemComboBoxCercaTassoCrescita() {
+		if(comboBoxCercaTassoCrescita.getSelectedItem().toString().equals("Qualsiasi"))
+			return null;
+		return comboBoxCercaTassoCrescita.getSelectedItem().toString();
+	}
+	
+	public String getItemComboBoxCercaLuce() {
+		if(comboBoxCercaLuce.getSelectedItem().toString().equals("Qualsiasi"))
+			return null;
+		return comboBoxCercaLuce.getSelectedItem().toString();
+	}
+	
+	public String getItemComboBoxCercaCo2() {
+		if(comboBoxCercaCo2.getSelectedItem().toString().equals("Qualsiasi"))
+			return null;
+		return comboBoxCercaCo2.getSelectedItem().toString();
+	}
+	
+	public String getItemComboBoxCercaDifficolta() {
+		if(comboBoxCercaDifficolta.getSelectedItem().toString().equals("Qualsiasi"))
+			return null;
+		return comboBoxCercaDifficolta.getSelectedItem().toString();
+	}
+	
+	/**
+	 * Retrieves a list of strings of the selected items in the JList used for searching plants.
+	 * 
+	 * @return a list containing the strings of the selected items
+	 */
+    public List<PiantaType> getSelectedItemsListCercaPiante() {
+        List<PiantaType> selectedItems = new ArrayList<>();
+        int[] selectedIndices = listCercaPiante.getSelectedIndices();
+        
+        for (int index : selectedIndices) {
+            selectedItems.add(arrayListCercaPiante.get(index));
+          
+        }
+        
+        for (int index : selectedIndices) {
+        	  arrayListCercaPiante.remove(index);
+              DefaultListModel<String> model = (DefaultListModel<String>) listCercaPiante.getModel();
+              model.remove(index);
+        }
+        
+        return selectedItems;
+    }
+	
+    /**
+     * Adds a list of PiantaType items to the existing list of PiantaType items.
+     * After adding the new items to the ArrayList, this method updates the JList model 
+     * to reflect the changes by adding the names of the newly added items to the model.
+     *
+     * @param itemsToAdd A List of PiantaType items to be added to the existing list.
+     */
+    public void addItemsToListCercaPiante(List<PiantaType> itemsToAdd) {
+        int startIndex = arrayListCercaPiante.size();
 
+        arrayListCercaPiante.addAll(itemsToAdd);
+
+        int endIndex = arrayListCercaPiante.size() - 1;
+
+        // Aggiorna direttamente il modello della JList
+        DefaultListModel<String> model = (DefaultListModel<String>) listCercaPiante.getModel();
+        for (int i = startIndex; i <= endIndex; i++) {
+            model.addElement(arrayListCercaPiante.get(i).getNome());
+        }
+    }
+    
+    /**
+     * Removes all items from both the ArrayList and the DefaultListModel associated with the JList.
+     * This method clears all the items from the ArrayList and updates the JList model to reflect the changes.
+     */
+    public void removeAllItemsFromListCercaPiante() {
+        arrayListCercaPiante.clear(); // Rimuove tutti gli elementi dall'ArrayList
+        DefaultListModel<String> model = (DefaultListModel<String>) listCercaPiante.getModel();
+        model.removeAllElements(); // Rimuove tutti gli elementi dal DefaultListModel
+    }
+
+
+
+
+
+
+
+    
 	/**
 	 * This method add to all buttons the reference of the class who manage the actions.
 	 * @param c the reference of the class.
@@ -699,6 +844,18 @@ public class Window extends JFrame {
 	    btnSalva.addActionListener(controller);
 	    btnNew.addActionListener(controller);
 	    btnView.addActionListener(controller);
+	    
+	    btnSalvaNewAcquario.addActionListener(controller);
+	    btnDelete.addActionListener(controller);
+	    
+	    btnCercaPianta.addActionListener(controller);
+	    btnCercaAggiungiPianta.addActionListener(controller);
+	    
+	    spinner.addChangeListener(controller);
+	    btnSalvaAggiungiPiante.addActionListener(controller);
+	    
+	    
+	    
 	}
 	
 	/**
