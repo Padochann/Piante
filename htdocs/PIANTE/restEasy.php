@@ -20,6 +20,7 @@ if ($conn->connect_error) {
 if(isset($_GET['table'])){
     // Recupera i parametri GET
     $table = $_GET['table'];
+    $crud = $_GET['crud'];
 
     $nome = isset($_GET['nome']) ? $_GET['nome'] : null;
     $origine = isset($_GET['origine']) ? $_GET['origine'] : null;
@@ -30,15 +31,23 @@ if(isset($_GET['table'])){
     $id_pianta = isset($_GET['id_pianta']) ? $_GET['id_pianta'] : null;
     $id_acquario = isset($_GET['id_acquario']) ? $_GET['id_acquario'] : null;
     // Costruisci la query SQL dinamicamente
-    $sql = createQuery($table, $nome, $origine, $tasso_crescita, $luce, $co2, $difficolta, $id_pianta, $id_acquario);
+    $sql = createQuery($crud,$table, $nome, $origine, $tasso_crescita, $luce, $co2, $difficolta, $id_pianta, $id_acquario);
     // Esegui la query
     $result = $conn->query($sql);
-    // Genera il documento XML
-    $xmlStringPiante = generateXmlFromResultSet($result, $xsdPath, $table, 'Piante');
-    // Invia il documento XML al client 
-    echo $xmlStringPiante;
-    // Salva il documento XML su file per debug in locale
-    file_put_contents("$table.xml", $xmlStringPiante);
+    if($crud == 'd')
+    {
+        echo "Cancellato con successo";
+    }
+    if($crud == 'r')
+    {
+        // Genera il documento XML
+        $xmlStringPiante = generateXmlFromResultSet($result, $xsdPath, $table, 'Piante');
+        // Invia il documento XML al client 
+        echo $xmlStringPiante;
+        // Salva il documento XML su file per debug in locale
+        file_put_contents("$table.xml", $xmlStringPiante);
+    }
+    
     
 }
 // Leggi l'XML inviato

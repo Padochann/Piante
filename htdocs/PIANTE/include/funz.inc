@@ -47,9 +47,16 @@
         return $xmlWriter->outputMemory();
     }
 
-    function createQuery($table, $nome, $origine, $tasso_crescita, $luce, $co2, $difficolta, $id_pianta, $id_acquario){
+    function createQuery($crud,$table, $nome, $origine, $tasso_crescita, $luce, $co2, $difficolta, $id_pianta, $id_acquario){
         // Costruisci la query SQL dinamicamente
-        $sql = "SELECT * FROM $table WHERE 1=1";
+        if($crud == 'r')
+        {
+            $sql = "SELECT * FROM $table WHERE 1=1";
+        }
+        if($crud == 'd')
+        {
+            $sql = "DELETE FROM $table WHERE 1=1";
+        }
 
         if ($nome !== null) {
             $sql .= " AND nome LIKE '%$nome%'";

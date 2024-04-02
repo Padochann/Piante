@@ -59,6 +59,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import piante.AcquarioType;
 import piante.PiantaType;
 import piante.TassoCrescitaType;
 import javax.swing.ListSelectionModel;
@@ -99,9 +100,9 @@ public class Window extends JFrame {
 	private JComboBox<String> comboBoxSalvaAcquari;
 	private JScrollPane scrollPaneSalvaListaCarrello;
 	private JPanel panelSalvaListaCarrello;
-	private JCheckBox chckbxNewCheckBox;
+	//private JCheckBox chckbxNewCheckBox;
 	private JPanel panel_1;
-	private JCheckBox chckbxNewCheckBox_1;
+	//private JCheckBox chckbxNewCheckBox_1;
 	private JSpinner spinner;
 	private JButton btnSalvaAggiungiPiante;
 	private JScrollPane scrollPaneView;
@@ -138,10 +139,11 @@ public class Window extends JFrame {
 	private CardLayout cardLayout;
 	private CardLayout acquarioLayout;
 	private List<JPanel> arrayPanelsListaCarrello = new ArrayList<JPanel>();
-	private List<JCheckBox> arrayChckBxListaCarrello = new ArrayList<JCheckBox>();
-	private List<JSpinner> arraySpinListaCarrello = new ArrayList<JSpinner>();
+	//private List<JCheckBox> arrayChckBxListaCarrello = new ArrayList<JCheckBox>();
+	//private List<JSpinner> arraySpinListaCarrello = new ArrayList<JSpinner>();
 	private List<PiantaType> arrayListaCarrello = new ArrayList<PiantaType>();
 	private List<PiantaType> arrayListCercaPiante = new ArrayList<PiantaType>();
+	private List<AcquarioType> arrayListAcquari = new ArrayList<AcquarioType>();
 	
 	/**
 	 * Launch the application.
@@ -960,6 +962,27 @@ public class Window extends JFrame {
     }
 
 
+    public void updateListAcquari(List<AcquarioType> itemsToUpdate) {
+        arrayListAcquari.clear();
+        arrayListAcquari.addAll(itemsToUpdate);
+        
+        DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) comboBoxSalvaAcquari.getModel();
+        
+        for (AcquarioType acquario : arrayListAcquari) {
+            String itemText = Long.toString(acquario.getIdAcquario()) + " - " + Long.toString(acquario.getLitri());
+            comboBoxModel.addElement(itemText);
+        }
+        
+        comboBoxSalvaAcquari.setModel(comboBoxModel);
+        
+        // Aggiornamento della JList listAcquari
+        DefaultListModel<String> listModel = (DefaultListModel<String>) listAcquari.getModel();
+        for (AcquarioType acquario : arrayListAcquari) {
+            String itemText = Long.toString(acquario.getIdAcquario()) + " - " + Long.toString(acquario.getLitri());
+            listModel.addElement(itemText);
+        }
+        listAcquari.setModel(listModel);
+    }
 
 
 

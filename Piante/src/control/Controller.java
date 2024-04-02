@@ -48,7 +48,7 @@ public class Controller implements ActionListener, MouseListener{
 			{
 				w.showPanel("cardLayout", "panelSalva");
 				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
-				//metodo che aggiunge al comboBoxAcquario i litri + id
+				//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
 			}
 			if(e.getSource() == w.getBtnView())
 			{
@@ -105,7 +105,7 @@ public class Controller implements ActionListener, MouseListener{
 
 	private void cercaPianta() throws Exception {
 	    // Costruisci la query string in base ai valori ottenuti dai metodi
-	    StringBuilder queryStringBuilder = new StringBuilder("table=piante");
+	    StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=piante");
 	    
 	    String txtCercaNome = w.getTxtCercaNome();
 	    String itemOrigine = w.getItemComboBoxCercaOrigine();
