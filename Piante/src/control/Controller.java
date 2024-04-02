@@ -80,7 +80,9 @@ public class Controller implements ActionListener, ChangeListener{
 			}
 			if(e.getSource() == w.getBtnCercaAggiungiPianta())
 			{
-				w.getSelectedItemsListCercaPiante();
+				
+				List<PiantaType> tmp= w.getSelectedItemsListCercaPiante();
+				w.addItemsToListaCarrello(tmp);
 			}
 			
 			

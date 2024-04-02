@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SpringLayout;
 import java.awt.CardLayout;
+import java.awt.Checkbox;
+
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 
@@ -33,11 +35,15 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.Color;
 import javax.swing.SpinnerNumberModel;
 import com.jgoodies.forms.layout.FormLayout;
@@ -131,6 +137,8 @@ public class Window extends JFrame {
 	private CardLayout cardLayout;
 	private CardLayout acquarioLayout;
 	private List<JPanel> arrayPanelsListaCarrello = new ArrayList<JPanel>();
+	private List<JCheckBox> arrayChckBxListaCarrello = new ArrayList<JCheckBox>();
+	private List<JSpinner> arraySpinListaCarrello = new ArrayList<JSpinner>();
 	private List<PiantaType> arrayListaCarrello = new ArrayList<PiantaType>();
 	private List<PiantaType> arrayListCercaPiante = new ArrayList<PiantaType>();
 	
@@ -480,7 +488,7 @@ public class Window extends JFrame {
 	    lblCercaCo2 = new JLabel("co2");
 	    
 	    comboBoxCercaDifficolta = new JComboBox<String>();
-	    comboBoxCercaDifficolta.setModel(new DefaultComboBoxModel<String>(new String[] {"Qualsiasi", "Easy", "Medium", "Hard"}));
+	    comboBoxCercaDifficolta.setModel(new DefaultComboBoxModel<String>(new String[] {"Qualsiasi", "Easy", "Medium", "Advanced"}));
 	    
 	    lblCercaDifficolta = new JLabel("difficoltà");
 	    
@@ -596,12 +604,12 @@ public class Window extends JFrame {
 	    panelSalvaListaCarrello = new JPanel();
 	    panelSalvaListaCarrello.setToolTipText("Carrello piante");
 	    scrollPaneSalvaListaCarrello.setViewportView(panelSalvaListaCarrello);
-	    GridLayout gl_panelSalvaListaCarrello= new GridLayout(30, 1, 0, 0);
+	    GridLayout gl_panelSalvaListaCarrello= new GridLayout(39, 1, 0, 0);
 	    panelSalvaListaCarrello.setLayout(gl_panelSalvaListaCarrello);
 	    
 	    //((GridLayout)panelSalvaListaCarrello.getLayout()).setRows(((GridLayout)panelSalvaListaCarrello.getLayout()).getRows()+30);
 	
-	    panel_1 = new JPanel();
+	    /*panel_1 = new JPanel();
 	    MatteBorder borderPanelSalvaListaPiante = new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0));
 	    panel_1.setBorder(borderPanelSalvaListaPiante);
 	    panelSalvaListaCarrello.add(panel_1);
@@ -637,7 +645,7 @@ public class Window extends JFrame {
 	    gbc_spinner.fill = GridBagConstraints.VERTICAL;
 	    gbc_spinner.gridx = 2;
 	    gbc_spinner.gridy = 0;
-	    panel_1.add(spinner, gbc_spinner);
+	    panel_1.add(spinner, gbc_spinner);*/
 	    
 	    btnSalvaAggiungiPiante = new JButton("Aggiungi Piante");
 	    sl_panelSalva.putConstraint(SpringLayout.WEST, btnSalvaAggiungiPiante, 85, SpringLayout.EAST, scrollPaneSalvaListaCarrello);
@@ -777,23 +785,27 @@ public class Window extends JFrame {
 	 * 
 	 * @return a list containing the strings of the selected items
 	 */
-    public List<PiantaType> getSelectedItemsListCercaPiante() {
-        List<PiantaType> selectedItems = new ArrayList<>();
-        int[] selectedIndices = listCercaPiante.getSelectedIndices();
-        
-        for (int index : selectedIndices) {
-            selectedItems.add(arrayListCercaPiante.get(index));
-          
-        }
-        
-        for (int index : selectedIndices) {
-        	  arrayListCercaPiante.remove(index);
-              DefaultListModel<String> model = (DefaultListModel<String>) listCercaPiante.getModel();
-              model.remove(index);
-        }
-        
-        return selectedItems;
-    }
+	public List<PiantaType> getSelectedItemsListCercaPiante() {
+	    List<PiantaType> selectedItems = new ArrayList<>();
+	    int[] selectedIndices = listCercaPiante.getSelectedIndices();
+	    
+	    // Ordina gli indici in ordine decrescente
+	    Arrays.sort(selectedIndices);
+	    for (int i = selectedIndices.length - 1; i >= 0; i--) {
+	        int index = selectedIndices[i];
+	        selectedItems.add(arrayListCercaPiante.get(index));
+	        
+	        // Rimuovi l'elemento dalla lista
+	        arrayListCercaPiante.remove(index);
+	        
+	        // Rimuovi l'elemento dal modello della JList
+	        DefaultListModel<String> model = (DefaultListModel<String>) listCercaPiante.getModel();
+	        model.remove(index);
+	    }
+	    
+	    return selectedItems;
+	}
+
 	
     /**
      * Adds a list of PiantaType items to the existing list of PiantaType items.
@@ -826,7 +838,126 @@ public class Window extends JFrame {
         model.removeAllElements(); // Rimuove tutti gli elementi dal DefaultListModel
     }
 
+    public void addItemsToListaCarrello(List<PiantaType> itemsToAdd) {
+    	
+    	for(PiantaType plant : itemsToAdd) {
+    		JPanel panelToAdd = this.createPanelWithComponentsForListaCarrello(plant);
+    		arrayPanelsListaCarrello.add(panelToAdd);
+    		arrayListaCarrello.add(plant);
+    	}
+    	
+    	for(JPanel panel : arrayPanelsListaCarrello) {
+    		panelSalvaListaCarrello.add(panel);
+    		
+    	}
+    	
+    	 panelSalvaListaCarrello.setLayout(new GridLayout(arrayPanelsListaCarrello.size(), 1,0 ,0));  // Imposta un layout di griglia dinamico con una sola colonna
+         panelSalvaListaCarrello.revalidate();
+         panelSalvaListaCarrello.repaint();
+    	
+    }
+    
+    public JPanel createPanelWithComponentsForListaCarrello(PiantaType plant) {
+		
+    	JPanel panel_1 = new JPanel();
+	    MatteBorder borderPanelSalvaListaPiante = new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0));
+	    panel_1.setBorder(borderPanelSalvaListaPiante);
+	    panel_1.setName(Long.toString(plant.getIdPianta()));
+	    GridBagLayout gbl_panel_1 = new GridBagLayout();
+	    gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
+	    gbl_panel_1.rowHeights = new int[]{0, 0};
+	    gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+	    gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+	    panel_1.setLayout(gbl_panel_1);
+	    
+	    
+	    
+	    
+	    JCheckBox chckbxNewCheckBox_1 = new JCheckBox("");
+	    chckbxNewCheckBox_1.setName(Long.toString(plant.getIdPianta()));
+	    GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
+	    gbc_chckbxNewCheckBox_1.fill = GridBagConstraints.VERTICAL;
+	    gbc_chckbxNewCheckBox_1.insets = new Insets(0, 0, 0, 5);
+	    gbc_chckbxNewCheckBox_1.gridx = 0;
+	    gbc_chckbxNewCheckBox_1.gridy = 0;
+	    panel_1.add(chckbxNewCheckBox_1, gbc_chckbxNewCheckBox_1);
+	    
+	    
+	    
+	    JLabel lblNewLabel = new JLabel(plant.getNome());
+	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel.setName(Long.toString(plant.getIdPianta()));
+	    GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+	    gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+	    gbc_lblNewLabel.gridx = 1;
+	    gbc_lblNewLabel.gridy = 0;
+	    panel_1.add(lblNewLabel, gbc_lblNewLabel);
+	    
+	    JSpinner spinner = new JSpinner();
+	    spinner.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));      
+	    spinner.setName(Long.toString(plant.getIdPianta()));
+	    GridBagConstraints gbc_spinner = new GridBagConstraints();
+	    gbc_spinner.fill = GridBagConstraints.VERTICAL;
+	    gbc_spinner.gridx = 2;
+	    gbc_spinner.gridy = 0;
+	    panel_1.add(spinner, gbc_spinner);
+	    
+	    spinner.addChangeListener(new ChangeListener() {
+	        @Override
+	        public void stateChanged(ChangeEvent e) {
+	            JSpinner source = (JSpinner) e.getSource();
+	            int value = (int) source.getValue();
 
+	            if (value == 0) {
+	                // Ottieni il pannello padre dello spinner
+	                JPanel parentPanel = (JPanel) spinner.getParent();
+
+	                // Rimuovi il pannello dalla tabella
+	                parentPanel.removeAll();
+	                parentPanel.revalidate();
+	                parentPanel.repaint();
+
+	                // Rimuovi il pannello dalla lista
+	                Iterator<JPanel> iterator = arrayPanelsListaCarrello.iterator();
+	                int index=0;
+	                while (iterator.hasNext()) {
+	                    JPanel currentPanel = iterator.next();
+	                    if (currentPanel == parentPanel) {
+	                        iterator.remove();
+	                        arrayListaCarrello.remove(index);
+	                        
+	                        break;
+	                    }
+	                    index++;
+	                }
+	                
+	                // Rimuovi tutti i componenti dal frame
+	                //JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(parentPanel);
+	                //frame.getContentPane().removeAll();
+	                
+	                panelSalvaListaCarrello.removeAll();
+	                
+	                // Aggiungi tutti i pannelli aggiornati al frame
+	                for (JPanel panel : arrayPanelsListaCarrello) {
+	                    panelSalvaListaCarrello.add(panel);
+	                }
+
+	                // Aggiorna il layout del frame
+	                panelSalvaListaCarrello.setLayout(new GridLayout(arrayPanelsListaCarrello.size(), 1,0,0));  // Imposta un layout di griglia dinamico con una sola colonna
+	                panelSalvaListaCarrello.revalidate();
+	                panelSalvaListaCarrello.repaint();
+	                System.out.println(arrayPanelsListaCarrello.toString());
+	                System.out.println(arrayListaCarrello.toString());
+	            }
+	        }
+
+			
+	    });
+
+	    
+    	return panel_1;
+    	
+    }
 
 
 
@@ -851,7 +982,7 @@ public class Window extends JFrame {
 	    btnCercaPianta.addActionListener(controller);
 	    btnCercaAggiungiPianta.addActionListener(controller);
 	    
-	    spinner.addChangeListener(controller);
+	    //spinner.addChangeListener(controller);//devo mettere questo nel metodo crea panel with components
 	    btnSalvaAggiungiPiante.addActionListener(controller);
 	    
 	    
