@@ -166,4 +166,12 @@ public class AcquarioType {
         this.descrizione = value;
     }
 
+	@Override
+	public String toString() {
+		return "AcquarioType [idAcquario=" + idAcquario + ", litri=" + litri + ", larghezza=" + larghezza
+				+ ", lunghezza=" + lunghezza + ", altezza=" + altezza + ", descrizione=" + descrizione + "]";
+	}
+
+    
+    
 }

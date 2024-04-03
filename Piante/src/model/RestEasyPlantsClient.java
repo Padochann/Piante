@@ -7,7 +7,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import jakarta.xml.bind.JAXBContext;
@@ -15,8 +19,10 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import piante.AcquariType;
+import piante.AcquarioType;
 import piante.ImmaginiType;
 import piante.LuceCO2Type;
+import piante.PiantaAcquarioType;
 import piante.PiantaType;
 import piante.PianteAcquariType;
 import piante.PianteType;
@@ -74,7 +80,7 @@ public class RestEasyPlantsClient {
         }
     }
     
-	public void sendDataToApi(Object obj) throws Exception {
+	public String sendDataToApi(Object obj) throws Exception {
 		
 		// Decidi il tipo di classe JAXB da utilizzare per la deserializzazione in base alla tabella
         Class<?> requestClass ;
@@ -129,7 +135,72 @@ public class RestEasyPlantsClient {
 
         connection.disconnect();
         
+        return line;
 	}
+	
+	public List<PiantaType> fetchPianteForAcquario(List<PiantaAcquarioType> piantaAcquarioList) throws JAXBException, Exception {
+	    List<PiantaType> pianteForAcquarioList = new ArrayList<PiantaType>();
+
+	    // Per ogni elemento PianteAcquariType nella lista, esegui una richiesta API
+	    for (PiantaAcquarioType piantaAcquario : piantaAcquarioList) {
+	        Long idPianta = piantaAcquario.getIdPianta(); // Assumendo che esista un metodo getIdPianta() in PianteAcquariType
+
+	        StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=piante");
+	        queryStringBuilder.append("&id_pianta=").append(URLEncoder.encode(Long.toString(idPianta), StandardCharsets.UTF_8.toString()));
+
+	        String queryString = queryStringBuilder.toString();
+
+	        
+            // Esegui la richiesta e ottieni i dettagli della pianta
+            PianteType piantaData = (PianteType) this.fetchDataFromApi(queryString);
+            System.out.println(piantaData.getItem());
+            if (piantaData != null) {
+                pianteForAcquarioList.addAll(piantaData.getItem());
+            }
+
+	        
+	    }
+
+	    return pianteForAcquarioList;
+	}
+
+	public PianteAcquariType createObjectPianteAcquariTypeMulti(Long[] idsPianta, Long[] quantitas, Long idAcquario) throws Exception {
+	    if (idsPianta == null || quantitas == null || idsPianta.length != quantitas.length)
+	        throw new IllegalArgumentException("Gli array idsPianta e quantitas devono avere la stessa lunghezza e non possono essere nulli");
+	    
+
+	    PianteAcquariType pianteAcquariDataResult = new PianteAcquariType();
+
+	    for (int i = 0; i < idsPianta.length; i++) {
+	        PiantaAcquarioType piantaAcquario = new PiantaAcquarioType();
+	        
+	        piantaAcquario.setIdPianta(idsPianta[i]);
+	        piantaAcquario.setQuantita(quantitas[i]);
+	        piantaAcquario.setIdAcquario(idAcquario);  // Imposta l'idAcquario su tutti gli oggetti PiantaAcquarioType
+	        
+	        pianteAcquariDataResult.getItem().add(piantaAcquario);
+	    }
+
+	    return pianteAcquariDataResult;
+	}
+	
+	public AcquariType createObjectAcquariTypeSolo(long idAcquario, long litri, long larghezza, long lunghezza, long altezza, String descrizione) {
+	    AcquariType acquariTypeResult = new AcquariType();
+	    AcquarioType acquario = new AcquarioType();
+	    
+	    acquario.setIdAcquario(idAcquario);
+	    acquario.setLitri(litri);
+	    acquario.setLarghezza(larghezza);
+	    acquario.setLunghezza(lunghezza);
+	    acquario.setAltezza(altezza);
+	    acquario.setDescrizione(descrizione);
+	    
+	    acquariTypeResult.getItem().add(acquario);
+
+	    return acquariTypeResult;
+	}
+
+
 	
     private Map<String, String> extractParameters(String queryString) {
         Map<String, String> params = new HashMap<>();

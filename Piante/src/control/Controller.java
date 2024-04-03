@@ -2,6 +2,8 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URLEncoder;
@@ -15,20 +17,23 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import model.RestEasyPlantsClient;
+import piante.AcquariType;
 import piante.AcquarioType;
 import piante.PiantaType;
+import piante.PianteAcquariType;
 import piante.PianteType;
 import view.Window;
 
-public class Controller implements ActionListener, MouseListener{
+public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	private Window w;
 	private RestEasyPlantsClient requester;
 	
-	public Controller(Window w) {
+	public Controller(Window w) throws Exception {
 		this.w= w;
 		this.w.registerEvent(this);
 		this.requester= new RestEasyPlantsClient();
+		w.updateListAcquari(this.getAcquariList());
 	}
 
 	@Override
@@ -39,6 +44,12 @@ public class Controller implements ActionListener, MouseListener{
 			if(e.getSource() == w.getBtnAcquari())
 			{
 				w.showPanel("cardLayout", "panelAcquari");
+				w.resetViewAndNew();
+				//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
+				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
+				List<AcquarioType> tmp = this.getAcquariList();
+				//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
+				w.updateListAcquari(tmp);
 			}
 			if(e.getSource() == w.getBtnCerca())
 			{
@@ -47,12 +58,16 @@ public class Controller implements ActionListener, MouseListener{
 			if(e.getSource() == w.getBtnSalva())
 			{
 				w.showPanel("cardLayout", "panelSalva");
+				//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
 				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
+				List<AcquarioType> tmp = this.getAcquariList();
 				//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
+				w.updateListAcquari(tmp);
 			}
 			if(e.getSource() == w.getBtnView())
 			{
 				w.showPanel("acquarioLayout", "panelView");
+				this.viewAcquario();
 			}
 			if(e.getSource() == w.getBtnNew())
 			{
@@ -142,18 +157,53 @@ public class Controller implements ActionListener, MouseListener{
 	}
 
 	private List<AcquarioType> getAcquariList() throws Exception{
-		
-		
-		return null;
+		StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=acquari");
+		String queryString = queryStringBuilder.toString();
+		System.out.println(queryString);
+		AcquariType acquariData = (AcquariType) requester.fetchDataFromApi(queryString);
+		System.out.println(acquariData.getItem().toString());
+		return acquariData.getItem();
 	}
+	
+	private void viewAcquario() throws Exception{
+		AcquarioType selectedAcquario = w.getSelectedItemListAcquari();
+		
+		// Costruisci la query string in base ai valori ottenuti dai metodi
+	    StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=piante_acquari");
+		
+	    queryStringBuilder.append("&id_acquario=").append(URLEncoder.encode(Long.toString(selectedAcquario.getIdAcquario()), StandardCharsets.UTF_8.toString()));
+	    
+	    String queryString = queryStringBuilder.toString();
+	    System.out.println(queryString);
+	    PianteAcquariType pianteAcquariData = (PianteAcquariType) requester.fetchDataFromApi(queryString);
+	    System.out.println(pianteAcquariData.getItem().toString());
+	    
+	    //ora devo fare un metodo sulla classe del model che da questa lista prende le pk di piante e fa n richieste al database e mette insieme le risposte restituendo una lista tipo PiantaType
+	   
+	    // Esegui le richieste per ottenere i dettagli delle piante
+	    List<PiantaType> pianteForAcquario = requester.fetchPianteForAcquario(pianteAcquariData.getItem());
+	    
+		w.viewSelectedAcquario(pianteForAcquario);
+	}
+	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		// Verifica se il tasto CTRL è premuto
-        if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1) {
+		// Verifica se il tasto ALT è premuto
+        if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListCercaPiante()) {
             // Ottieni l'indice dell'elemento cliccato
             int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
+            
+            // Verifica se l'indice è valido
+            if (index != -1) {
+                // Apri una nuova finestra Java e mostra l'indice
+                w.messageDialog("trovato a indice "+ index);;
+            }
+        }
+        if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListViewPianteAcquario()) {
+            // Ottieni l'indice dell'elemento cliccato
+            int index = w.getIndexOfElemenListViewPianteAcquarioForMouseClick(e.getPoint());
             
             // Verifica se l'indice è valido
             if (index != -1) {
@@ -186,5 +236,35 @@ public class Controller implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	//keylistener
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE && e.getSource() == w.getListAcquari()) {
+            w.clearSelectionListAcquari();
+        }
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE && e.getSource() == w.getListCercaPiante()) {
+            w.clearSelectionListCercaPiante();
+        }
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE && e.getSource() == w.getListViewPianteAcquario()) {
+            w.clearSelectionListViewPianteAcquario();
+        }
+	}
+	
+	
 	
 }

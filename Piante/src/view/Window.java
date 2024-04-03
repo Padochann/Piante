@@ -101,7 +101,7 @@ public class Window extends JFrame {
 	private JScrollPane scrollPaneSalvaListaCarrello;
 	private JPanel panelSalvaListaCarrello;
 	//private JCheckBox chckbxNewCheckBox;
-	private JPanel panel_1;
+	//private JPanel panel_1;
 	//private JCheckBox chckbxNewCheckBox_1;
 	private JSpinner spinner;
 	private JButton btnSalvaAggiungiPiante;
@@ -144,6 +144,7 @@ public class Window extends JFrame {
 	private List<PiantaType> arrayListaCarrello = new ArrayList<PiantaType>();
 	private List<PiantaType> arrayListCercaPiante = new ArrayList<PiantaType>();
 	private List<AcquarioType> arrayListAcquari = new ArrayList<AcquarioType>();
+	private List<PiantaType> arrayListViewPianteForAcquario = new ArrayList<PiantaType>();
 	
 	/**
 	 * Launch the application.
@@ -167,7 +168,7 @@ public class Window extends JFrame {
 	 */
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 956,530);
+		setBounds(100, 100, 978,530);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		 
@@ -211,19 +212,33 @@ public class Window extends JFrame {
 		sl_panelAcquari.putConstraint(SpringLayout.EAST, panelBtnAcquari, -6, SpringLayout.WEST, panelCardAcquari);
 		
 		listAcquari = new JList<String>();
-		listAcquari.setModel(new AbstractListModel<String>() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
+		listAcquari.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listAcquari.setModel(new DefaultListModel<String>() {
+	        /**
+	         * 
+	         */
+	    		
+	        private static final long serialVersionUID = 1L;
+	        @Override
+            public int getSize() {
+                return arrayListAcquari.size();
+            }
+
+            @Override
+            public String getElementAt(int index) {
+                return Long.toString(arrayListAcquari.get(index).getIdAcquario())+")   litri:"+Long.toString(arrayListAcquari.get(index).getLitri());
+            }
+
+			@Override
+			public void fireIntervalAdded(Object source, int index0, int index1) {
+				// TODO Auto-generated method stub
+				super.fireIntervalAdded(source, index0, index1);
 			}
-			public String getElementAt(int index) {
-				return values[index];
-			}
-		});
+
+            
+	        
+	        
+	    });
 		scrollPaneAcquari.setViewportView(listAcquari);
 		acquarioLayout= new CardLayout();
 		panelCardAcquari.setLayout(acquarioLayout);
@@ -346,6 +361,33 @@ public class Window extends JFrame {
 		scrollPaneViewListaPianteAcquario = new JScrollPane();
 		
 		listViewPianteAcquario = new JList<String>();
+		listViewPianteAcquario.setModel(new DefaultListModel<String>() {
+	        /**
+	         * 
+	         */
+	    		
+	        private static final long serialVersionUID = 1L;
+	        @Override
+            public int getSize() {
+                return arrayListViewPianteForAcquario.size();
+            }
+
+            @Override
+            public String getElementAt(int index) {
+                return arrayListViewPianteForAcquario.get(index).getNome();
+            }
+
+			@Override
+			public void fireIntervalAdded(Object source, int index0, int index1) {
+				// TODO Auto-generated method stub
+				super.fireIntervalAdded(source, index0, index1);
+			}
+
+            
+	        
+	        
+	    });
+		listViewPianteAcquario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneViewListaPianteAcquario.setViewportView(listViewPianteAcquario);
 		
 		textAreaViewDescrizioneAcquario = new JTextArea();
@@ -358,24 +400,25 @@ public class Window extends JFrame {
 					.addGap(10)
 					.addGroup(gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelViewAcquario.createSequentialGroup()
-							.addComponent(textFieldViewLitraggio, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addComponent(textFieldViewLitraggio, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
 							.addGap(98)
 							.addComponent(lblViewLitraggio))
 						.addGroup(gl_panelViewAcquario.createSequentialGroup()
-							.addComponent(textFieldViewLunghezza, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addComponent(textFieldViewLunghezza, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
 							.addGap(88)
 							.addComponent(lblViewLunghezza))
 						.addGroup(gl_panelViewAcquario.createSequentialGroup()
-							.addComponent(textFieldViewLarghezza, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addComponent(textFieldViewLarghezza, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
 							.addGap(90)
 							.addComponent(lblViewLarghezza))
 						.addGroup(gl_panelViewAcquario.createSequentialGroup()
-							.addComponent(textFieldViewAltezza, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addComponent(textFieldViewAltezza, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
 							.addGap(102)
 							.addComponent(lblViewAltezza))
-						.addComponent(scrollPaneViewDescrizioneAcquario, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scrollPaneViewDescrizioneAcquario, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
 						.addComponent(lblViewDescrizione)
-						.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+					.addGap(8))
 		);
 		gl_panelViewAcquario.setVerticalGroup(
 			gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
@@ -409,7 +452,7 @@ public class Window extends JFrame {
 					.addGap(6)
 					.addComponent(lblViewDescrizione)
 					.addGap(6)
-					.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
+					.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
 		);
 		panelViewAcquario.setLayout(gl_panelViewAcquario);
 		panelAcquari.add(panelBtnAcquari);
@@ -433,6 +476,32 @@ public class Window extends JFrame {
 		panelSalva.setLayout(sl_panelSalva);
 		
 		comboBoxSalvaAcquari = new JComboBox<String>();
+		comboBoxSalvaAcquari.setModel(new DefaultComboBoxModel<String>() {
+	        /**
+	         * 
+	         */
+	    		
+	        private static final long serialVersionUID = 1L;
+	        @Override
+            public int getSize() {
+                return arrayListAcquari.size();
+            }
+
+            @Override
+            public String getElementAt(int index) {
+                return Long.toString(arrayListAcquari.get(index).getIdAcquario())+")   litri:"+Long.toString(arrayListAcquari.get(index).getLitri());
+            }
+
+			@Override
+			public void fireIntervalAdded(Object source, int index0, int index1) {
+				// TODO Auto-generated method stub
+				super.fireIntervalAdded(source, index0, index1);
+			}
+
+            
+	        
+	        
+	    });
 		comboBoxSalvaAcquari.setMaximumRowCount(12);
 		comboBoxSalvaAcquari.setToolTipText("Selezione acquario");
 		sl_panelSalva.putConstraint(SpringLayout.EAST, comboBoxSalvaAcquari, -41, SpringLayout.EAST, panelSalva);
@@ -746,6 +815,29 @@ public class Window extends JFrame {
 		return btnCercaPianta;
 	}
 	
+	
+	
+	/**
+	 * @return the listAcquari
+	 */
+	public JList<String> getListAcquari() {
+		return listAcquari;
+	}
+
+	/**
+	 * @return the listViewPianteAcquario
+	 */
+	public JList<String> getListViewPianteAcquario() {
+		return listViewPianteAcquario;
+	}
+
+	/**
+	 * @return the listCercaPiante
+	 */
+	public JList<String> getListCercaPiante() {
+		return listCercaPiante;
+	}
+
 	public String getTxtCercaNome() {
 		if(textFieldCercaNome.getText().equals(""))
 			return null;
@@ -781,6 +873,8 @@ public class Window extends JFrame {
 			return null;
 		return comboBoxCercaDifficolta.getSelectedItem().toString();
 	}
+	
+	
 	
 	/**
 	 * Retrieves a list of strings of the selected items in the JList used for searching plants.
@@ -839,7 +933,12 @@ public class Window extends JFrame {
         DefaultListModel<String> model = (DefaultListModel<String>) listCercaPiante.getModel();
         model.removeAllElements(); // Rimuove tutti gli elementi dal DefaultListModel
     }
-
+    
+    /**
+     * Adds items to the list of carrello piante and updates the display.
+     * 
+     * @param itemsToAdd the list of items to add PiantaType
+     */
     public void addItemsToListaCarrello(List<PiantaType> itemsToAdd) {
     	
     	for(PiantaType plant : itemsToAdd) {
@@ -859,6 +958,13 @@ public class Window extends JFrame {
     	
     }
     
+    
+    /**
+     * Creates a JPanel with components for a specific PiantaType.
+     * 
+     * @param plant The PiantaType object for which the panel is created.
+     * @return The JPanel with the components.
+     */
     public JPanel createPanelWithComponentsForListaCarrello(PiantaType plant) {
 		
     	JPanel panel_1 = new JPanel();
@@ -961,7 +1067,11 @@ public class Window extends JFrame {
     	
     }
 
-
+    /**
+     * Updates the list of aquariums with the given items.
+     *
+     * @param itemsToUpdate The list of aquarium items to update.
+     */
     public void updateListAcquari(List<AcquarioType> itemsToUpdate) {
         arrayListAcquari.clear();
         arrayListAcquari.addAll(itemsToUpdate);
@@ -969,7 +1079,7 @@ public class Window extends JFrame {
         DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) comboBoxSalvaAcquari.getModel();
         
         for (AcquarioType acquario : arrayListAcquari) {
-            String itemText = Long.toString(acquario.getIdAcquario()) + " - " + Long.toString(acquario.getLitri());
+            String itemText = Long.toString(acquario.getIdAcquario()) + ")   litri:" + Long.toString(acquario.getLitri());
             comboBoxModel.addElement(itemText);
         }
         
@@ -978,14 +1088,69 @@ public class Window extends JFrame {
         // Aggiornamento della JList listAcquari
         DefaultListModel<String> listModel = (DefaultListModel<String>) listAcquari.getModel();
         for (AcquarioType acquario : arrayListAcquari) {
-            String itemText = Long.toString(acquario.getIdAcquario()) + " - " + Long.toString(acquario.getLitri());
+            String itemText = Long.toString(acquario.getIdAcquario()) + ")   litri:" + Long.toString(acquario.getLitri());
             listModel.addElement(itemText);
         }
         listAcquari.setModel(listModel);
     }
 
+    public AcquarioType getSelectedItemListAcquari() throws Exception{
 
+    	AcquarioType selectedItem;
+	    int selectedIndex = listAcquari.getSelectedIndex();
+	    if(selectedIndex == -1)
+	    	throw new Exception("Attenzione: selezionare un acquario dalla lista per poterlo visualizzare");
+	    
+	    selectedItem = arrayListAcquari.get(selectedIndex);
+	    
+	    return selectedItem;
+    }
 
+    //aggiungere come parametro una lista di PiantaType filtrata per l'id dell'acquario selezionato
+    //contr chiama getSelectedItemListAcquari prende la pk
+    //fa la richiesta su piante_acquari id_acquario=pk
+    //per ogni item del risultato prende la pk della pianta e fa una richiesta a piante e salva il singolo item ottenuto add in una lista di PiantaType che viene passata a questo metodo
+    public void viewSelectedAcquario(List<PiantaType> plantsToView) throws Exception{
+    	AcquarioType selectedItem = this.getSelectedItemListAcquari();
+    	//listAcquari.clearSelection();
+    	textFieldViewLitraggio.setText(Long.toString(selectedItem.getLitri()));
+    	textFieldViewLarghezza.setText(Long.toString(selectedItem.getLarghezza()));
+    	textFieldViewLunghezza.setText(Long.toString(selectedItem.getLunghezza()));
+    	textFieldViewAltezza.setText(Long.toString(selectedItem.getAltezza()));
+    	textAreaViewDescrizioneAcquario.setText(selectedItem.getDescrizione());
+    	
+    	arrayListViewPianteForAcquario.clear();
+    	arrayListViewPianteForAcquario.addAll(plantsToView);
+    	
+    	this.updateViewListPianteForAcquario();
+    }
+    
+    private void updateViewListPianteForAcquario() {
+    	// Aggiornamento della JList listAcquari
+        DefaultListModel<String> listModel = new DefaultListModel<String>();
+        for (PiantaType pianta : arrayListViewPianteForAcquario) {
+            
+            listModel.addElement(pianta.getNome());
+        }
+        listViewPianteAcquario.setModel(listModel);
+    }
+    
+    public void resetViewAndNew() {
+    	textFieldViewLitraggio.setText(null);
+    	textFieldViewLarghezza.setText(null);
+    	textFieldViewLunghezza.setText(null);
+    	textFieldViewAltezza.setText(null);
+    	textAreaViewDescrizioneAcquario.setText(null);
+    	
+    	arrayListViewPianteForAcquario.clear();
+    	this.updateViewListPianteForAcquario();
+    	
+    	textFieldNewLitraggio.setText(null);
+    	textFieldNewLarghezza.setText(null);
+    	textFieldNewLunghezza.setText(null);
+    	textFieldNewAltezza.setText(null);
+    	textAreaNewDescrizione.setText(null);
+    }
     
 	/**
 	 * This method add to all buttons the reference of the class who manage the actions.
@@ -1009,6 +1174,11 @@ public class Window extends JFrame {
 	    btnSalvaAggiungiPiante.addActionListener(controller);
 	    
 	    listCercaPiante.addMouseListener(controller);
+	    listViewPianteAcquario.addMouseListener(controller);
+	    
+	    listCercaPiante.addKeyListener(controller);
+	    listAcquari.addKeyListener(controller);
+	    listViewPianteAcquario.addKeyListener(controller);
 	    
 	    
 	}
@@ -1041,10 +1211,39 @@ public class Window extends JFrame {
 	 */
 	public void messageDialog(String message) {
 		JOptionPane.showMessageDialog(this, message);
+		System.out.println(message);
 	}
 	
+	/**
+	 * Returns the index of the element in the listCercaPiante that corresponds to the given mouse click point.
+	 *
+	 * @param p the mouse click point
+	 * @return the index of the element in the listCercaPiante, or -1 if no element is found
+	 */
 	public int getIndexOfElemenListCercaPiantaForMouseClick(Point p) {
 		return listCercaPiante.locationToIndex(p);
+	}
+	
+	/**
+	 * Returns the index of the element in the listViewPianteAcquario that corresponds to the given mouse click point.
+	 *
+	 * @param p the mouse click point
+	 * @return the index of the element in the listViewPianteAcquario, or -1 if no element is found
+	 */
+	public int getIndexOfElemenListViewPianteAcquarioForMouseClick(Point p) {
+		return listViewPianteAcquario.locationToIndex(p);
+	}
+	
+	public void clearSelectionListAcquari() {
+		listAcquari.clearSelection();
+	}
+	
+	public void clearSelectionListCercaPiante() {
+		listCercaPiante.clearSelection();
+	}
+	
+	public void clearSelectionListViewPianteAcquario() {
+		listViewPianteAcquario.clearSelection();
 	}
 	
 	

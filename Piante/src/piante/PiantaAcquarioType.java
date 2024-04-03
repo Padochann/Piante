@@ -100,4 +100,12 @@ public class PiantaAcquarioType {
         this.quantita = value;
     }
 
+	@Override
+	public String toString() {
+		return "PiantaAcquarioType [idPianta=" + idPianta + ", idAcquario=" + idAcquario + ", quantita=" + quantita
+				+ "]";
+	}
+
+    
+    
 }
