@@ -87,10 +87,6 @@ public class Window extends JFrame {
 	private JButton btnSalvaNewAcquario;
 	private JScrollPane scrollPaneNewDescrizione;
 	private JTextArea textAreaNewDescrizione;
-	private JTextField textFieldNewLitraggio;
-	private JTextField textFieldNewLunghezza;
-	private JTextField textFieldNewLarghezza;
-	private JTextField textFieldNewAltezza;
 	private JList<String> listAcquari;
 	private JLabel lblDescrizione;
 	private JLabel lblNewLitraggio;
@@ -103,7 +99,7 @@ public class Window extends JFrame {
 	//private JCheckBox chckbxNewCheckBox;
 	//private JPanel panel_1;
 	//private JCheckBox chckbxNewCheckBox_1;
-	private JSpinner spinner;
+	//private JSpinner spinner;
 	private JButton btnSalvaAggiungiPiante;
 	private JScrollPane scrollPaneView;
 	private JPanel panelViewAcquario;
@@ -145,6 +141,10 @@ public class Window extends JFrame {
 	private List<PiantaType> arrayListCercaPiante = new ArrayList<PiantaType>();
 	private List<AcquarioType> arrayListAcquari = new ArrayList<AcquarioType>();
 	private List<PiantaType> arrayListViewPianteForAcquario = new ArrayList<PiantaType>();
+	private JSpinner spinnerLarghezza;
+	private JSpinner spinnerAltezza;
+	private JSpinner spinnerLitraggio;
+	private JSpinner spinnerLunghezza;
 	
 	/**
 	 * Launch the application.
@@ -262,38 +262,6 @@ public class Window extends JFrame {
 		textAreaNewDescrizione = new JTextArea();
 		scrollPaneNewDescrizione.setViewportView(textAreaNewDescrizione);
 		
-		textFieldNewLitraggio = new JTextField();
-		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldNewLitraggio, 10, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldNewLitraggio, -153, SpringLayout.EAST, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldNewLitraggio, 10, SpringLayout.WEST, panelNew);
-		panelNew.add(textFieldNewLitraggio);
-		textFieldNewLitraggio.setColumns(10);
-		
-		textFieldNewLunghezza = new JTextField();
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldNewLitraggio, -17, SpringLayout.NORTH, textFieldNewLunghezza);
-		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldNewLunghezza, 0, SpringLayout.EAST, textFieldNewLitraggio);
-		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldNewLunghezza, 47, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldNewLunghezza, 10, SpringLayout.WEST, panelNew);
-		textFieldNewLunghezza.setColumns(10);
-		panelNew.add(textFieldNewLunghezza);
-		
-		textFieldNewLarghezza = new JTextField();
-		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldNewLarghezza, 86, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldNewLarghezza, 10, SpringLayout.WEST, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldNewLarghezza, 0, SpringLayout.EAST, textFieldNewLitraggio);
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldNewLunghezza, -19, SpringLayout.NORTH, textFieldNewLarghezza);
-		textFieldNewLarghezza.setColumns(10);
-		panelNew.add(textFieldNewLarghezza);
-		
-		textFieldNewAltezza = new JTextField();
-		sl_panelNew.putConstraint(SpringLayout.NORTH, scrollPaneNewDescrizione, 20, SpringLayout.SOUTH, textFieldNewAltezza);
-		sl_panelNew.putConstraint(SpringLayout.NORTH, textFieldNewAltezza, 122, SpringLayout.NORTH, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.SOUTH, textFieldNewLarghezza, -16, SpringLayout.NORTH, textFieldNewAltezza);
-		sl_panelNew.putConstraint(SpringLayout.WEST, textFieldNewAltezza, 10, SpringLayout.WEST, panelNew);
-		sl_panelNew.putConstraint(SpringLayout.EAST, textFieldNewAltezza, 0, SpringLayout.EAST, textFieldNewLitraggio);
-		textFieldNewAltezza.setColumns(10);
-		panelNew.add(textFieldNewAltezza);
-		
 		lblDescrizione = new JLabel("Descrizione");
 		sl_panelNew.putConstraint(SpringLayout.NORTH, lblDescrizione, 4, SpringLayout.NORTH, btnSalvaNewAcquario);
 		sl_panelNew.putConstraint(SpringLayout.WEST, lblDescrizione, 10, SpringLayout.WEST, panelNew);
@@ -315,9 +283,46 @@ public class Window extends JFrame {
 		panelNew.add(lblNewLarghezza);
 		
 		lblNewAltezza = new JLabel("altezza");
+		sl_panelNew.putConstraint(SpringLayout.NORTH, scrollPaneNewDescrizione, 26, SpringLayout.SOUTH, lblNewAltezza);
 		sl_panelNew.putConstraint(SpringLayout.NORTH, lblNewAltezza, 22, SpringLayout.SOUTH, lblNewLarghezza);
 		sl_panelNew.putConstraint(SpringLayout.EAST, lblNewAltezza, -10, SpringLayout.EAST, panelNew);
 		panelNew.add(lblNewAltezza);
+		
+		spinnerLitraggio = new JSpinner();
+		spinnerLitraggio.setModel(new SpinnerNumberModel(Long.valueOf(1), Long.valueOf(1), null, Long.valueOf(1)));
+		sl_panelNew.putConstraint(SpringLayout.NORTH, spinnerLitraggio, 10, SpringLayout.NORTH, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.WEST, spinnerLitraggio, 10, SpringLayout.WEST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, spinnerLitraggio, 158, SpringLayout.WEST, panelNew);
+		JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) spinnerLitraggio.getEditor();
+		editor.getTextField().setEditable(false);
+		panelNew.add(spinnerLitraggio);
+		
+		spinnerLunghezza = new JSpinner();
+		sl_panelNew.putConstraint(SpringLayout.NORTH, spinnerLunghezza, 10, SpringLayout.SOUTH, spinnerLitraggio);
+		sl_panelNew.putConstraint(SpringLayout.WEST, spinnerLunghezza, 10, SpringLayout.WEST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, spinnerLunghezza, 158, SpringLayout.WEST, panelNew);
+		spinnerLunghezza.setModel(new SpinnerNumberModel(Long.valueOf(1), Long.valueOf(1), null, Long.valueOf(1)));
+		JSpinner.DefaultEditor editor1 = (JSpinner.DefaultEditor) spinnerLunghezza.getEditor();
+		editor1.getTextField().setEditable(false);
+		panelNew.add(spinnerLunghezza);
+		
+		spinnerLarghezza = new JSpinner();
+		sl_panelNew.putConstraint(SpringLayout.NORTH, spinnerLarghezza, 16, SpringLayout.SOUTH, spinnerLunghezza);
+		sl_panelNew.putConstraint(SpringLayout.WEST, spinnerLarghezza, 10, SpringLayout.WEST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, spinnerLarghezza, 158, SpringLayout.WEST, panelNew);
+		spinnerLarghezza.setModel(new SpinnerNumberModel(Long.valueOf(1), Long.valueOf(1), null, Long.valueOf(1)));
+		JSpinner.DefaultEditor editor2 = (JSpinner.DefaultEditor) spinnerLarghezza.getEditor();
+		editor2.getTextField().setEditable(false);
+		panelNew.add(spinnerLarghezza);
+		
+		spinnerAltezza = new JSpinner();
+		spinnerAltezza.setModel(new SpinnerNumberModel(Long.valueOf(1), Long.valueOf(1), null, Long.valueOf(1)));
+		sl_panelNew.putConstraint(SpringLayout.NORTH, spinnerAltezza, 16, SpringLayout.SOUTH, spinnerLarghezza);
+		sl_panelNew.putConstraint(SpringLayout.WEST, spinnerAltezza, 10, SpringLayout.WEST, panelNew);
+		sl_panelNew.putConstraint(SpringLayout.EAST, spinnerAltezza, 158, SpringLayout.WEST, panelNew);
+		JSpinner.DefaultEditor editor3 = (JSpinner.DefaultEditor) spinnerAltezza.getEditor();
+		editor3.getTextField().setEditable(false);
+		panelNew.add(spinnerAltezza);
 		
 		panelView = new JPanel();
 		panelCardAcquari.add(panelView, "panelView");
@@ -787,12 +792,7 @@ public class Window extends JFrame {
 		return btnSalvaNewAcquario;
 	}
 
-	/**
-	 * @return the spinner
-	 */
-	public JSpinner getSpinner() {
-		return spinner;
-	}
+	
 
 	/**
 	 * @return the btnSalvaAggiungiPiante
@@ -874,7 +874,25 @@ public class Window extends JFrame {
 		return comboBoxCercaDifficolta.getSelectedItem().toString();
 	}
 	
+	public Long getValueSpinnerLitraggio() {
+		return ((Long)spinnerLitraggio.getValue());
+	}
 	
+	public Long getValueSpinnerLunghezza() {
+		return ((Long)spinnerLunghezza.getValue());
+	}
+	
+	public Long getValueSpinnerLarghezza() {
+		return ((Long)spinnerLarghezza.getValue());
+	}
+	
+	public Long getValueSpinnerAltezza() {
+		return ((Long)spinnerAltezza.getValue());
+	}
+	
+	public String getTextAreaDescrizione() {
+		return textAreaNewDescrizione.getText();
+	}
 	
 	/**
 	 * Retrieves a list of strings of the selected items in the JList used for searching plants.
@@ -1004,6 +1022,8 @@ public class Window extends JFrame {
 	    JSpinner spinner = new JSpinner();
 	    spinner.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));      
 	    spinner.setName(Long.toString(plant.getIdPianta()));
+	    JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) spinner.getEditor();
+		editor.getTextField().setEditable(false);
 	    GridBagConstraints gbc_spinner = new GridBagConstraints();
 	    gbc_spinner.fill = GridBagConstraints.VERTICAL;
 	    gbc_spinner.gridx = 2;
@@ -1018,44 +1038,7 @@ public class Window extends JFrame {
 
 	            if (value == 0) {
 	                // Ottieni il pannello padre dello spinner
-	                JPanel parentPanel = (JPanel) spinner.getParent();
-
-	                // Rimuovi il pannello dalla tabella
-	                parentPanel.removeAll();
-	                parentPanel.revalidate();
-	                parentPanel.repaint();
-
-	                // Rimuovi il pannello dalla lista
-	                Iterator<JPanel> iterator = arrayPanelsListaCarrello.iterator();
-	                int index=0;
-	                while (iterator.hasNext()) {
-	                    JPanel currentPanel = iterator.next();
-	                    if (currentPanel == parentPanel) {
-	                        iterator.remove();
-	                        arrayListaCarrello.remove(index);
-	                        
-	                        break;
-	                    }
-	                    index++;
-	                }
-	                
-	                // Rimuovi tutti i componenti dal frame
-	                //JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(parentPanel);
-	                //frame.getContentPane().removeAll();
-	                
-	                panelSalvaListaCarrello.removeAll();
-	                
-	                // Aggiungi tutti i pannelli aggiornati al frame
-	                for (JPanel panel : arrayPanelsListaCarrello) {
-	                    panelSalvaListaCarrello.add(panel);
-	                }
-
-	                // Aggiorna il layout del frame
-	                panelSalvaListaCarrello.setLayout(new GridLayout(arrayPanelsListaCarrello.size(), 1,0,0));  // Imposta un layout di griglia dinamico con una sola colonna
-	                panelSalvaListaCarrello.revalidate();
-	                panelSalvaListaCarrello.repaint();
-	                System.out.println(arrayPanelsListaCarrello.toString());
-	                System.out.println(arrayListaCarrello.toString());
+	            	removeItemFromListaCarrello(spinner);
 	            }
 	        }
 
@@ -1085,6 +1068,7 @@ public class Window extends JFrame {
         
         comboBoxSalvaAcquari.setModel(comboBoxModel);
         
+        
         // Aggiornamento della JList listAcquari
         DefaultListModel<String> listModel = (DefaultListModel<String>) listAcquari.getModel();
         for (AcquarioType acquario : arrayListAcquari) {
@@ -1110,8 +1094,9 @@ public class Window extends JFrame {
     //contr chiama getSelectedItemListAcquari prende la pk
     //fa la richiesta su piante_acquari id_acquario=pk
     //per ogni item del risultato prende la pk della pianta e fa una richiesta a piante e salva il singolo item ottenuto add in una lista di PiantaType che viene passata a questo metodo
-    public void viewSelectedAcquario(List<PiantaType> plantsToView) throws Exception{
+    public void viewSelectedAcquario(List<PiantaType> plantsToView, List<Long> quantitas) throws Exception{
     	AcquarioType selectedItem = this.getSelectedItemListAcquari();
+    	
     	//listAcquari.clearSelection();
     	textFieldViewLitraggio.setText(Long.toString(selectedItem.getLitri()));
     	textFieldViewLarghezza.setText(Long.toString(selectedItem.getLarghezza()));
@@ -1119,20 +1104,29 @@ public class Window extends JFrame {
     	textFieldViewAltezza.setText(Long.toString(selectedItem.getAltezza()));
     	textAreaViewDescrizioneAcquario.setText(selectedItem.getDescrizione());
     	
-    	arrayListViewPianteForAcquario.clear();
+    	//arrayListViewPianteForAcquario.clear();
     	arrayListViewPianteForAcquario.addAll(plantsToView);
     	
-    	this.updateViewListPianteForAcquario();
+    	this.updateViewListPianteForAcquario(quantitas);
+    	
     }
     
-    private void updateViewListPianteForAcquario() {
+    private void updateViewListPianteForAcquario(List<Long> quantitas) {
     	// Aggiornamento della JList listAcquari
+    	
         DefaultListModel<String> listModel = new DefaultListModel<String>();
+        
+        int i = 0;
         for (PiantaType pianta : arrayListViewPianteForAcquario) {
             
-            listModel.addElement(pianta.getNome());
+            listModel.addElement(pianta.getNome()+"   Q:"+Long.toString(quantitas.get(i)));
+            
+            i++;
+            
         }
+        
         listViewPianteAcquario.setModel(listModel);
+        
     }
     
     public void resetViewAndNew() {
@@ -1143,13 +1137,140 @@ public class Window extends JFrame {
     	textAreaViewDescrizioneAcquario.setText(null);
     	
     	arrayListViewPianteForAcquario.clear();
-    	this.updateViewListPianteForAcquario();
+    	this.updateViewListPianteForAcquario(new ArrayList<Long>(0));
     	
-    	textFieldNewLitraggio.setText(null);
-    	textFieldNewLarghezza.setText(null);
-    	textFieldNewLunghezza.setText(null);
-    	textFieldNewAltezza.setText(null);
+    	spinnerLitraggio.setValue(1);
+    	spinnerLunghezza.setValue(1);
+    	spinnerLarghezza.setValue(1);
+    	spinnerAltezza.setValue(1);
     	textAreaNewDescrizione.setText(null);
+    }
+    
+    // Metodo per ottenere gli indici dei pannelli con checkbox selezionati
+    public int[] getSelectedCheckBoxIndices() {
+        List<Integer> selectedIndices = new ArrayList<>();
+
+        for (int i = 0; i < arrayPanelsListaCarrello.size(); i++) {
+            JPanel panel = arrayPanelsListaCarrello.get(i);
+            Component[] components = panel.getComponents();
+
+            for (Component component : components) {
+                if (component instanceof JCheckBox) {
+                    JCheckBox checkBox = (JCheckBox) component;
+                    if (checkBox.isSelected()) {
+                        selectedIndices.add(i);
+                        break;  // Esci dal ciclo se il checkbox è selezionato
+                    }
+                }
+            }
+        }
+        
+        // Converti la lista di indici in un array di interi
+        return selectedIndices.stream().mapToInt(Integer::intValue).toArray();
+    }
+    
+    public Long getValueOfSpinnerListaCarrello(int index) throws Exception{
+    	
+    	Long value = null;
+    	
+    	JPanel panel = arrayPanelsListaCarrello.get(index);
+    	Component[] components = panel.getComponents();
+
+        for (Component component : components) {
+            if (component instanceof JSpinner) {
+                JSpinner spinner = (JSpinner) component;
+                value = ((Integer)spinner.getValue()).longValue();
+                
+                break;
+            }
+        }
+    	
+        if(value == null)
+        	throw new Exception("Errore: non è stato possibile recuperare il valore dalla quantità della pianta");
+    	//qui rimuovi il pannello parent dal carrello
+        
+    	return value;
+    }
+    
+    public Long getIdOfPiantaListaCarrello(int index) throws Exception{
+    	if(arrayListaCarrello.get(index)==null)
+    		throw new Exception("Errore: non è stato possibile recuperare l'id della pianta selezionata nel carrello");
+    	//devi fare il remove poi
+    	return arrayListaCarrello.get(index).getIdPianta();
+    	
+    }
+    
+    public Long getIdOfAcquarioSelectedInComboBoxSalvaAcquario() throws Exception{
+    	if(arrayListAcquari.get(comboBoxSalvaAcquari.getSelectedIndex())==null)
+    		throw new Exception("Errore: impossibile recuperare id dell'acuqario selezionato per il salvataggio");
+    	
+    	return arrayListAcquari.get(comboBoxSalvaAcquari.getSelectedIndex()).getIdAcquario();
+    }
+    
+    public void removeItemFromListaCarrello(JSpinner spinner) {
+    	// Ottieni il pannello padre dello spinner
+        JPanel parentPanel = (JPanel) spinner.getParent();
+
+        // Rimuovi il pannello dalla tabella
+        parentPanel.removeAll();
+        parentPanel.revalidate();
+        parentPanel.repaint();
+
+        // Rimuovi il pannello dalla lista
+        Iterator<JPanel> iterator = arrayPanelsListaCarrello.iterator();
+        int index=0;
+        while (iterator.hasNext()) {
+            JPanel currentPanel = iterator.next();
+            if (currentPanel == parentPanel) {
+                iterator.remove();
+                arrayListaCarrello.remove(index);
+                
+                break;
+            }
+            index++;
+        }
+        
+        // Rimuovi tutti i componenti dal frame
+        //JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(parentPanel);
+        //frame.getContentPane().removeAll();
+        
+        panelSalvaListaCarrello.removeAll();
+        
+        // Aggiungi tutti i pannelli aggiornati al frame
+        for (JPanel panel : arrayPanelsListaCarrello) {
+            panelSalvaListaCarrello.add(panel);
+        }
+
+        // Aggiorna il layout del frame
+        panelSalvaListaCarrello.setLayout(new GridLayout(arrayPanelsListaCarrello.size(), 1,0,0));  // Imposta un layout di griglia dinamico con una sola colonna
+        panelSalvaListaCarrello.revalidate();
+        panelSalvaListaCarrello.repaint();
+        System.out.println(arrayPanelsListaCarrello.toString());
+        System.out.println(arrayListaCarrello.toString());
+    }
+    
+    //da chiamare nel controller dopo aver chimato i due metodi getSpinner value e getIdPianta
+    public void removeItemFromListaCarrello(int index) {
+    	arrayPanelsListaCarrello.get(index).removeAll();
+    	arrayPanelsListaCarrello.get(index).revalidate();
+    	arrayPanelsListaCarrello.get(index).repaint();
+    	
+    	arrayPanelsListaCarrello.remove(index);
+    	arrayListaCarrello.remove(index);
+    	
+    	panelSalvaListaCarrello.removeAll();
+    	
+    	// Aggiungi tutti i pannelli aggiornati al frame
+        for (JPanel panel : arrayPanelsListaCarrello) {
+            panelSalvaListaCarrello.add(panel);
+        }
+        
+     // Aggiorna il layout del frame
+        panelSalvaListaCarrello.setLayout(new GridLayout(arrayPanelsListaCarrello.size(), 1,0,0));  // Imposta un layout di griglia dinamico con una sola colonna
+        panelSalvaListaCarrello.revalidate();
+        panelSalvaListaCarrello.repaint();
+        System.out.println(arrayPanelsListaCarrello.toString());
+        System.out.println(arrayListaCarrello.toString());
     }
     
 	/**
@@ -1245,6 +1366,4 @@ public class Window extends JFrame {
 	public void clearSelectionListViewPianteAcquario() {
 		listViewPianteAcquario.clearSelection();
 	}
-	
-	
 }

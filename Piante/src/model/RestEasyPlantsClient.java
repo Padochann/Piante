@@ -32,10 +32,11 @@ public class RestEasyPlantsClient {
 
 	private static final String API_URL = "http://localhost/PIANTE/restEasy.php";
 	
-	public Object fetchDataFromApi(String queryString) throws JAXBException {
+	public Object fetchDataFromApi(String queryString) throws JAXBException, Exception{
         // Estrai i parametri e la tabella dalla query string
         Map<String, String> params = extractParameters(queryString);
         String table = params.get("table");
+        String crud = params.get("crud");
         
         
         
@@ -71,6 +72,15 @@ public class RestEasyPlantsClient {
             // Deserializza la risposta usando JAXB
             JAXBContext jaxbContext = JAXBContext.newInstance(responseClass);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            
+            if(crud.equals("d"))
+            {
+            	byte[] bytes = input.readAllBytes();
+                String message = new String(bytes);
+                
+                return message;
+            }
+            	
             
             return jaxbUnmarshaller.unmarshal(input);
             
@@ -125,17 +135,19 @@ public class RestEasyPlantsClient {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
         String line;
+        String echo="";
         while ((line = reader.readLine()) != null) {
             System.out.println(line);
+            echo=echo.concat(line);
         }
 
         reader.close();
         in.close();
-
-
-        connection.disconnect();
         
-        return line;
+      
+        connection.disconnect();
+   
+        return echo;
 	}
 	
 	public List<PiantaType> fetchPianteForAcquario(List<PiantaAcquarioType> piantaAcquarioList) throws JAXBException, Exception {
@@ -184,7 +196,7 @@ public class RestEasyPlantsClient {
 	    return pianteAcquariDataResult;
 	}
 	
-	public AcquariType createObjectAcquariTypeSolo(long idAcquario, long litri, long larghezza, long lunghezza, long altezza, String descrizione) {
+	public AcquariType createObjectAcquariTypeSolo(long idAcquario, long litri, long larghezza, long lunghezza, long altezza, String descrizione) throws Exception {
 	    AcquariType acquariTypeResult = new AcquariType();
 	    AcquarioType acquario = new AcquarioType();
 	    
@@ -202,7 +214,7 @@ public class RestEasyPlantsClient {
 
 
 	
-    private Map<String, String> extractParameters(String queryString) {
+    private Map<String, String> extractParameters(String queryString) throws Exception{
         Map<String, String> params = new HashMap<>();
         String[] keyValuePairs = queryString.split("&");
         

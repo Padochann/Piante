@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.event.AncestorEvent;
@@ -19,6 +20,7 @@ import javax.swing.event.ChangeListener;
 import model.RestEasyPlantsClient;
 import piante.AcquariType;
 import piante.AcquarioType;
+import piante.PiantaAcquarioType;
 import piante.PiantaType;
 import piante.PianteAcquariType;
 import piante.PianteType;
@@ -67,6 +69,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			if(e.getSource() == w.getBtnView())
 			{
 				w.showPanel("acquarioLayout", "panelView");
+				
 				this.viewAcquario();
 			}
 			if(e.getSource() == w.getBtnNew())
@@ -77,7 +80,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			
 			if(e.getSource() == w.getBtnDelete())
 			{
-			
+				this.cancellaAcquario();
 			}
 			if(e.getSource() == w.getBtnSalvaNewAcquario())
 			{
@@ -108,7 +111,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			
 			if(e.getSource() == w.getBtnSalvaAggiungiPiante())
 			{
-				
+				/*int[] tmp = w.getSelectedCheckBoxIndices();
+				System.out.println(Arrays.toString(tmp));
+				System.out.println(w.getValueOfSpinnerListaCarrello(tmp[0]));
+				System.out.println(w.getIdOfPiantaListaCarrello(tmp[0]));*/
+				this.salvaPiante();
 			}
 		}
 		catch(Exception e1) {
@@ -166,6 +173,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	}
 	
 	private void viewAcquario() throws Exception{
+		w.resetViewAndNew();
 		AcquarioType selectedAcquario = w.getSelectedItemListAcquari();
 		
 		// Costruisci la query string in base ai valori ottenuti dai metodi
@@ -179,13 +187,48 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	    System.out.println(pianteAcquariData.getItem().toString());
 	    
 	    //ora devo fare un metodo sulla classe del model che da questa lista prende le pk di piante e fa n richieste al database e mette insieme le risposte restituendo una lista tipo PiantaType
-	   
+	    List<Long> quantitas= new ArrayList<Long>();
+	    
+	    for(PiantaAcquarioType pa : pianteAcquariData.getItem()) {
+	    	quantitas.add(pa.getQuantita());
+	    }
+	    
 	    // Esegui le richieste per ottenere i dettagli delle piante
 	    List<PiantaType> pianteForAcquario = requester.fetchPianteForAcquario(pianteAcquariData.getItem());
 	    
-		w.viewSelectedAcquario(pianteForAcquario);
+	   
+		w.viewSelectedAcquario(pianteForAcquario, quantitas);
 	}
 	
+	private void cancellaAcquario() throws Exception{
+		Long idAcquarioToDelete = w.getSelectedItemListAcquari().getIdAcquario();
+		
+		StringBuilder queryStringBuilder = new StringBuilder("crud=d&table=acquari");
+		queryStringBuilder.append("&id_acquario=").append(URLEncoder.encode(Long.toString(idAcquarioToDelete), StandardCharsets.UTF_8.toString()));
+		String queryString = queryStringBuilder.toString();
+		System.out.println(queryString);
+		
+		String echo = (String) requester.fetchDataFromApi(queryString);
+		w.updateListAcquari(this.getAcquariList());
+		w.messageDialog(echo);
+	}
+	
+	private void salvaPiante() throws Exception{
+		int[] indexesOfPlantsToSave = w.getSelectedCheckBoxIndices();
+		Long idAcquario = w.getIdOfAcquarioSelectedInComboBoxSalvaAcquario();
+		Long[] idsPianta = new Long[indexesOfPlantsToSave.length];
+		Long[]  quantitas = new Long[indexesOfPlantsToSave.length];
+		
+		for(int i=0; i<indexesOfPlantsToSave.length;i++) {
+			idsPianta[i] = w.getIdOfPiantaListaCarrello(i);
+			quantitas[i] = w.getValueOfSpinnerListaCarrello(i);
+		}
+		
+		PianteAcquariType pianteToSave = requester.createObjectPianteAcquariTypeMulti(idsPianta, quantitas, idAcquario);
+		
+		String echo = requester.sendDataToApi(pianteToSave);
+		w.messageDialog(echo);
+	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
