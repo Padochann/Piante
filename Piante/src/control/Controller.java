@@ -1,5 +1,7 @@
 package control;
 
+import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +12,8 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -18,12 +22,15 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.HyperlinkEvent;
 
 import model.RestEasyPlantsClient;
 import piante.AcquariType;
@@ -286,9 +293,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
             	    PiantaType pianta = w.getPiantaAltClickedInListCerca(index);
             	    if (pianta != null) {
             	        // ... esegui il codice con la variabile "pianta" e accedi alle sue proprietà
-            	        long idPianta = pianta.getIdPianta();
-            	        System.out.println("indice pianta nel db: "+idPianta);
-            	        // qua va creata la query
+            	        showImageForPianta(pianta);
             	        
             	    }
             	} catch (IndexOutOfBoundsException e1) {
@@ -298,7 +303,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
             	}
 
                 // Apri una nuova finestra Java e mostra l'indice
-                w.messageDialog("trovato a indice "+ index);;
+                //w.messageDialog("trovato a indice "+ index);;
             }
         }
 	    //idem co patate ma attento che devi farti i metodi anche per questa lista arrayListViewPianteForAcquario 
@@ -309,19 +314,19 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
             // Verifica se l'indice è valido
             if (index != -1) {
                 // Apri una nuova finestra Java e mostra l'indice
-                w.messageDialog("trovato a indice "+ index);;
+                //w.messageDialog("trovato a indice "+ index);;
             }
         }
 	}
 	
 	
-	//va fatto il join tra pianta e immagini e controllata la query
+	
 	public void showImageForPianta(PiantaType pianta) throws Exception {
 
 	    // Costruisci la query string
 	    StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=immagini");
 	    queryStringBuilder.append("&id_pianta=").append(URLEncoder.encode(Long.toString(pianta.getIdPianta()), StandardCharsets.UTF_8.toString()));
-
+	    System.out.println("id pianta "+pianta.getIdPianta());
 	    String queryString = queryStringBuilder.toString();
 	    System.out.println(queryString);
 
@@ -334,17 +339,23 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	    }
 
 	    // Ottieni l'array di byte dell'immagine
-	    byte[] imageBytes = imageToShow.getItem().get(0).getBlob().getBytes(1, (int) imageToShow.getItem().get(0).getBlob().length());
-
+	    byte[] imageBytes = imageToShow.getItem().get(0).getImmaginePianta();
 	    // Converti l'array di byte in un'immagine
 	    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
-
+	    System.out.println("immagine convertita in immagine");
 	    // Visualizza l'immagine
 	    ImageIcon imageIcon = new ImageIcon(bufferedImage);
 	    JLabel label = new JLabel(imageIcon);
-
+	    
+	    
+	    String link=pianta.getLinkPagina();
 	    //da controllare che funzioni
-	    displayPlantImage(imageIcon);
+	    try {
+			displayPlantImage(imageIcon, link);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -358,81 +369,48 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 
 
 
-	//ho messo gli if come prima perche qui fare tutti sti if annidati non va bene pk poi il codice va spostato in un metodo private come ho fatto sopra nell'action performed
-	   /* if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 ) {
-	        if (e.getSource() == w.getListCercaPiante()) {
-	            int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
-	            if (index != -1) {
-	                // Simula il percorso del file immagine sul tuo computer
-	            	System.out.println("l'indice è:" + index);
-	                String imageFilePath = "images\\1.jpg";
-	                displayPlantImage(imageFilePath);
-	            }
-	        } else if (e.getSource() == w.getListViewPianteAcquario()) {
-	            int index = w.getIndexOfElemenListViewPianteAcquarioForMouseClick(e.getPoint());
-	            if (index != -1) {
-	                // Simula il percorso del file immagine sul tuo computer
-	            	System.out.println("l'indice è:" + index);
-	            	String imageFilePath = "images\\1.jpg";
-	                displayPlantImage(imageFilePath);
-	            }
-	        }
-	    }*///tutta sta parte sopra commentala sti if qui usa quelli sotto
-	    
-		    //sai che l'input arriva dalla lista cerca piante quindi lavorerai su arrayListCercaPiante tramite l'index devi ottenere un oggetto piantaType 
-		    //ti fai un metodo nella window che si chiama getPiantaAltClickedInListCerca(int index)
-		    //questo metodo fa il arrayListCercaPianta.get(index); e fa il return metti un throws exception se per caso (cosa impossibile) dia null
-		    
-		    //dopo che qui nel controller hai questa PiantaType plantToShowImage
-		    //ti recuperi il suo idPlant = plantToShowImage.getIdPianta();
-		    //e ora prepari la riechiesta quindi vedi il codice a riga 182 a 188, cambia la table in immagini e sotto id_acquario in id_pianta e poi dentro il metodo Long.toString(idPlant) 
-		    
-		    //ora hai la query string prepara un oggetto di tipo ImmaginiType imageToShow = (ImmaginiType) requester.fetchDataFromApi(queryString);
-		    
-		    //ora devi prendere il primo item per leggere l'immagine //fai un if che imageToShow.getItem().isEmpty() se vero throw new exception quindi aggiungi il try e catch dentro al costrutto mouseClicked(MouseEvent e)  come ho fatto nell action performed
-		    //byte[] imageToConvert =  imageToShow.getItem().get(0);
-		    
-		    //ora devi convertire l'array di byte in immagine e visualizzarla con il metodo che hai fatto tu, guarda il codice su whastap per capiee come convertirla
-		
-	/*public void mouseClicked(MouseEvent e) {
-	    if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1) {
-	        if (e.getSource() == w.getListCercaPiante()) {
-	            int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
-	            if (index != -1) {
-	                try {
-	                    PiantaType pianta = w.getPiantaAltClickedInListCerca(index);
-	                    long idPianta = pianta.getIdPianta();
-	                    String queryString = "crud=r&table=immagini&id_pianta=" + Long.toString(idPianta);
-	                    ImmaginiType imageToShow = (ImmaginiType) requester.fetchDataFromApi(queryString);
-	                    if (!imageToShow.getItem().isEmpty()) {
-	                        byte[] imageToConvert = imageToShow.getItem().get(0);
-	                        BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageToConvert));
-	                        displayPlantImage(image);
-	                    } else {
-	                        throw new Exception("Immagine non trovata per la pianta " + idPianta);
-	                    }
-	                } catch (Exception ex) {
-	                    w.messageDialog(ex.getMessage());
-	                }
-	            }
-	        } else if (e.getSource() == w.getListViewPianteAcquario()) {
-	            // ... implementare lo stesso comportamento per la lista "Piante Acquario"
-	        }
-	    }
-	}*/
+	
+	private void displayPlantImage(ImageIcon immagine, String link) {
+	    String decodedLink = URLDecoder.decode(link, StandardCharsets.UTF_8);
 
-	//questo non lo useremo più credo
-	// Metodo per visualizzare l'immagine in una nuova finestra
-	private void displayPlantImage(ImageIcon immagine) {
-	    
 	    JLabel imageLabel = new JLabel(immagine);
 
+	    // Create a clickable link using JEditorPane
+	    JEditorPane linkPane = new JEditorPane();
+	    linkPane.setContentType("text/html");
+	    
+	    // Format the link as an HTML anchor tag
+	    String htmlLink = "<a href=\"" + decodedLink + "\">" + decodedLink + "</a>";
+	    linkPane.setText(htmlLink);
+	    
+	    linkPane.setEditable(false);  // Make it non-editable
+	    linkPane.setBorder(null);  // Remove the border
+	    linkPane.addHyperlinkListener(e -> {
+	        try {
+	            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+	                Desktop.getDesktop().browse(new URI(e.getURL().toString()));
+	            }
+	        } catch (Exception ex) {
+	            // Handle exceptions if the link cannot be opened
+	        }
+	    });
+
+	    // Create a panel for the image and link
+	    JPanel contentPanel = new JPanel();
+	    contentPanel.setLayout(new BorderLayout());
+	    contentPanel.add(imageLabel, BorderLayout.CENTER);
+	    contentPanel.add(linkPane, BorderLayout.SOUTH);  // Add linkPane below the image
+
+	    // Create the frame
 	    JFrame imageFrame = new JFrame("Immagine Pianta Selezionata");
 	    imageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	    imageFrame.add(imageLabel);
+	    imageFrame.add(contentPanel);  // Add the panel with image and link
 	    imageFrame.pack();
 	    imageFrame.setVisible(true);
 	}
+
+
+
 
 	@Override
 	public void mousePressed(MouseEvent e) {

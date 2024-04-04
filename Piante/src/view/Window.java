@@ -1394,6 +1394,7 @@ public class Window extends JFrame {
         }
 
         PiantaType pianta = arrayListCercaPiante.get(index);
+        System.out.println("l'indice di piantaType è: "+pianta.getIdPianta());
         
         if (pianta == null) {
             throw new Exception("Pianta non trovata all'indice " + index);
