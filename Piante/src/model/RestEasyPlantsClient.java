@@ -138,7 +138,7 @@ public class RestEasyPlantsClient {
         String echo="";
         while ((line = reader.readLine()) != null) {
             System.out.println(line);
-            echo=echo.concat(line);
+            echo=echo.concat(line+"\n");
         }
 
         reader.close();

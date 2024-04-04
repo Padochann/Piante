@@ -52,9 +52,9 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 				w.resetViewAndNew();
 				//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
 				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
-				List<AcquarioType> tmp = this.getAcquariList();
+				//List<AcquarioType> tmp = this.getAcquariList();
 				//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
-				w.updateListAcquari(tmp);
+				//w.updateListAcquari(tmp);
 			}
 			if(e.getSource() == w.getBtnCerca())
 			{
@@ -65,9 +65,9 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 				w.showPanel("cardLayout", "panelSalva");
 				//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
 				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
-				List<AcquarioType> tmp = this.getAcquariList();
+				//List<AcquarioType> tmp = this.getAcquariList();
 				//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
-				w.updateListAcquari(tmp);
+				//w.updateListAcquari(tmp);
 			}
 			if(e.getSource() == w.getBtnView())
 			{
@@ -77,6 +77,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			}
 			if(e.getSource() == w.getBtnNew())
 			{
+				w.resetViewAndNew();
 				w.showPanel("acquarioLayout", "panelNew");
 			}
 			
@@ -86,6 +87,10 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 				this.cancellaAcquario();
 			}
 			if(e.getSource() == w.getBtnSalvaNewAcquario())
+			{
+				this.salvaAcquario();
+			}
+			if(e.getSource() == w.getBtnCancellaPianteAcquario())
 			{
 				
 			}
@@ -203,6 +208,27 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		w.viewSelectedAcquario(pianteForAcquario, quantitas);
 	}
 	
+	private void salvaAcquario() throws Exception{
+		//w.resetViewAndNew();
+		Long idAcquario = new Long(0);
+		System.out.println("ciao");
+		Long litraggio = w.getValueSpinnerLitraggio();
+		System.out.println("primo long litir");
+		Long larghezza = w.getValueSpinnerLarghezza();
+		Long lunghezza = w.getValueSpinnerLunghezza();
+		Long altezza = w.getValueSpinnerAltezza();
+		String descrizione = w.getTextAreaDescrizione();
+		
+		AcquariType acquarioToSave = requester.createObjectAcquariTypeSolo(idAcquario, litraggio, larghezza, lunghezza, altezza, descrizione);
+		
+		System.out.println(acquarioToSave.getItem().toString());
+		
+		String echo = requester.sendDataToApi(acquarioToSave);
+		w.messageDialog(echo);
+		w.resetViewAndNew();
+		w.updateListAcquari(getAcquariList());
+	}
+	
 	private void cancellaAcquario() throws Exception{
 		Long idAcquarioToDelete = w.getSelectedItemListAcquari().getIdAcquario();
 		
@@ -212,8 +238,8 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		System.out.println(queryString);
 		
 		String echo = (String) requester.fetchDataFromApi(queryString);
-		w.updateListAcquari(this.getAcquariList());
 		w.messageDialog(echo);
+		w.updateListAcquari(this.getAcquariList());
 	}
 	
 	private void salvaPiante() throws Exception{
@@ -223,20 +249,24 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		Long[]  quantitas = new Long[indexesOfPlantsToSave.length];
 		
 		for(int i=0; i<indexesOfPlantsToSave.length;i++) {
-			idsPianta[i] = w.getIdOfPiantaListaCarrello(i);
-			quantitas[i] = w.getValueOfSpinnerListaCarrello(i);
+			idsPianta[i] = w.getIdOfPiantaListaCarrello(indexesOfPlantsToSave[i]);
+			quantitas[i] = w.getValueOfSpinnerListaCarrello(indexesOfPlantsToSave[i]);
+		}
+		for(int i=indexesOfPlantsToSave.length-1; i>=0;i--) {
+			w.removeItemFromListaCarrello(indexesOfPlantsToSave[i]);
 		}
 		
 		PianteAcquariType pianteToSave = requester.createObjectPianteAcquariTypeMulti(idsPianta, quantitas, idAcquario);
 		
 		String echo = requester.sendDataToApi(pianteToSave);
 		w.messageDialog(echo);
+		w.updateListAcquari(this.getAcquariList());
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		//ho messo gli if come prima perche qui fare tutti sti if annidati non va bene pk poi il codice va spostato in un metodo private come ho fatto sopra nell'action performed
-	    if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 ) {
+	   /* if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 ) {
 	        if (e.getSource() == w.getListCercaPiante()) {
 	            int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
 	            if (index != -1) {
@@ -254,7 +284,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	                displayPlantImage(imageFilePath);
 	            }
 	        }
-	    }//tutta sta parte sopra commentala sti if qui usa quelli sotto
+	    }*///tutta sta parte sopra commentala sti if qui usa quelli sotto
 	    
 	    //sai che l'input arriva dalla lista cerca piante quindi lavorerai su arrayListCercaPiante tramite l'index devi ottenere un oggetto piantaType 
 	    //ti fai un metodo nella window che si chiama getPiantaAltClickedInListCerca(int index)
@@ -350,6 +380,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE && e.getSource() == w.getListAcquari()) {
             w.clearSelectionListAcquari();
+            w.resetViewAndNew();
         }
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE && e.getSource() == w.getListCercaPiante()) {
             w.clearSelectionListCercaPiante();

@@ -144,6 +144,7 @@ public class Window extends JFrame {
 	private JSpinner spinnerAltezza;
 	private JSpinner spinnerLitraggio;
 	private JSpinner spinnerLunghezza;
+	private JButton btnCancellaPianteAcquario;
 	
 	/**
 	 * Launch the application.
@@ -167,7 +168,7 @@ public class Window extends JFrame {
 	 */
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 978,530);
+		setBounds(100, 100, 1008,530);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		 
@@ -397,6 +398,8 @@ public class Window extends JFrame {
 		textAreaViewDescrizioneAcquario = new JTextArea();
 		textAreaViewDescrizioneAcquario.setEditable(false);
 		scrollPaneViewDescrizioneAcquario.setViewportView(textAreaViewDescrizioneAcquario);
+		
+		btnCancellaPianteAcquario = new JButton("cancella pianta");
 		GroupLayout gl_panelViewAcquario = new GroupLayout(panelViewAcquario);
 		gl_panelViewAcquario.setHorizontalGroup(
 			gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
@@ -404,25 +407,29 @@ public class Window extends JFrame {
 					.addGap(10)
 					.addGroup(gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelViewAcquario.createSequentialGroup()
-							.addComponent(textFieldViewLitraggio, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+							.addComponent(textFieldViewLitraggio, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
 							.addGap(98)
 							.addComponent(lblViewLitraggio))
 						.addGroup(gl_panelViewAcquario.createSequentialGroup()
-							.addComponent(textFieldViewLunghezza, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+							.addComponent(textFieldViewLunghezza, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
 							.addGap(88)
 							.addComponent(lblViewLunghezza))
 						.addGroup(gl_panelViewAcquario.createSequentialGroup()
-							.addComponent(textFieldViewLarghezza, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+							.addComponent(textFieldViewLarghezza, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
 							.addGap(90)
 							.addComponent(lblViewLarghezza))
 						.addGroup(gl_panelViewAcquario.createSequentialGroup()
-							.addComponent(textFieldViewAltezza, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+							.addComponent(textFieldViewAltezza, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
 							.addGap(102)
 							.addComponent(lblViewAltezza))
-						.addComponent(scrollPaneViewDescrizioneAcquario, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+						.addComponent(scrollPaneViewDescrizioneAcquario, GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
 						.addComponent(lblViewDescrizione)
-						.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+						.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
 					.addGap(8))
+				.addGroup(gl_panelViewAcquario.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnCancellaPianteAcquario)
+					.addContainerGap(240, Short.MAX_VALUE))
 		);
 		gl_panelViewAcquario.setVerticalGroup(
 			gl_panelViewAcquario.createParallelGroup(Alignment.LEADING)
@@ -455,8 +462,11 @@ public class Window extends JFrame {
 					.addComponent(scrollPaneViewDescrizioneAcquario, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 					.addGap(6)
 					.addComponent(lblViewDescrizione)
-					.addGap(6)
-					.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+					.addGap(5)
+					.addComponent(scrollPaneViewListaPianteAcquario, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnCancellaPianteAcquario)
+					.addGap(17))
 		);
 		panelViewAcquario.setLayout(gl_panelViewAcquario);
 		panelAcquari.add(panelBtnAcquari);
@@ -791,7 +801,12 @@ public class Window extends JFrame {
 		return btnSalvaNewAcquario;
 	}
 
-	
+	/**
+	 * @return the btnCancellaPianteAcquario
+	 */
+	public JButton getBtnCancellaPianteAcquario() {
+		return btnCancellaPianteAcquario;
+	}
 
 	/**
 	 * @return the btnSalvaAggiungiPiante
@@ -918,7 +933,10 @@ public class Window extends JFrame {
 	    
 	    return selectedItems;
 	}
-
+	
+//	public PiantaType getSelectedItemListCercaPiante() throws Exception{
+		
+//	}
 	
     /**
      * Adds a list of PiantaType items to the existing list of PiantaType items.
@@ -1138,10 +1156,10 @@ public class Window extends JFrame {
     	arrayListViewPianteForAcquario.clear();
     	this.updateViewListPianteForAcquario(new ArrayList<Long>(0));
     	
-    	spinnerLitraggio.setValue(1);
-    	spinnerLunghezza.setValue(1);
-    	spinnerLarghezza.setValue(1);
-    	spinnerAltezza.setValue(1);
+    	spinnerLitraggio.setValue(new Long(1));
+    	spinnerLunghezza.setValue(new Long(1));
+    	spinnerLarghezza.setValue(new Long(1));
+    	spinnerAltezza.setValue(new Long(1));
     	textAreaNewDescrizione.setText(null);
     }
     
@@ -1286,6 +1304,7 @@ public class Window extends JFrame {
 	    
 	    btnSalvaNewAcquario.addActionListener(controller);
 	    btnDelete.addActionListener(controller);
+	    btnCancellaPianteAcquario.addActionListener(controller);
 	    
 	    btnCercaPianta.addActionListener(controller);
 	    btnCercaAggiungiPianta.addActionListener(controller);
