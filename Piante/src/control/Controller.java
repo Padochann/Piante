@@ -235,7 +235,8 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-	    if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1) {
+		//ho messo gli if come prima perche qui fare tutti sti if annidati non va bene pk poi il codice va spostato in un metodo private come ho fatto sopra nell'action performed
+	    if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 ) {
 	        if (e.getSource() == w.getListCercaPiante()) {
 	            int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
 	            if (index != -1) {
@@ -253,9 +254,47 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	                displayPlantImage(imageFilePath);
 	            }
 	        }
-	    }
+	    }//tutta sta parte sopra commentala sti if qui usa quelli sotto
+	    
+	    //sai che l'input arriva dalla lista cerca piante quindi lavorerai su arrayListCercaPiante tramite l'index devi ottenere un oggetto piantaType 
+	    //ti fai un metodo nella window che si chiama getPiantaAltClickedInListCerca(int index)
+	    //questo metodo fa il arrayListCercaPianta.get(index); e fa il return metti un throws exception se per caso (cosa impossibile) dia null
+	    
+	    //dopo che qui nel controller hai questa PiantaType plantToShowImage
+	    //ti recuperi il suo idPlant = plantToShowImage.getIdPianta();
+	    //e ora prepari la riechiesta quindi vedi il codice a riga 182 a 188, cambia la table in immagini e sotto id_acquario in id_pianta e poi dentro il metodo Long.toString(idPlant) 
+	    
+	    //ora hai la query string prepara un oggetto di tipo ImmaginiType imageToShow = (ImmaginiType) requester.fetchDataFromApi(queryString);
+	    
+	    //ora devi prendere il primo item per leggere l'immagine //fai un if che imageToShow.getItem().isEmpty() se vero throw new exception quindi aggiungi il try e catch dentro al costrutto mouseClicked(MouseEvent e)  come ho fatto nell action performed
+	    //byte[] imageToConvert =  imageToShow.getItem().get(0);
+	    
+	    //ora devi convertire l'array di byte in immagine e visualizzarla con il metodo che hai fatto tu, guarda il codice su whastap per capiee come convertirla
+	    
+	    if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListCercaPiante()) {
+            // Ottieni l'indice dell'elemento cliccato
+            int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
+            
+            // Verifica se l'indice è valido
+            if (index != -1) {
+                // Apri una nuova finestra Java e mostra l'indice
+                w.messageDialog("trovato a indice "+ index);;
+            }
+        }
+	    //idem co patate ma attento che devi farti i metodi anche per questa lista arrayListViewPianteForAcquario 
+        if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListViewPianteAcquario()) {
+            // Ottieni l'indice dell'elemento cliccato
+            int index = w.getIndexOfElemenListViewPianteAcquarioForMouseClick(e.getPoint());
+            
+            // Verifica se l'indice è valido
+            if (index != -1) {
+                // Apri una nuova finestra Java e mostra l'indice
+                w.messageDialog("trovato a indice "+ index);;
+            }
+        }
 	}
 
+	//questo non lo useremo più credo
 	// Metodo per visualizzare l'immagine in una nuova finestra
 	private void displayPlantImage(String imageFilePath) {
 	    ImageIcon plantIcon = new ImageIcon(imageFilePath);
