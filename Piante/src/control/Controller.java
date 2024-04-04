@@ -1,6 +1,7 @@
 package control;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -22,10 +23,12 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
@@ -44,11 +47,14 @@ import piante.PianteType;
 import view.Window;
 import view.Window;
 
+
 public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	private Window w;
 	private RestEasyPlantsClient requester;
-	
+	private JButton lastPressedButton;
+	private JButton lastToken;
+	private boolean BtnPrincipale;
 	public Controller(Window w) throws Exception {
 		this.w= w;
 		this.w.registerEvent(this);
@@ -59,55 +65,63 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		try
-		{
-			if(e.getSource() == w.getBtnAcquari())
-			{
-				w.showPanel("cardLayout", "panelAcquari");
-				w.resetViewAndNew();
+		
+		
+		
+		try {
+           
+			if (e.getSource() == w.getBtnAcquari()) {
+                w.showPanel("cardLayout", "panelAcquari");
+                w.getBtnAcquari().setBackground(Color.RED);
+                lastToken = w.getBtnAcquari();
+                BtnPrincipale=true;
+                w.resetViewAndNew();
+            }
+            if (e.getSource() == w.getBtnCerca()) {
+                w.showPanel("cardLayout", "panelCerca");
+                w.getBtnCerca().setBackground(Color.RED);
+                BtnPrincipale=true;
+                lastToken = w.getBtnCerca();
+            }
+            if (e.getSource() == w.getBtnSalva()) {
+                w.showPanel("cardLayout", "panelSalva");
+                w.getBtnSalva().setBackground(Color.RED);
+                BtnPrincipale=true;
+                lastToken = w.getBtnSalva();
+            }
 				//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
 				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
 				//List<AcquarioType> tmp = this.getAcquariList();
 				//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
 				//w.updateListAcquari(tmp);
-			}
-			if(e.getSource() == w.getBtnCerca())
-			{
-				w.showPanel("cardLayout", "panelCerca");
-			}
-			if(e.getSource() == w.getBtnSalva())
-			{
-				w.showPanel("cardLayout", "panelSalva");
-				//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
-				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
-				//List<AcquarioType> tmp = this.getAcquariList();
-				//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
-				//w.updateListAcquari(tmp);
-			}
+			
 			if(e.getSource() == w.getBtnView())
 			{
 				w.showPanel("acquarioLayout", "panelView");
-				
+				BtnPrincipale=false;
 				this.viewAcquario();
 			}
 			if(e.getSource() == w.getBtnNew())
 			{
 				w.resetViewAndNew();
+				BtnPrincipale=false;
 				w.showPanel("acquarioLayout", "panelNew");
 			}
 			
 			
 			if(e.getSource() == w.getBtnDelete())
 			{
+				BtnPrincipale=false;
 				this.cancellaAcquario();
 			}
 			if(e.getSource() == w.getBtnSalvaNewAcquario())
 			{
+				BtnPrincipale=false;
 				this.salvaAcquario();
 			}
 			if(e.getSource() == w.getBtnCancellaPianteAcquario())
 			{
-				
+				BtnPrincipale=false;
 			}
 			
 			
@@ -121,12 +135,13 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			    	}
 			    });
 			    w.addItemsToListCercaPiante(prova);*/
+				BtnPrincipale=false;
 				w.removeAllItemsFromListCercaPiante();
 				this.cercaPianta();
 			}
 			if(e.getSource() == w.getBtnCercaAggiungiPianta())
 			{
-				
+				BtnPrincipale=false;
 				List<PiantaType> tmp= w.getSelectedItemsListCercaPiante();
 				w.addItemsToListaCarrello(tmp);
 			}
@@ -138,9 +153,15 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 				System.out.println(Arrays.toString(tmp));
 				System.out.println(w.getValueOfSpinnerListaCarrello(tmp[0]));
 				System.out.println(w.getIdOfPiantaListaCarrello(tmp[0]));*/
+				BtnPrincipale=false;
 				this.salvaPiante();
 			}
+			if (lastPressedButton != null&&BtnPrincipale==true) {
+	            lastPressedButton.setBackground(UIManager.getColor("Button.background"));
+	        }
+			lastPressedButton=lastToken;
 		}
+		
 		catch(Exception e1) {
 			w.messageDialog(e1.getMessage());
 		}
@@ -221,6 +242,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	    
 	   
 		w.viewSelectedAcquario(pianteForAcquario, quantitas);
+		
 	}
 	
 	private void salvaAcquario() throws Exception{
@@ -290,7 +312,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
             		
             	    PiantaType pianta = w.getPiantaAltClickedInListCerca(index);
             	    if (pianta != null) {
-            	        // ... esegui il codice con la variabile "pianta" e accedi alle sue proprietà
             	        showImageForPianta(pianta);
             	        
             	    }
@@ -299,9 +320,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
             	} catch (Exception e1) {
             	    // ...
             	}
-
-                // Apri una nuova finestra Java e mostra l'indice
-                //w.messageDialog("trovato a indice "+ index);;
             }
         }
 	    //idem co patate ma attento che devi farti i metodi anche per questa lista arrayListViewPianteForAcquario 
@@ -311,8 +329,48 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
             
             // Verifica se l'indice è valido
             if (index != -1) {
-                // Apri una nuova finestra Java e mostra l'indice
-                //w.messageDialog("trovato a indice "+ index);;
+            	try {
+            		
+            	    PiantaType pianta = w.getPiantaAltClickInPianteForAcquario(index);
+            	    if (pianta != null) {
+            	        showImageForPianta(pianta);
+            	        
+            	    }
+            	} catch (IndexOutOfBoundsException e1) {
+            	    // ...
+            	} catch (Exception e1) {
+            	    // ...
+            	}
+            }
+        }
+        
+        if (e.isControlDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListViewPianteAcquario()) {
+            // Ottieni l'indice dell'elemento cliccato
+            int index = w.getIndexOfElemenListViewPianteAcquarioForMouseClick(e.getPoint());
+            PiantaType pianta = w.deletePiantaFromAcquario(index);
+            // w.refreshView();
+            try {
+				viewAcquario();
+				
+				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            // Verifica se l'indice è valido
+            if (index != -1) {
+            	try {
+            		System.out.println("ciao");
+            	    PiantaType pianta1 = w.getPiantaAltClickInPianteForAcquario(index);
+            	    if (pianta != null) {
+            	        showImageForPianta(pianta1);
+            	        
+            	    }
+            	} catch (IndexOutOfBoundsException e1) {
+            	    // ...
+            	} catch (Exception e1) {
+            	    // ...
+            	}
             }
         }
 	}

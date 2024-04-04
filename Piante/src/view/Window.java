@@ -1146,7 +1146,6 @@ public class Window extends JFrame {
         }
         
         listViewPianteAcquario.setModel(listModel);
-        
     }
     
     public void resetViewAndNew() {
@@ -1399,5 +1398,44 @@ public class Window extends JFrame {
         
         return pianta;
     }
-	
+	public PiantaType getPiantaAltClickInPianteForAcquario(int index)throws IndexOutOfBoundsException, Exception {
+        if (index < 0 || index > arrayListViewPianteForAcquario.size()) {
+            throw new IndexOutOfBoundsException("Indice fuori dai limiti della lista");
+        }
+
+        PiantaType pianta = arrayListViewPianteForAcquario.get(index);
+        System.out.println("l'indice di piantaType è: "+pianta.getIdPianta());
+        
+        return pianta;
+	}
+
+	public PiantaType deletePiantaFromAcquario(int index) {
+		
+		PiantaType pianta =  arrayListViewPianteForAcquario.get(index);
+		
+		arrayListViewPianteForAcquario.remove(index);
+		//list quantitas da aggiornare togliendo quella della pianta rimossa
+
+		return pianta;
+	}
+
+	/*public void refreshView() throws Exception {
+	    AcquarioType selectedItem = this.getSelectedItemListAcquari();
+	    
+	    textFieldViewLitraggio.setText(Long.toString(selectedItem.getLitri()));
+	    textFieldViewLarghezza.setText(Long.toString(selectedItem.getLarghezza()));
+	    textFieldViewLunghezza.setText(Long.toString(selectedItem.getLunghezza()));
+	    textFieldViewAltezza.setText(Long.toString(selectedItem.getAltezza()));
+	    textAreaViewDescrizioneAcquario.setText(selectedItem.getDescrizione());
+
+	    // Ricarica la lista delle piante nell'acquario
+	    List<PiantaType> plantsToView = // Qui ottieni la lista aggiornata delle piante per l'acquario
+	    List<Long> quantitas = // Qui ottieni la lista aggiornata delle quantità delle piante
+
+	    arrayListViewPianteForAcquario.clear();
+	    arrayListViewPianteForAcquario.addAll(plantsToView);
+
+	    this.updateViewListPianteForAcquario(quantitas);
+	}*/
+
 }
