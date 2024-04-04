@@ -3,7 +3,7 @@
 set_time_limit(300);
 
 // Percorso della cartella delle immagini
-$imageFolder = "D:/informatica/images/";
+$imageFolder = "images/";
 
 //credenziali db
 $servername = "localhost";

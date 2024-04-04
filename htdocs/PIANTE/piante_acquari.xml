@@ -1,8 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<piante_acquari xmlns="Piante">
- <item>
-  <id_pianta>203</id_pianta>
-  <id_acquario>10</id_acquario>
-  <quantita>2</quantita>
- </item>
-</piante_acquari>
+<piante_acquari xmlns="Piante"/>

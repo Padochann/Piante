@@ -226,9 +226,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	private void salvaAcquario() throws Exception{
 		//w.resetViewAndNew();
 		Long idAcquario = new Long(0);
-		System.out.println("ciao");
 		Long litraggio = w.getValueSpinnerLitraggio();
-		System.out.println("primo long litir");
 		Long larghezza = w.getValueSpinnerLarghezza();
 		Long lunghezza = w.getValueSpinnerLunghezza();
 		Long altezza = w.getValueSpinnerAltezza();
@@ -285,7 +283,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	    if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListCercaPiante()) {
             // Ottieni l'indice dell'elemento cliccato
             int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
-            
+            //index++;
             // Verifica se l'indice è valido
             if (index != -1) {
             	try {
@@ -325,8 +323,8 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 
 	    // Costruisci la query string
 	    StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=immagini");
+	    //queryStringBuilder.append("&id_pianta=2");
 	    queryStringBuilder.append("&id_pianta=").append(URLEncoder.encode(Long.toString(pianta.getIdPianta()), StandardCharsets.UTF_8.toString()));
-	    System.out.println("id pianta "+pianta.getIdPianta());
 	    String queryString = queryStringBuilder.toString();
 	    System.out.println(queryString);
 
@@ -342,16 +340,16 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	    byte[] imageBytes = imageToShow.getItem().get(0).getImmaginePianta();
 	    // Converti l'array di byte in un'immagine
 	    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
-	    System.out.println("immagine convertita in immagine");
 	    // Visualizza l'immagine
 	    ImageIcon imageIcon = new ImageIcon(bufferedImage);
 	    JLabel label = new JLabel(imageIcon);
 	    
 	    
 	    String link=pianta.getLinkPagina();
+	    String nomePianta=pianta.getNome();
 	    //da controllare che funzioni
 	    try {
-			displayPlantImage(imageIcon, link);
+			displayPlantImage(nomePianta, imageIcon, link);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -370,7 +368,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 
 
 	
-	private void displayPlantImage(ImageIcon immagine, String link) {
+	private void displayPlantImage(String nomePianta, ImageIcon immagine, String link) {
 	    String decodedLink = URLDecoder.decode(link, StandardCharsets.UTF_8);
 
 	    JLabel imageLabel = new JLabel(immagine);
@@ -402,7 +400,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	    contentPanel.add(linkPane, BorderLayout.SOUTH);  // Add linkPane below the image
 
 	    // Create the frame
-	    JFrame imageFrame = new JFrame("Immagine Pianta Selezionata");
+	    JFrame imageFrame = new JFrame(nomePianta);
 	    imageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    imageFrame.add(contentPanel);  // Add the panel with image and link
 	    imageFrame.pack();

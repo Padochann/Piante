@@ -169,6 +169,7 @@ public class Window extends JFrame {
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1008,530);
+		setTitle("Progetto Acquari");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		 
@@ -949,7 +950,7 @@ public class Window extends JFrame {
      */
     public void addItemsToListCercaPiante(List<PiantaType> itemsToAdd) {
         int startIndex = arrayListCercaPiante.size();
-
+        
         arrayListCercaPiante.addAll(itemsToAdd);
 
         int endIndex = arrayListCercaPiante.size() - 1;
@@ -1389,17 +1390,13 @@ public class Window extends JFrame {
 
 	
 	public PiantaType getPiantaAltClickedInListCerca(int index) throws IndexOutOfBoundsException, Exception {
-        if (index < 0 || index >= arrayListCercaPiante.size()) {
+        if (index < 0 || index > arrayListCercaPiante.size()) {
             throw new IndexOutOfBoundsException("Indice fuori dai limiti della lista");
         }
 
         PiantaType pianta = arrayListCercaPiante.get(index);
         System.out.println("l'indice di piantaType è: "+pianta.getIdPianta());
         
-        if (pianta == null) {
-            throw new Exception("Pianta non trovata all'indice " + index);
-        }
-
         return pianta;
     }
 	

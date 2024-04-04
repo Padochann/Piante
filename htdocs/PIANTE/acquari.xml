@@ -9,131 +9,59 @@
   <descrizione>c</descrizione>
  </item>
  <item>
-  <id_acquario>11</id_acquario>
-  <litri>100</litri>
-  <larghezza>100</larghezza>
-  <lunghezza>100</lunghezza>
-  <altezza>100</altezza>
-  <descrizione>acquario di test</descrizione>
+  <id_acquario>32</id_acquario>
+  <litri>1</litri>
+  <larghezza>1</larghezza>
+  <lunghezza>1</lunghezza>
+  <altezza>1</altezza>
+  <descrizione></descrizione>
  </item>
  <item>
-  <id_acquario>12</id_acquario>
-  <litri>100</litri>
-  <larghezza>100</larghezza>
-  <lunghezza>100</lunghezza>
-  <altezza>100</altezza>
-  <descrizione>acquario di test</descrizione>
+  <id_acquario>33</id_acquario>
+  <litri>1</litri>
+  <larghezza>1</larghezza>
+  <lunghezza>1</lunghezza>
+  <altezza>1</altezza>
+  <descrizione></descrizione>
  </item>
  <item>
-  <id_acquario>13</id_acquario>
-  <litri>100</litri>
-  <larghezza>100</larghezza>
-  <lunghezza>100</lunghezza>
-  <altezza>100</altezza>
-  <descrizione>acquario di test</descrizione>
+  <id_acquario>43</id_acquario>
+  <litri>1</litri>
+  <larghezza>1</larghezza>
+  <lunghezza>1</lunghezza>
+  <altezza>1</altezza>
+  <descrizione>adsas</descrizione>
  </item>
  <item>
-  <id_acquario>14</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao cino</descrizione>
+  <id_acquario>44</id_acquario>
+  <litri>18</litri>
+  <larghezza>7</larghezza>
+  <lunghezza>14</lunghezza>
+  <altezza>5</altezza>
+  <descrizione>acquario di paolo</descrizione>
  </item>
  <item>
-  <id_acquario>15</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao cino</descrizione>
+  <id_acquario>47</id_acquario>
+  <litri>1</litri>
+  <larghezza>1</larghezza>
+  <lunghezza>1</lunghezza>
+  <altezza>1</altezza>
+  <descrizione></descrizione>
  </item>
  <item>
-  <id_acquario>16</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao piove</descrizione>
+  <id_acquario>48</id_acquario>
+  <litri>1</litri>
+  <larghezza>1</larghezza>
+  <lunghezza>1</lunghezza>
+  <altezza>1</altezza>
+  <descrizione></descrizione>
  </item>
  <item>
-  <id_acquario>17</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao cino</descrizione>
- </item>
- <item>
-  <id_acquario>18</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao guzzo</descrizione>
- </item>
- <item>
-  <id_acquario>19</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao piove</descrizione>
- </item>
- <item>
-  <id_acquario>20</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao cino</descrizione>
- </item>
- <item>
-  <id_acquario>21</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao guzzo</descrizione>
- </item>
- <item>
-  <id_acquario>22</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao piove</descrizione>
- </item>
- <item>
-  <id_acquario>23</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao cino</descrizione>
- </item>
- <item>
-  <id_acquario>24</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao guzzo</descrizione>
- </item>
- <item>
-  <id_acquario>25</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao piove</descrizione>
- </item>
- <item>
-  <id_acquario>26</id_acquario>
-  <litri>20</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>ciao cino</descrizione>
+  <id_acquario>49</id_acquario>
+  <litri>1</litri>
+  <larghezza>1</larghezza>
+  <lunghezza>1</lunghezza>
+  <altezza>1</altezza>
+  <descrizione></descrizione>
  </item>
 </acquari>
