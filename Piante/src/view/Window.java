@@ -660,6 +660,8 @@ public class Window extends JFrame {
             public String getElementAt(int index) {
                 return arrayListCercaPiante.get(index).getNome();
             }
+            
+            	
 
 			@Override
 			public void fireIntervalAdded(Object source, int index0, int index1) {
@@ -1384,4 +1386,20 @@ public class Window extends JFrame {
 	public void clearSelectionListViewPianteAcquario() {
 		listViewPianteAcquario.clearSelection();
 	}
+
+	
+	public PiantaType getPiantaAltClickedInListCerca(int index) throws IndexOutOfBoundsException, Exception {
+        if (index < 0 || index >= arrayListCercaPiante.size()) {
+            throw new IndexOutOfBoundsException("Indice fuori dai limiti della lista");
+        }
+
+        PiantaType pianta = arrayListCercaPiante.get(index);
+        
+        if (pianta == null) {
+            throw new Exception("Pianta non trovata all'indice " + index);
+        }
+
+        return pianta;
+    }
+	
 }
