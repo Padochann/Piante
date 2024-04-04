@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
@@ -232,28 +235,37 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		// Verifica se il tasto ALT è premuto
-        if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListCercaPiante()) {
-            // Ottieni l'indice dell'elemento cliccato
-            int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
-            
-            // Verifica se l'indice è valido
-            if (index != -1) {
-                // Apri una nuova finestra Java e mostra l'indice
-                w.messageDialog("trovato a indice "+ index);;
-            }
-        }
-        if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListViewPianteAcquario()) {
-            // Ottieni l'indice dell'elemento cliccato
-            int index = w.getIndexOfElemenListViewPianteAcquarioForMouseClick(e.getPoint());
-            
-            // Verifica se l'indice è valido
-            if (index != -1) {
-                // Apri una nuova finestra Java e mostra l'indice
-                w.messageDialog("trovato a indice "+ index);;
-            }
-        }
+	    if (e.isAltDown() && e.getButton() == MouseEvent.BUTTON1) {
+	        if (e.getSource() == w.getListCercaPiante()) {
+	            int index = w.getIndexOfElemenListCercaPiantaForMouseClick(e.getPoint());
+	            if (index != -1) {
+	                // Simula il percorso del file immagine sul tuo computer
+	            	System.out.println("l'indice è:" + index);
+	                String imageFilePath = "images\\1.jpg";
+	                displayPlantImage(imageFilePath);
+	            }
+	        } else if (e.getSource() == w.getListViewPianteAcquario()) {
+	            int index = w.getIndexOfElemenListViewPianteAcquarioForMouseClick(e.getPoint());
+	            if (index != -1) {
+	                // Simula il percorso del file immagine sul tuo computer
+	            	System.out.println("l'indice è:" + index);
+	            	String imageFilePath = "images\\1.jpg";
+	                displayPlantImage(imageFilePath);
+	            }
+	        }
+	    }
+	}
+
+	// Metodo per visualizzare l'immagine in una nuova finestra
+	private void displayPlantImage(String imageFilePath) {
+	    ImageIcon plantIcon = new ImageIcon(imageFilePath);
+	    JLabel imageLabel = new JLabel(plantIcon);
+
+	    JFrame imageFrame = new JFrame("Immagine Pianta Selezionata");
+	    imageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    imageFrame.add(imageLabel);
+	    imageFrame.pack();
+	    imageFrame.setVisible(true);
 	}
 
 	@Override
