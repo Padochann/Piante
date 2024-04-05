@@ -144,8 +144,7 @@ public class Window extends JFrame {
 	private CardLayout cardLayout;
 	private CardLayout acquarioLayout;
 	private List<JPanel> arrayPanelsListaCarrello = new ArrayList<JPanel>();
-	//private List<JCheckBox> arrayChckBxListaCarrello = new ArrayList<JCheckBox>();
-	//private List<JSpinner> arraySpinListaCarrello = new ArrayList<JSpinner>();
+	
 	private List<PiantaType> arrayListaCarrello = new ArrayList<PiantaType>();
 	private List<PiantaType> arrayListCercaPiante = new ArrayList<PiantaType>();
 	private List<AcquarioType> arrayListAcquari = new ArrayList<AcquarioType>();
@@ -707,45 +706,10 @@ public class Window extends JFrame {
 	    GridLayout gl_panelSalvaListaCarrello= new GridLayout(39, 1, 0, 0);
 	    panelSalvaListaCarrello.setLayout(gl_panelSalvaListaCarrello);
 	    
-	    //((GridLayout)panelSalvaListaCarrello.getLayout()).setRows(((GridLayout)panelSalvaListaCarrello.getLayout()).getRows()+30);
-	
-	    /*panel_1 = new JPanel();
-	    MatteBorder borderPanelSalvaListaPiante = new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0));
-	    panel_1.setBorder(borderPanelSalvaListaPiante);
-	    panelSalvaListaCarrello.add(panel_1);
-	    GridBagLayout gbl_panel_1 = new GridBagLayout();
-	    gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
-	    gbl_panel_1.rowHeights = new int[]{0, 0};
-	    gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-	    gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-	    panel_1.setLayout(gbl_panel_1);
 	    
 	    
 	    
-	    
-	    chckbxNewCheckBox_1 = new JCheckBox("");
-	    GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
-	    gbc_chckbxNewCheckBox_1.fill = GridBagConstraints.VERTICAL;
-	    gbc_chckbxNewCheckBox_1.insets = new Insets(0, 0, 0, 5);
-	    gbc_chckbxNewCheckBox_1.gridx = 0;
-	    gbc_chckbxNewCheckBox_1.gridy = 0;
-	    panel_1.add(chckbxNewCheckBox_1, gbc_chckbxNewCheckBox_1);
-	    
-	    JLabel lblNewLabel = new JLabel("Rotala rotundifollia var \"hraa\"");
-	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	    GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-	    gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-	    gbc_lblNewLabel.gridx = 1;
-	    gbc_lblNewLabel.gridy = 0;
-	    panel_1.add(lblNewLabel, gbc_lblNewLabel);
-	    
-	    spinner = new JSpinner();
-	    spinner.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
-	    GridBagConstraints gbc_spinner = new GridBagConstraints();
-	    gbc_spinner.fill = GridBagConstraints.VERTICAL;
-	    gbc_spinner.gridx = 2;
-	    gbc_spinner.gridy = 0;
-	    panel_1.add(spinner, gbc_spinner);*/
+	   
 	    
 	    btnSalvaAggiungiPiante = new JButton("Aggiungi Piante");
 	    sl_panelSalva.putConstraint(SpringLayout.WEST, btnSalvaAggiungiPiante, 85, SpringLayout.EAST, scrollPaneSalvaListaCarrello);
@@ -753,13 +717,6 @@ public class Window extends JFrame {
 	    panelSalva.add(btnSalvaAggiungiPiante);
 	    
 	
-	    
-	 /*Aggiungi un ActionListener ai bottoni per cambiare il pannello visualizzato
-	    btnAcquari.addActionListener(e -> cardLayout.show(panelCardMain, "panelAcquari"));
-	    btnCerca.addActionListener(e -> cardLayout.show(panelCardMain, "panelCerca"));
-	    btnSalva.addActionListener(e -> cardLayout.show(panelCardMain, "panelSalva"));
-	    btnNew.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelNew"));
-	    btnView.addActionListener(e -> acquarioLayout.show(panelCardAcquari, "panelView"));*/
 	    
 	    
 	    
@@ -1171,7 +1128,7 @@ public class Window extends JFrame {
         arrayListAcquari.clear();
         arrayListAcquari.addAll(itemsToUpdate);
         
-        DefaultComboBoxModel<String> comboBoxModel = (DefaultComboBoxModel<String>) comboBoxSalvaAcquari.getModel();
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<String>();
         
         for (AcquarioType acquario : arrayListAcquari) {
             String itemText = Long.toString(acquario.getIdAcquario()) + ")   litri:" + Long.toString(acquario.getLitri());
@@ -1182,7 +1139,7 @@ public class Window extends JFrame {
         
         
         // Aggiornamento della JList listAcquari
-        DefaultListModel<String> listModel = (DefaultListModel<String>) listAcquari.getModel();
+        DefaultListModel<String> listModel = new DefaultListModel<String>();
         for (AcquarioType acquario : arrayListAcquari) {
             String itemText = Long.toString(acquario.getIdAcquario()) + ")   litri:" + Long.toString(acquario.getLitri());
             listModel.addElement(itemText);
@@ -1428,8 +1385,7 @@ public class Window extends JFrame {
         }
         
         // Rimuovi tutti i componenti dal frame
-        //JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(parentPanel);
-        //frame.getContentPane().removeAll();
+        
         
         panelSalvaListaCarrello.removeAll();
         
@@ -1498,7 +1454,7 @@ public class Window extends JFrame {
 	    btnCercaPianta.addActionListener(controller);
 	    btnCercaAggiungiPianta.addActionListener(controller);
 	    
-	    //spinner.addChangeListener(controller);//devo mettere questo nel metodo crea panel with components
+	    
 	    btnSalvaAggiungiPiante.addActionListener(controller);
 	    
 	    listCercaPiante.addMouseListener(controller);
@@ -1673,34 +1629,7 @@ public class Window extends JFrame {
     	return arrayListViewPianteForAcquario.get(listViewPianteAcquario.getSelectedIndex());
 	}
 	
-	/*public PiantaType deletePiantaFromAcquario(int index) {
-		
-		PiantaType pianta =  arrayListViewPianteForAcquario.get(index);
-		
-		arrayListViewPianteForAcquario.remove(index);
-		//list quantitas da aggiornare togliendo quella della pianta rimossa
-
-		return pianta;
-	}*/
-
-	/*public void refreshView() throws Exception {
-	    AcquarioType selectedItem = this.getSelectedItemListAcquari();
-	    
-	    textFieldViewLitraggio.setText(Long.toString(selectedItem.getLitri()));
-	    textFieldViewLarghezza.setText(Long.toString(selectedItem.getLarghezza()));
-	    textFieldViewLunghezza.setText(Long.toString(selectedItem.getLunghezza()));
-	    textFieldViewAltezza.setText(Long.toString(selectedItem.getAltezza()));
-	    textAreaViewDescrizioneAcquario.setText(selectedItem.getDescrizione());
-
-	    // Ricarica la lista delle piante nell'acquario
-	    List<PiantaType> plantsToView = // Qui ottieni la lista aggiornata delle piante per l'acquario
-	    List<Long> quantitas = // Qui ottieni la lista aggiornata delle quantità delle piante
-
-	    arrayListViewPianteForAcquario.clear();
-	    arrayListViewPianteForAcquario.addAll(plantsToView);
-
-	    this.updateViewListPianteForAcquario(quantitas);
-	}*/
+	
 
 	/**
 	 * Displays an image of a plant along with a clickable link.

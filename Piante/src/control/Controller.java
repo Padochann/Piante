@@ -128,6 +128,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			{
 				
 				this.cancellaAcquario();
+				
 			}
 			if(e.getSource() == w.getBtnSalvaNewAcquario())
 			{
