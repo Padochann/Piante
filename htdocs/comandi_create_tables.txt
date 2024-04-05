@@ -1,0 +1,106 @@
+CREATE TABLE `acquari` (
+  `id_acquario` int(10) UNSIGNED NOT NULL,
+  `litri` int(10) UNSIGNED NOT NULL,
+  `larghezza` int(10) UNSIGNED NOT NULL,
+  `lunghezza` int(10) UNSIGNED NOT NULL,
+  `altezza` int(10) UNSIGNED NOT NULL,
+  `descrizione` text DEFAULT 'descrizione non inserita'
+)
+
+CREATE TABLE `piante_acquari` (
+  `id_pianta` int(10) UNSIGNED NOT NULL,
+  `id_acquario` int(10) UNSIGNED NOT NULL,
+  `quantita` int(10) UNSIGNED DEFAULT 1
+)
+
+CREATE TABLE `piante` (
+  `id_pianta` int(10) UNSIGNED NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `link_pagina` varchar(500) NOT NULL,
+  `link_img` varchar(255) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `origine` varchar(100) NOT NULL,
+  `tasso_crescita` enum('lento','medio','veloce') DEFAULT NULL,
+  `altezza_minima` int(3) UNSIGNED NOT NULL,
+  `altezza_massima` int(3) UNSIGNED NOT NULL,
+  `luce` enum('poca','media','tanta') DEFAULT 'poca',
+  `co2` enum('poca','media','tanta') DEFAULT 'poca',
+  `link_logo` varchar(255) NOT NULL,
+  `difficolta` varchar(255) NOT NULL
+)
+
+CREATE TABLE `immagini` (
+  `id_immagine` int(10) UNSIGNED NOT NULL,
+  `immagine_pianta` blob NOT NULL,
+  `id_pianta` int(10) UNSIGNED NOT NULL
+)
+
+
+
+//alter table
+
+
+ALTER TABLE `acquari`
+  ADD PRIMARY KEY (`id_acquario`);
+
+--
+-- Indici per le tabelle `immagini`
+--
+ALTER TABLE `immagini`
+  ADD PRIMARY KEY (`id_immagine`),
+  ADD KEY `imm_pia` (`id_pianta`);
+
+--
+-- Indici per le tabelle `piante`
+--
+ALTER TABLE `piante`
+  ADD PRIMARY KEY (`id_pianta`);
+
+--
+-- Indici per le tabelle `piante_acquari`
+--
+ALTER TABLE `piante_acquari`
+  ADD PRIMARY KEY (`id_pianta`,`id_acquario`),
+  ADD KEY `piac_acq` (`id_acquario`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
+--
+
+--
+-- AUTO_INCREMENT per la tabella `acquari`
+--
+ALTER TABLE `acquari`
+  MODIFY `id_acquario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT per la tabella `immagini`
+--
+ALTER TABLE `immagini`
+  MODIFY `id_immagine` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+
+--
+-- AUTO_INCREMENT per la tabella `piante`
+--
+ALTER TABLE `piante`
+  MODIFY `id_pianta` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+
+--
+-- Limiti per le tabelle scaricate
+--
+
+--
+-- Limiti per la tabella `immagini`
+--
+ALTER TABLE `immagini`
+  ADD CONSTRAINT `imm_pia` FOREIGN KEY (`id_pianta`) REFERENCES `piante` (`id_pianta`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limiti per la tabella `piante_acquari`
+--
+ALTER TABLE `piante_acquari`
+  ADD CONSTRAINT `piac_acq` FOREIGN KEY (`id_acquario`) REFERENCES `acquari` (`id_acquario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `piac_pia` FOREIGN KEY (`id_pianta`) REFERENCES `piante` (`id_pianta`) ON UPDATE CASCADE;
+COMMIT;
+
+
