@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SpringLayout;
+
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Checkbox;
 
@@ -28,11 +30,16 @@ import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 import java.awt.Component;
+import java.awt.Desktop;
+
 import javax.swing.ScrollPaneConstants;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Point;
+import java.net.URI;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -43,6 +50,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.HyperlinkEvent;
 
 import java.awt.Color;
 import javax.swing.SpinnerNumberModel;
@@ -55,6 +63,7 @@ import control.Controller;
 import com.jgoodies.forms.layout.FormSpecs;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -1409,7 +1418,14 @@ public class Window extends JFrame {
         return pianta;
 	}
 
-	public PiantaType deletePiantaFromAcquario(int index) {
+	public PiantaType getSelectedItemOfListPlantsOfAcquario() throws Exception{
+		if(arrayListViewPianteForAcquario.get(listViewPianteAcquario.getSelectedIndex())==null)
+    		throw new Exception("Errore: impossibile eliminare la pianta");
+    	
+    	return arrayListViewPianteForAcquario.get(listViewPianteAcquario.getSelectedIndex());
+	}
+	
+	/*public PiantaType deletePiantaFromAcquario(int index) {
 		
 		PiantaType pianta =  arrayListViewPianteForAcquario.get(index);
 		
@@ -1417,7 +1433,7 @@ public class Window extends JFrame {
 		//list quantitas da aggiornare togliendo quella della pianta rimossa
 
 		return pianta;
-	}
+	}*/
 
 	/*public void refreshView() throws Exception {
 	    AcquarioType selectedItem = this.getSelectedItemListAcquari();
@@ -1438,4 +1454,45 @@ public class Window extends JFrame {
 	    this.updateViewListPianteForAcquario(quantitas);
 	}*/
 
+	
+	public void displayPlantImage(String nomePianta, ImageIcon immagine, String link) {
+	    String decodedLink = URLDecoder.decode(link, StandardCharsets.UTF_8);
+
+	    JLabel imageLabel = new JLabel(immagine);
+
+	    // Create a clickable link using JEditorPane
+	    JEditorPane linkPane = new JEditorPane();
+	    linkPane.setContentType("text/html");
+	    
+	    // Format the link as an HTML anchor tag
+	    String htmlLink = "<a href=\"" + decodedLink + "\">" + decodedLink + "</a>";
+	    linkPane.setText(htmlLink);
+	    
+	    linkPane.setEditable(false);  // Make it non-editable
+	    linkPane.setBorder(null);  // Remove the border
+	    linkPane.addHyperlinkListener(e -> {
+	        try {
+	            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+	                Desktop.getDesktop().browse(new URI(e.getURL().toString()));
+	            }
+	        } catch (Exception ex) {
+	            // Handle exceptions if the link cannot be opened
+	        }
+	    });
+
+	    // Create a panel for the image and link
+	    JPanel contentPanel = new JPanel();
+	    contentPanel.setLayout(new BorderLayout());
+	    contentPanel.add(imageLabel, BorderLayout.CENTER);
+	    contentPanel.add(linkPane, BorderLayout.SOUTH);  // Add linkPane below the image
+
+	    // Create the frame
+	    JFrame imageFrame = new JFrame(nomePianta);
+	    imageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    imageFrame.add(contentPanel);  // Add the panel with image and link
+	    imageFrame.pack();
+	    imageFrame.setVisible(true);
+	}
+	
+	
 }

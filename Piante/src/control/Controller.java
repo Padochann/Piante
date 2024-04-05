@@ -122,6 +122,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			if(e.getSource() == w.getBtnCancellaPianteAcquario())
 			{
 				BtnPrincipale=false;
+				this.cancellaPiantaDaAcquario();
 			}
 			
 			
@@ -298,6 +299,25 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		w.updateListAcquari(this.getAcquariList());
 	}
 	
+	private void cancellaPiantaDaAcquario() throws Exception{
+		
+		Long idAcquario = w.getSelectedItemListAcquari().getIdAcquario();
+		Long idPianta = w.getSelectedItemOfListPlantsOfAcquario().getIdPianta();
+		
+		StringBuilder queryStringBuilder = new StringBuilder("crud=d&table=piante_acquari");
+		
+		queryStringBuilder.append("&id_acquario=").append(URLEncoder.encode(Long.toString(idAcquario), StandardCharsets.UTF_8.toString()));
+		queryStringBuilder.append("&id_pianta=").append(URLEncoder.encode(Long.toString(idPianta), StandardCharsets.UTF_8.toString()));
+		
+		String queryString = queryStringBuilder.toString();
+		System.out.println(queryString);
+		
+		String echo = (String) requester.fetchDataFromApi(queryString);
+		w.messageDialog(echo);
+		this.viewAcquario();
+		
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e){
 		
@@ -344,40 +364,12 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
             }
         }
         
-        if (e.isControlDown() && e.getButton() == MouseEvent.BUTTON1 && e.getSource() == w.getListViewPianteAcquario()) {
-            // Ottieni l'indice dell'elemento cliccato
-            int index = w.getIndexOfElemenListViewPianteAcquarioForMouseClick(e.getPoint());
-            PiantaType pianta = w.deletePiantaFromAcquario(index);
-            // w.refreshView();
-            try {
-				viewAcquario();
-				
-				
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-            // Verifica se l'indice è valido
-            if (index != -1) {
-            	try {
-            		System.out.println("ciao");
-            	    PiantaType pianta1 = w.getPiantaAltClickInPianteForAcquario(index);
-            	    if (pianta != null) {
-            	        showImageForPianta(pianta1);
-            	        
-            	    }
-            	} catch (IndexOutOfBoundsException e1) {
-            	    // ...
-            	} catch (Exception e1) {
-            	    // ...
-            	}
-            }
-        }
+        
 	}
 	
 	
 	
-	public void showImageForPianta(PiantaType pianta) throws Exception {
+	private void showImageForPianta(PiantaType pianta) throws Exception {
 
 	    // Costruisci la query string
 	    StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=immagini");
@@ -397,17 +389,15 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	    // Ottieni l'array di byte dell'immagine
 	    byte[] imageBytes = imageToShow.getItem().get(0).getImmaginePianta();
 	    // Converti l'array di byte in un'immagine
-	    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
-	    // Visualizza l'immagine
-	    ImageIcon imageIcon = new ImageIcon(bufferedImage);
-	    JLabel label = new JLabel(imageIcon);
+	    
+	    
 	    
 	    
 	    String link=pianta.getLinkPagina();
 	    String nomePianta=pianta.getNome();
 	    //da controllare che funzioni
 	    try {
-			displayPlantImage(nomePianta, imageIcon, link);
+			w.displayPlantImage(nomePianta, RestEasyPlantsClient.convertToImage(imageBytes), link);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -415,55 +405,13 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 
 	}
 
-	public static Image convertToImage(byte[] imageBytes) throws IOException {
-	    ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
-	    BufferedImage image = ImageIO.read(bais);
-	    bais.close();
-	    return image;
-	}
+	
 
 
 
 
 	
-	private void displayPlantImage(String nomePianta, ImageIcon immagine, String link) {
-	    String decodedLink = URLDecoder.decode(link, StandardCharsets.UTF_8);
-
-	    JLabel imageLabel = new JLabel(immagine);
-
-	    // Create a clickable link using JEditorPane
-	    JEditorPane linkPane = new JEditorPane();
-	    linkPane.setContentType("text/html");
-	    
-	    // Format the link as an HTML anchor tag
-	    String htmlLink = "<a href=\"" + decodedLink + "\">" + decodedLink + "</a>";
-	    linkPane.setText(htmlLink);
-	    
-	    linkPane.setEditable(false);  // Make it non-editable
-	    linkPane.setBorder(null);  // Remove the border
-	    linkPane.addHyperlinkListener(e -> {
-	        try {
-	            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-	                Desktop.getDesktop().browse(new URI(e.getURL().toString()));
-	            }
-	        } catch (Exception ex) {
-	            // Handle exceptions if the link cannot be opened
-	        }
-	    });
-
-	    // Create a panel for the image and link
-	    JPanel contentPanel = new JPanel();
-	    contentPanel.setLayout(new BorderLayout());
-	    contentPanel.add(imageLabel, BorderLayout.CENTER);
-	    contentPanel.add(linkPane, BorderLayout.SOUTH);  // Add linkPane below the image
-
-	    // Create the frame
-	    JFrame imageFrame = new JFrame(nomePianta);
-	    imageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	    imageFrame.add(contentPanel);  // Add the panel with image and link
-	    imageFrame.pack();
-	    imageFrame.setVisible(true);
-	}
+	
 
 
 
