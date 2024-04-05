@@ -284,6 +284,8 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	private void salvaPiante() throws Exception{
 		int[] indexesOfPlantsToSave = w.getSelectedCheckBoxIndices();
+		if(indexesOfPlantsToSave.length==0)
+			throw new Exception("Attenzione: selezionare almeno una pianta all'interno del carrello");
 		Long idAcquario = w.getIdOfAcquarioSelectedInComboBoxSalvaAcquario();
 		Long[] idsPianta = new Long[indexesOfPlantsToSave.length];
 		Long[]  quantitas = new Long[indexesOfPlantsToSave.length];
