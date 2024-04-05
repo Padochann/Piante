@@ -873,7 +873,6 @@ public class Window extends JFrame {
 	 * 
 	 * @return the text from textFieldCercaNome or null if it's empty
 	 */
-
 	public String getTxtCercaNome() {
 		if(textFieldCercaNome.getText().equals(""))
 			return null;
