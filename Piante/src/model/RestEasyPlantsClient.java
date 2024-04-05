@@ -1,7 +1,11 @@
 package model;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -13,6 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -213,6 +220,13 @@ public class RestEasyPlantsClient {
 	}
 
 
+	public static ImageIcon convertToImage(byte[] imageBytes) throws IOException {
+		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
+	    // Visualizza l'immagine
+	    ImageIcon imageIcon = new ImageIcon(bufferedImage);
+		
+	    return imageIcon;
+	}
 	
     private Map<String, String> extractParameters(String queryString) throws Exception{
         Map<String, String> params = new HashMap<>();
