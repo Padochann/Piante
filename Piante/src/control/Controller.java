@@ -64,30 +64,34 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		
-		
-		try {
-           
-			if (e.getSource() == w.getBtnAcquari()) {
+        try {
+            if (e.getSource() == w.getBtnAcquari()) {
                 w.showPanel("cardLayout", "panelAcquari");
-                w.getBtnAcquari().setBackground(Color.RED);
+                w.getBtnAcquari().setBackground(Color.CYAN);
+                if (lastToken != null && lastToken != w.getBtnAcquari()) {
+                    lastToken.setBackground(UIManager.getColor("Button.background"));
+                }
                 lastToken = w.getBtnAcquari();
-                BtnPrincipale=true;
+               w.updateListAcquari(getAcquariList());
                 w.resetViewAndNew();
             }
             if (e.getSource() == w.getBtnCerca()) {
                 w.showPanel("cardLayout", "panelCerca");
-                w.getBtnCerca().setBackground(Color.RED);
-                BtnPrincipale=true;
+                w.getBtnCerca().setBackground(Color.CYAN);
+                if (lastToken != null && lastToken != w.getBtnCerca()) {
+                    lastToken.setBackground(UIManager.getColor("Button.background"));
+                }
                 lastToken = w.getBtnCerca();
+               
             }
             if (e.getSource() == w.getBtnSalva()) {
                 w.showPanel("cardLayout", "panelSalva");
-                w.getBtnSalva().setBackground(Color.RED);
-                BtnPrincipale=true;
+                w.getBtnSalva().setBackground(Color.CYAN);
+                if (lastToken != null && lastToken != w.getBtnSalva()) {
+                    lastToken.setBackground(UIManager.getColor("Button.background"));
+                }
                 lastToken = w.getBtnSalva();
+            
             }
 				//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
 				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
@@ -98,30 +102,29 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			if(e.getSource() == w.getBtnView())
 			{
 				w.showPanel("acquarioLayout", "panelView");
-				BtnPrincipale=false;
+				
 				this.viewAcquario();
 			}
 			if(e.getSource() == w.getBtnNew())
 			{
 				w.resetViewAndNew();
-				BtnPrincipale=false;
+		
 				w.showPanel("acquarioLayout", "panelNew");
 			}
 			
 			
 			if(e.getSource() == w.getBtnDelete())
 			{
-				BtnPrincipale=false;
 				this.cancellaAcquario();
 			}
 			if(e.getSource() == w.getBtnSalvaNewAcquario())
 			{
-				BtnPrincipale=false;
+				
 				this.salvaAcquario();
 			}
 			if(e.getSource() == w.getBtnCancellaPianteAcquario())
 			{
-				BtnPrincipale=false;
+				
 			}
 			
 			
@@ -135,13 +138,13 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			    	}
 			    });
 			    w.addItemsToListCercaPiante(prova);*/
-				BtnPrincipale=false;
+				
 				w.removeAllItemsFromListCercaPiante();
 				this.cercaPianta();
 			}
 			if(e.getSource() == w.getBtnCercaAggiungiPianta())
 			{
-				BtnPrincipale=false;
+				
 				List<PiantaType> tmp= w.getSelectedItemsListCercaPiante();
 				w.addItemsToListaCarrello(tmp);
 			}
@@ -153,13 +156,16 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 				System.out.println(Arrays.toString(tmp));
 				System.out.println(w.getValueOfSpinnerListaCarrello(tmp[0]));
 				System.out.println(w.getIdOfPiantaListaCarrello(tmp[0]));*/
-				BtnPrincipale=false;
+				   
 				this.salvaPiante();
 			}
-			if (lastPressedButton != null&&BtnPrincipale==true) {
+			/*if (lastPressedButton != lastToken&&BtnPrincipale==true) {
 	            lastPressedButton.setBackground(UIManager.getColor("Button.background"));
 	        }
-			lastPressedButton=lastToken;
+			if(lastPressedButton!=lastToken) {
+				lastPressedButton=lastToken;	
+			}*/
+			
 		}
 		
 		catch(Exception e1) {
