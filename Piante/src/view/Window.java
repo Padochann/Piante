@@ -28,6 +28,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.JTextPane;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.awt.Desktop;
@@ -162,6 +163,8 @@ public class Window extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		            
 					Window frame = new Window();
 					frame.setVisible(true);
 					Controller controller = new Controller(frame);
