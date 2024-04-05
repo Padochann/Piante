@@ -87,59 +87,61 @@
     }
 
     function insertXmlIntoDatabase($xmlString, $conn) {
-        // Disabilita la visualizzazione degli errori XML
-        libxml_use_internal_errors(true);
-    
-        // Carica l'XML
-        $xml = simplexml_load_string($xmlString);
-    
-        // Controlla gli errori XML
-        if ($xml === false) {
-            foreach (libxml_get_errors() as $error) {
-                echo "Errore XML: ", $error->message;
-            }
-            libxml_clear_errors();
-            return;
+    // Disabilita la visualizzazione degli errori XML
+    libxml_use_internal_errors(true);
+
+    // Carica l'XML
+    $xml = simplexml_load_string($xmlString);
+
+    // Controlla gli errori XML
+    if ($xml === false) {
+        foreach (libxml_get_errors() as $error) {
+            echo "Errore XML: ", $error->message;
         }
-    
-        // Riabilita la visualizzazione degli errori XML
-        libxml_use_internal_errors(false);
-    
-        // Ottieni il nome del nodo radice come nome della tabella
-        $tableName = $xml->getName();
-    
-        // Cicla attraverso ogni item e inserisci nel database
-        foreach ($xml->item as $item) {
-            $columns = [];
-            $values = [];
-            $params = [];
-            $types = '';
-    
-            // Ottieni colonne, valori e parametri per la query preparata
-            foreach ($item->children() as $key => $value) {
-                $columns[] = $key;
-                $values[] = $value;
-                $params[] = '?';
-                $types .= 's'; // Supponendo che tutti i valori siano stringhe. Adatta se necessario.
-            }
-    
-            // Crea e esegui la query preparata
-            $sql = "INSERT INTO $tableName (" . implode(',', $columns) . ") VALUES (" . implode(',', $params) . ")";
-            $stmt = $conn->prepare($sql);
-            
-            if ($stmt) {
-                $stmt->bind_param($types, ...$values);
-                if ($stmt->execute()) {
-                    echo "Inserito con successo\n";
-                } else {
-                    echo "Errore durante l'inserimento: " . $stmt->error;
-                }
-                $stmt->close();
+        libxml_clear_errors();
+        return;
+    }
+
+    // Riabilita la visualizzazione degli errori XML
+    libxml_use_internal_errors(false);
+
+    // Ottieni il nome del nodo radice come nome della tabella
+    $tableName = $xml->getName();
+
+    // Cicla attraverso ogni item e inserisci nel database
+    foreach ($xml->item as $item) {
+        $columns = [];
+        $values = [];
+        $params = [];
+        $types = '';
+
+        // Ottieni colonne, valori e parametri per la query preparata
+        foreach ($item->children() as $key => $value) {
+            $columns[] = $key;
+            $values[] = $value;
+            $params[] = '?';
+            $types .= 's'; // Supponendo che tutti i valori siano stringhe. Adatta se necessario.
+        }
+
+        // Crea e esegui la query preparata con ON DUPLICATE KEY UPDATE per aggiornare la quantità
+        $sql = "INSERT INTO $tableName (" . implode(',', $columns) . ") VALUES (" . implode(',', $params) . ") ON DUPLICATE KEY UPDATE quantita = quantita + VALUES(quantita)";
+
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param($types, ...$values);
+            if ($stmt->execute()) {
+                echo "Inserito o aggiornato con successo\n";
             } else {
-                echo "Errore nella preparazione della query: " . $conn->error;
+                echo "Errore durante l'inserimento o l'aggiornamento: " . $stmt->error;
             }
+            $stmt->close();
+        } else {
+            echo "Errore nella preparazione della query: " . $conn->error;
         }
     }
+}
+
     
 
 ?>

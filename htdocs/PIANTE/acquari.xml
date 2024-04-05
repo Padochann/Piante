@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <acquari xmlns="Piante">
  <item>
-  <id_acquario>10</id_acquario>
-  <litri>3</litri>
-  <larghezza>3</larghezza>
-  <lunghezza>3</lunghezza>
-  <altezza>3</altezza>
-  <descrizione>c</descrizione>
- </item>
- <item>
   <id_acquario>32</id_acquario>
   <litri>1</litri>
   <larghezza>1</larghezza>
@@ -23,14 +15,6 @@
   <lunghezza>1</lunghezza>
   <altezza>1</altezza>
   <descrizione></descrizione>
- </item>
- <item>
-  <id_acquario>43</id_acquario>
-  <litri>1</litri>
-  <larghezza>1</larghezza>
-  <lunghezza>1</lunghezza>
-  <altezza>1</altezza>
-  <descrizione>adsas</descrizione>
  </item>
  <item>
   <id_acquario>44</id_acquario>
