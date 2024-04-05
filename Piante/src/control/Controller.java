@@ -52,9 +52,8 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	
 	private Window w;
 	private RestEasyPlantsClient requester;
-	private JButton lastPressedButton;
 	private JButton lastToken;
-	private boolean BtnPrincipale;
+
 	public Controller(Window w) throws Exception {
 		this.w= w;
 		this.w.registerEvent(this);
@@ -68,60 +67,68 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		
 		
 		
-		try {
-           
-			if (e.getSource() == w.getBtnAcquari()) {
-                w.showPanel("cardLayout", "panelAcquari");
-                w.getBtnAcquari().setBackground(Color.RED);
-                lastToken = w.getBtnAcquari();
-                BtnPrincipale=true;
-                w.resetViewAndNew();
-            }
-            if (e.getSource() == w.getBtnCerca()) {
-                w.showPanel("cardLayout", "panelCerca");
-                w.getBtnCerca().setBackground(Color.RED);
-                BtnPrincipale=true;
-                lastToken = w.getBtnCerca();
-            }
-            if (e.getSource() == w.getBtnSalva()) {
-                w.showPanel("cardLayout", "panelSalva");
-                w.getBtnSalva().setBackground(Color.RED);
-                BtnPrincipale=true;
-                lastToken = w.getBtnSalva();
-            }
-				//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
-				//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
-				//List<AcquarioType> tmp = this.getAcquariList();
-				//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
-				//w.updateListAcquari(tmp);
-			
+	        try {
+	            if (e.getSource() == w.getBtnAcquari()) {
+	                w.showPanel("cardLayout", "panelAcquari");
+	                w.getBtnAcquari().setBackground(Color.CYAN);
+	                if (lastToken != null && lastToken != w.getBtnAcquari()) {
+	                    lastToken.setBackground(UIManager.getColor("Button.background"));
+	                }
+	                lastToken = w.getBtnAcquari();
+	               w.updateListAcquari(getAcquariList());
+	                w.resetViewAndNew();
+	            }
+	            if (e.getSource() == w.getBtnCerca()) {
+	                w.showPanel("cardLayout", "panelCerca");
+	                w.getBtnCerca().setBackground(Color.CYAN);
+	                if (lastToken != null && lastToken != w.getBtnCerca()) {
+	                    lastToken.setBackground(UIManager.getColor("Button.background"));
+	                }
+	                lastToken = w.getBtnCerca();
+	               
+	            }
+	            if (e.getSource() == w.getBtnSalva()) {
+	                w.showPanel("cardLayout", "panelSalva");
+	                w.getBtnSalva().setBackground(Color.CYAN);
+	                if (lastToken != null && lastToken != w.getBtnSalva()) {
+	                    lastToken.setBackground(UIManager.getColor("Button.background"));
+	                }
+	                lastToken = w.getBtnSalva();
+	            
+	            }
+			//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
+			//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
+			//List<AcquarioType> tmp = this.getAcquariList();
+			//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
+			//w.updateListAcquari(tmp);
+		
 			if(e.getSource() == w.getBtnView())
 			{
 				w.showPanel("acquarioLayout", "panelView");
-				BtnPrincipale=false;
+				
 				this.viewAcquario();
 			}
 			if(e.getSource() == w.getBtnNew())
 			{
 				w.resetViewAndNew();
-				BtnPrincipale=false;
+				
 				w.showPanel("acquarioLayout", "panelNew");
 			}
 			
 			
 			if(e.getSource() == w.getBtnDelete())
 			{
-				BtnPrincipale=false;
+				
 				this.cancellaAcquario();
 			}
 			if(e.getSource() == w.getBtnSalvaNewAcquario())
 			{
-				BtnPrincipale=false;
+			
 				this.salvaAcquario();
 			}
 			if(e.getSource() == w.getBtnCancellaPianteAcquario())
 			{
-				BtnPrincipale=false;
+				
 				this.cancellaPiantaDaAcquario();
 			}
 			
@@ -136,13 +143,13 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			    	}
 			    });
 			    w.addItemsToListCercaPiante(prova);*/
-				BtnPrincipale=false;
+				
 				w.removeAllItemsFromListCercaPiante();
 				this.cercaPianta();
 			}
 			if(e.getSource() == w.getBtnCercaAggiungiPianta())
 			{
-				BtnPrincipale=false;
+				
 				List<PiantaType> tmp= w.getSelectedItemsListCercaPiante();
 				w.addItemsToListaCarrello(tmp);
 			}
@@ -154,13 +161,10 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 				System.out.println(Arrays.toString(tmp));
 				System.out.println(w.getValueOfSpinnerListaCarrello(tmp[0]));
 				System.out.println(w.getIdOfPiantaListaCarrello(tmp[0]));*/
-				BtnPrincipale=false;
+				
 				this.salvaPiante();
 			}
-			if (lastPressedButton != null&&BtnPrincipale==true) {
-	            lastPressedButton.setBackground(UIManager.getColor("Button.background"));
-	        }
-			lastPressedButton=lastToken;
+			
 		}
 		
 		catch(Exception e1) {

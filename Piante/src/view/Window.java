@@ -1112,7 +1112,7 @@ public class Window extends JFrame {
     	AcquarioType selectedItem;
 	    int selectedIndex = listAcquari.getSelectedIndex();
 	    if(selectedIndex == -1)
-	    	throw new Exception("Attenzione: selezionare un acquario dalla lista per poterlo visualizzare");
+	    	throw new Exception("Attenzione: selezionare prima un acquario");
 	    
 	    selectedItem = arrayListAcquari.get(selectedIndex);
 	    
