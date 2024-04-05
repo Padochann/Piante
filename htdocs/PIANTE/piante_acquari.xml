@@ -2,22 +2,7 @@
 <piante_acquari xmlns="Piante">
  <item>
   <id_pianta>1</id_pianta>
-  <id_acquario>32</id_acquario>
-  <quantita>2</quantita>
- </item>
- <item>
-  <id_pianta>2</id_pianta>
-  <id_acquario>32</id_acquario>
-  <quantita>1</quantita>
- </item>
- <item>
-  <id_pianta>3</id_pianta>
-  <id_acquario>32</id_acquario>
-  <quantita>10</quantita>
- </item>
- <item>
-  <id_pianta>4</id_pianta>
-  <id_acquario>32</id_acquario>
+  <id_acquario>51</id_acquario>
   <quantita>1</quantita>
  </item>
 </piante_acquari>

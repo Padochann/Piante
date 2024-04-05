@@ -368,9 +368,9 @@ div#legend div.hint {
 <script type="text/javascript">
 <!--
 /* IDs of XML Instance Representation boxes */
-var xiBoxes = new Array('type_tassoCrescitaType_xibox', 'type_luceCO2Type_xibox', 'type_base64Binary_xibox', 'type_linkType_xibox', 'type_linkImgType_xibox', 'type_linkLogoType_xibox', 'type_difficoltaType_xibox', 'type_idAcquarioType_xibox', 'type_idImmagineType_xibox', 'type_idPiantaType_xibox', 'type_quantitaType_xibox', 'type_dimensioneType_xibox', 'type_testoType_xibox', 'type_tipoPiantaType_xibox', 'type_origineType_xibox', 'type_altezzaType_xibox', 'element_immagine_pianta_xibox', 'element_acquario_xibox', 'element_pianta_xibox', 'element_piante_acquari_xibox');
+var xiBoxes = new Array('type_tassoCrescitaType_xibox', 'type_luceCO2Type_xibox', 'type_base64Binary_xibox', 'type_linkType_xibox', 'type_linkImgType_xibox', 'type_linkLogoType_xibox', 'type_difficoltaType_xibox', 'type_idAcquarioType_xibox', 'type_idImmagineType_xibox', 'type_idPiantaType_xibox', 'type_quantitaType_xibox', 'type_dimensioneType_xibox', 'type_testoType_xibox', 'type_tipoPiantaType_xibox', 'type_origineType_xibox', 'type_altezzaType_xibox', 'type_acquarioType_xibox', 'type_immagineType_xibox', 'type_piantaType_xibox', 'type_pianta_acquarioType_xibox', 'type_pianteType_xibox', 'type_immaginiType_xibox', 'type_acquariType_xibox', 'type_piante_acquariType_xibox', 'element_piante_xibox', 'element_acquari_xibox', 'element_immagini_xibox', 'element_piante_acquari_xibox');
 /* IDs of Schema Component Representation boxes */
-var scBoxes = new Array('schema_scbox', 'type_tassoCrescitaType_scbox', 'type_luceCO2Type_scbox', 'type_base64Binary_scbox', 'type_linkType_scbox', 'type_linkImgType_scbox', 'type_linkLogoType_scbox', 'type_difficoltaType_scbox', 'type_idAcquarioType_scbox', 'type_idImmagineType_scbox', 'type_idPiantaType_scbox', 'type_quantitaType_scbox', 'type_dimensioneType_scbox', 'type_testoType_scbox', 'type_tipoPiantaType_scbox', 'type_origineType_scbox', 'type_altezzaType_scbox', 'element_immagine_pianta_scbox', 'element_acquario_scbox', 'element_pianta_scbox', 'element_piante_acquari_scbox');
+var scBoxes = new Array('schema_scbox', 'type_tassoCrescitaType_scbox', 'type_luceCO2Type_scbox', 'type_base64Binary_scbox', 'type_linkType_scbox', 'type_linkImgType_scbox', 'type_linkLogoType_scbox', 'type_difficoltaType_scbox', 'type_idAcquarioType_scbox', 'type_idImmagineType_scbox', 'type_idPiantaType_scbox', 'type_quantitaType_scbox', 'type_dimensioneType_scbox', 'type_testoType_scbox', 'type_tipoPiantaType_scbox', 'type_origineType_scbox', 'type_altezzaType_scbox', 'type_acquarioType_scbox', 'type_immagineType_scbox', 'type_piantaType_scbox', 'type_pianta_acquarioType_scbox', 'type_pianteType_scbox', 'type_immaginiType_scbox', 'type_acquariType_scbox', 'type_piante_acquariType_scbox', 'element_piante_scbox', 'element_acquari_scbox', 'element_immagini_scbox', 'element_piante_acquari_scbox');
 
 /**
  * Can get the ID of the button controlling
@@ -711,15 +711,15 @@ if (gc != null) {
 <li><a href="#SchemaDeclarations">Global Declarations</a>
 <ul>
 <li>
-<a href="#element_acquario">Element: <strong>acquario</strong>
+<a href="#element_acquari">Element: <strong>acquari</strong>
 </a>
 </li>
 <li>
-<a href="#element_immagine_pianta">Element: <strong>immagine_pianta</strong>
+<a href="#element_immagini">Element: <strong>immagini</strong>
 </a>
 </li>
 <li>
-<a href="#element_pianta">Element: <strong>pianta</strong>
+<a href="#element_piante">Element: <strong>piante</strong>
 </a>
 </li>
 <li>
@@ -730,6 +730,38 @@ if (gc != null) {
 </li>
 <li><a href="#SchemaDefinitions">Global Definitions</a>
 <ul>
+<li>
+<a href="#type_acquarioType">Complex Type: <strong>acquarioType</strong>
+</a>
+</li>
+<li>
+<a href="#type_acquariType">Complex Type: <strong>acquariType</strong>
+</a>
+</li>
+<li>
+<a href="#type_immagineType">Complex Type: <strong>immagineType</strong>
+</a>
+</li>
+<li>
+<a href="#type_immaginiType">Complex Type: <strong>immaginiType</strong>
+</a>
+</li>
+<li>
+<a href="#type_pianta_acquarioType">Complex Type: <strong>pianta_acquarioType</strong>
+</a>
+</li>
+<li>
+<a href="#type_piantaType">Complex Type: <strong>piantaType</strong>
+</a>
+</li>
+<li>
+<a href="#type_piante_acquariType">Complex Type: <strong>piante_acquariType</strong>
+</a>
+</li>
+<li>
+<a href="#type_pianteType">Complex Type: <strong>pianteType</strong>
+</a>
+</li>
 <li>
 <a href="#type_altezzaType">Simple Type: <strong>altezzaType</strong>
 </a>
@@ -875,76 +907,18 @@ setState('schema_scbox', false);
 <div style="text-align: right; clear: both;"><a href="#top">top</a></div>
 <hr />
 <h2><a name="SchemaDeclarations">Global Declarations</a></h2>
-<h3>Element: <a name="element_acquario" class="name">acquario</a>
+<h3>Element: <a name="element_acquari" class="name">acquari</a>
 </h3>
 <table class="properties">
 <tr>
 <th>Name</th>
-<td>acquario</td>
-</tr>
-<tr>
-<th>Type</th>
-<td>Locally-defined complex type</td>
-</tr>
-<tr>
-<th>
-<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
-</th>
-<td>no</td>
-</tr>
-<tr>
-<th>
-<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
-</th>
-<td>no</td>
-</tr>
-<tr xmlns="">
-<th>Diagram</th>
-<td>
-<img src="plants.files/element_acquario.jpg" />
-</td>
-</tr>
-</table>
-<div class="sample box">
-<div>
-<input type="button" id="element_acquario_xibox_button" class="control" onclick="switchState('element_acquario_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
-</div>
-<div id="element_acquario_xibox" class="contents">
-<div style="margin-left: 0em">&lt;acquario&gt; <br /><div style="margin-left: 1.5em">&lt;id_acquario&gt; <span class="type"><a title="Jump to &quot;idAcquarioType&quot; type definition." href="#type_idAcquarioType">idAcquarioType</a></span> &lt;/id_acquario&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;litri&gt; <span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span> &lt;/litri&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;larghezza&gt; <span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span> &lt;/larghezza&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;lunghezza&gt; <span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span> &lt;/lunghezza&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;altezza&gt; <span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span> &lt;/altezza&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;descrizione&gt; <span class="type"><a title="Jump to &quot;testoType&quot; type definition." href="#type_testoType">testoType</a></span> &lt;/descrizione&gt; <span class="occurs">[1]</span></div>&lt;/acquario&gt;</div>
-</div>
-<script type="text/javascript">
-<!--
-setState('element_acquario_xibox', true);
-// -->
-</script>
-</div>
-<div class="schemaComponent box">
-<div>
-<input type="button" id="element_acquario_scbox_button" class="control" onclick="switchState('element_acquario_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
-</div>
-<div id="element_acquario_scbox" class="contents">
-<div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">acquario</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_acquario</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;idAcquarioType&quot; type definition." href="#type_idAcquarioType">idAcquarioType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">litri</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">larghezza</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">lunghezza</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">altezza</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">descrizione</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;testoType&quot; type definition." href="#type_testoType">testoType</a></span></span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>&lt;/<span class="scTag">xs:element</span>&gt;</div>
-</div>
-<script type="text/javascript">
-<!--
-setState('element_acquario_scbox', false);
-// -->
-</script>
-</div>
-<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
-<hr />
-<h3>Element: <a name="element_immagine_pianta" class="name">immagine_pianta</a>
-</h3>
-<table class="properties">
-<tr>
-<th>Name</th>
-<td>immagine_pianta</td>
+<td>acquari</td>
 </tr>
 <tr>
 <th>Type</th>
 <td>
 <span class="type">
-<a title="Jump to &quot;base64Binary&quot; type definition." href="#type_base64Binary">base64Binary</a>
+<a title="Jump to &quot;acquariType&quot; type definition." href="#type_acquariType">acquariType</a>
 </span>
 </td>
 </tr>
@@ -963,48 +937,52 @@ setState('element_acquario_scbox', false);
 <tr xmlns="">
 <th>Diagram</th>
 <td>
-<img src="plants.files/element_immagine_pianta.jpg" />
+<img src="plants.files/element_acquari.jpg" />
 </td>
 </tr>
 </table>
 <div class="sample box">
 <div>
-<input type="button" id="element_immagine_pianta_xibox_button" class="control" onclick="switchState('element_immagine_pianta_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+<input type="button" id="element_acquari_xibox_button" class="control" onclick="switchState('element_acquari_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
 </div>
-<div id="element_immagine_pianta_xibox" class="contents">
-<div style="margin-left: 0em">&lt;immagine_pianta&gt; <span class="type"><a title="Jump to &quot;base64Binary&quot; type definition." href="#type_base64Binary">base64Binary</a></span> &lt;/immagine_pianta&gt;</div>
+<div id="element_acquari_xibox" class="contents">
+<div style="margin-left: 0em">&lt;acquari&gt; <br /><div style="margin-left: 1.5em">&lt;item&gt; <span class="type"><a title="Jump to &quot;acquarioType&quot; type definition." href="#type_acquarioType">acquarioType</a></span> &lt;/item&gt; <span class="occurs">[1..*]</span></div>&lt;/acquari&gt;</div>
 </div>
 <script type="text/javascript">
 <!--
-setState('element_immagine_pianta_xibox', true);
+setState('element_acquari_xibox', true);
 // -->
 </script>
 </div>
 <div class="schemaComponent box">
 <div>
-<input type="button" id="element_immagine_pianta_scbox_button" class="control" onclick="switchState('element_immagine_pianta_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+<input type="button" id="element_acquari_scbox_button" class="control" onclick="switchState('element_acquari_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
 </div>
-<div id="element_immagine_pianta_scbox" class="contents">
-<div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">immagine_pianta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;base64Binary&quot; type definition." href="#type_base64Binary">base64Binary</a></span></span>"/&gt;</div>
+<div id="element_acquari_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">acquari</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;acquariType&quot; type definition." href="#type_acquariType">acquariType</a></span></span>"/&gt;</div>
 </div>
 <script type="text/javascript">
 <!--
-setState('element_immagine_pianta_scbox', false);
+setState('element_acquari_scbox', false);
 // -->
 </script>
 </div>
 <div style="text-align: right; clear: both;"><a href="#top">top</a></div>
 <hr />
-<h3>Element: <a name="element_pianta" class="name">pianta</a>
+<h3>Element: <a name="element_immagini" class="name">immagini</a>
 </h3>
 <table class="properties">
 <tr>
 <th>Name</th>
-<td>pianta</td>
+<td>immagini</td>
 </tr>
 <tr>
 <th>Type</th>
-<td>Locally-defined complex type</td>
+<td>
+<span class="type">
+<a title="Jump to &quot;immaginiType&quot; type definition." href="#type_immaginiType">immaginiType</a>
+</span>
+</td>
 </tr>
 <tr>
 <th>
@@ -1021,33 +999,95 @@ setState('element_immagine_pianta_scbox', false);
 <tr xmlns="">
 <th>Diagram</th>
 <td>
-<img src="plants.files/element_pianta.jpg" />
+<img src="plants.files/element_immagini.jpg" />
 </td>
 </tr>
 </table>
 <div class="sample box">
 <div>
-<input type="button" id="element_pianta_xibox_button" class="control" onclick="switchState('element_pianta_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+<input type="button" id="element_immagini_xibox_button" class="control" onclick="switchState('element_immagini_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
 </div>
-<div id="element_pianta_xibox" class="contents">
-<div style="margin-left: 0em">&lt;pianta&gt; <br /><div style="margin-left: 1.5em">&lt;id_pianta&gt; <span class="type"><a title="Jump to &quot;idPiantaType&quot; type definition." href="#type_idPiantaType">idPiantaType</a></span> &lt;/id_pianta&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;nome&gt; <span class="type"><a title="Jump to &quot;testoType&quot; type definition." href="#type_testoType">testoType</a></span> &lt;/nome&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;link_pagina&gt; <span class="type"><a title="Jump to &quot;linkType&quot; type definition." href="#type_linkType">linkType</a></span> &lt;/link_pagina&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;link_img&gt; <span class="type"><a title="Jump to &quot;linkImgType&quot; type definition." href="#type_linkImgType">linkImgType</a></span> &lt;/link_img&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;tipo&gt; <span class="type"><a title="Jump to &quot;tipoPiantaType&quot; type definition." href="#type_tipoPiantaType">tipoPiantaType</a></span> &lt;/tipo&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;origine&gt; <span class="type"><a title="Jump to &quot;origineType&quot; type definition." href="#type_origineType">origineType</a></span> &lt;/origine&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;tasso_crescita&gt; <span class="type"><a title="Jump to &quot;tassoCrescitaType&quot; type definition." href="#type_tassoCrescitaType">tassoCrescitaType</a></span> &lt;/tasso_crescita&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;altezza_minima&gt; <span class="type"><a title="Jump to &quot;altezzaType&quot; type definition." href="#type_altezzaType">altezzaType</a></span> &lt;/altezza_minima&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;altezza_massima&gt; <span class="type"><a title="Jump to &quot;altezzaType&quot; type definition." href="#type_altezzaType">altezzaType</a></span> &lt;/altezza_massima&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;luce&gt; <span class="type"><a title="Jump to &quot;luceCO2Type&quot; type definition." href="#type_luceCO2Type">luceCO2Type</a></span> &lt;/luce&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;co2&gt; <span class="type"><a title="Jump to &quot;luceCO2Type&quot; type definition." href="#type_luceCO2Type">luceCO2Type</a></span> &lt;/co2&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;link_logo&gt; <span class="type"><a title="Jump to &quot;linkLogoType&quot; type definition." href="#type_linkLogoType">linkLogoType</a></span> &lt;/link_logo&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;difficolta&gt; <span class="type"><a title="Jump to &quot;difficoltaType&quot; type definition." href="#type_difficoltaType">difficoltaType</a></span> &lt;/difficolta&gt; <span class="occurs">[1]</span></div>&lt;/pianta&gt;</div>
+<div id="element_immagini_xibox" class="contents">
+<div style="margin-left: 0em">&lt;immagini&gt; <br /><div style="margin-left: 1.5em">&lt;item&gt; <span class="type"><a title="Jump to &quot;immagineType&quot; type definition." href="#type_immagineType">immagineType</a></span> &lt;/item&gt; <span class="occurs">[1..*]</span></div>&lt;/immagini&gt;</div>
 </div>
 <script type="text/javascript">
 <!--
-setState('element_pianta_xibox', true);
+setState('element_immagini_xibox', true);
 // -->
 </script>
 </div>
 <div class="schemaComponent box">
 <div>
-<input type="button" id="element_pianta_scbox_button" class="control" onclick="switchState('element_pianta_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+<input type="button" id="element_immagini_scbox_button" class="control" onclick="switchState('element_immagini_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
 </div>
-<div id="element_pianta_scbox" class="contents">
-<div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">pianta</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_pianta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;idPiantaType&quot; type definition." href="#type_idPiantaType">idPiantaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">nome</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;testoType&quot; type definition." href="#type_testoType">testoType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">link_pagina</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;linkType&quot; type definition." href="#type_linkType">linkType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">link_img</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;linkImgType&quot; type definition." href="#type_linkImgType">linkImgType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">tipo</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;tipoPiantaType&quot; type definition." href="#type_tipoPiantaType">tipoPiantaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">origine</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;origineType&quot; type definition." href="#type_origineType">origineType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">tasso_crescita</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;tassoCrescitaType&quot; type definition." href="#type_tassoCrescitaType">tassoCrescitaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">altezza_minima</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;altezzaType&quot; type definition." href="#type_altezzaType">altezzaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">altezza_massima</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;altezzaType&quot; type definition." href="#type_altezzaType">altezzaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">luce</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;luceCO2Type&quot; type definition." href="#type_luceCO2Type">luceCO2Type</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">co2</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;luceCO2Type&quot; type definition." href="#type_luceCO2Type">luceCO2Type</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">link_logo</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;linkLogoType&quot; type definition." href="#type_linkLogoType">linkLogoType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">difficolta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;difficoltaType&quot; type definition." href="#type_difficoltaType">difficoltaType</a></span></span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>&lt;/<span class="scTag">xs:element</span>&gt;</div>
+<div id="element_immagini_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">immagini</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;immaginiType&quot; type definition." href="#type_immaginiType">immaginiType</a></span></span>"/&gt;</div>
 </div>
 <script type="text/javascript">
 <!--
-setState('element_pianta_scbox', false);
+setState('element_immagini_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_piante" class="name">piante</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>piante</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;pianteType&quot; type definition." href="#type_pianteType">pianteType</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/element_piante.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_piante_xibox_button" class="control" onclick="switchState('element_piante_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_piante_xibox" class="contents">
+<div style="margin-left: 0em">&lt;piante&gt; <br /><div style="margin-left: 1.5em">&lt;item&gt; <span class="type"><a title="Jump to &quot;piantaType&quot; type definition." href="#type_piantaType">piantaType</a></span> &lt;/item&gt; <span class="occurs">[1..*]</span></div>&lt;/piante&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('element_piante_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_piante_scbox_button" class="control" onclick="switchState('element_piante_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_piante_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">piante</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;pianteType&quot; type definition." href="#type_pianteType">pianteType</a></span></span>"/&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('element_piante_scbox', false);
 // -->
 </script>
 </div>
@@ -1062,7 +1102,11 @@ setState('element_pianta_scbox', false);
 </tr>
 <tr>
 <th>Type</th>
-<td>Locally-defined complex type</td>
+<td>
+<span class="type">
+<a title="Jump to &quot;piante_acquariType&quot; type definition." href="#type_piante_acquariType">piante_acquariType</a>
+</span>
+</td>
 </tr>
 <tr>
 <th>
@@ -1088,7 +1132,7 @@ setState('element_pianta_scbox', false);
 <input type="button" id="element_piante_acquari_xibox_button" class="control" onclick="switchState('element_piante_acquari_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
 </div>
 <div id="element_piante_acquari_xibox" class="contents">
-<div style="margin-left: 0em">&lt;piante_acquari&gt; <br /><div style="margin-left: 1.5em">&lt;id_pianta&gt; <span class="type"><a title="Jump to &quot;idPiantaType&quot; type definition." href="#type_idPiantaType">idPiantaType</a></span> &lt;/id_pianta&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;id_acquario&gt; <span class="type"><a title="Jump to &quot;idAcquarioType&quot; type definition." href="#type_idAcquarioType">idAcquarioType</a></span> &lt;/id_acquario&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;quantita&gt; <span class="type"><a title="Jump to &quot;quantitaType&quot; type definition." href="#type_quantitaType">quantitaType</a></span> &lt;/quantita&gt; <span class="occurs">[1]</span></div>&lt;/piante_acquari&gt;</div>
+<div style="margin-left: 0em">&lt;piante_acquari&gt; <br /><div style="margin-left: 1.5em">&lt;item&gt; <span class="type"><a title="Jump to &quot;pianta_acquarioType&quot; type definition." href="#type_pianta_acquarioType">pianta_acquarioType</a></span> &lt;/item&gt; <span class="occurs">[1..*]</span></div>&lt;/piante_acquari&gt;</div>
 </div>
 <script type="text/javascript">
 <!--
@@ -1101,7 +1145,7 @@ setState('element_piante_acquari_xibox', true);
 <input type="button" id="element_piante_acquari_scbox_button" class="control" onclick="switchState('element_piante_acquari_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
 </div>
 <div id="element_piante_acquari_scbox" class="contents">
-<div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">piante_acquari</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_pianta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;idPiantaType&quot; type definition." href="#type_idPiantaType">idPiantaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_acquario</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;idAcquarioType&quot; type definition." href="#type_idAcquarioType">idAcquarioType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">quantita</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;quantitaType&quot; type definition." href="#type_quantitaType">quantitaType</a></span></span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>&lt;/<span class="scTag">xs:element</span>&gt;</div>
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">piante_acquari</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;piante_acquariType&quot; type definition." href="#type_piante_acquariType">piante_acquariType</a></span></span>"/&gt;</div>
 </div>
 <script type="text/javascript">
 <!--
@@ -1112,6 +1156,470 @@ setState('element_piante_acquari_scbox', false);
 <div style="text-align: right; clear: both;"><a href="#top">top</a></div>
 <hr />
 <h2><a name="SchemaDefinitions">Global Definitions</a></h2>
+<h3>Complex Type: <a name="type_acquarioType" class="name">acquarioType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>acquarioType</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/complexType_acquarioType.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_acquarioType_xibox_button" class="control" onclick="switchState('type_acquarioType_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_acquarioType_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...&gt; <br /><div style="margin-left: 1.5em">&lt;id_acquario&gt; <span class="type"><a title="Jump to &quot;idAcquarioType&quot; type definition." href="#type_idAcquarioType">idAcquarioType</a></span> &lt;/id_acquario&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;litri&gt; <span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span> &lt;/litri&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;larghezza&gt; <span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span> &lt;/larghezza&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;lunghezza&gt; <span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span> &lt;/lunghezza&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;altezza&gt; <span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span> &lt;/altezza&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;descrizione&gt; <span class="type"><a title="Jump to &quot;testoType&quot; type definition." href="#type_testoType">testoType</a></span> &lt;/descrizione&gt; <span class="occurs">[1]</span></div>&lt;/...&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_acquarioType_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_acquarioType_scbox_button" class="control" onclick="switchState('type_acquarioType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_acquarioType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> <span class="scTag">name</span>="<span class="scContent">acquarioType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_acquario</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;idAcquarioType&quot; type definition." href="#type_idAcquarioType">idAcquarioType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">litri</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">larghezza</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">lunghezza</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">altezza</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;dimensioneType&quot; type definition." href="#type_dimensioneType">dimensioneType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">descrizione</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;testoType&quot; type definition." href="#type_testoType">testoType</a></span></span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_acquarioType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_acquariType" class="name">acquariType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>acquariType</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/complexType_acquariType.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_acquariType_xibox_button" class="control" onclick="switchState('type_acquariType_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_acquariType_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...&gt; <br /><div style="margin-left: 1.5em">&lt;item&gt; <span class="type"><a title="Jump to &quot;acquarioType&quot; type definition." href="#type_acquarioType">acquarioType</a></span> &lt;/item&gt; <span class="occurs">[1..*]</span></div>&lt;/...&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_acquariType_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_acquariType_scbox_button" class="control" onclick="switchState('type_acquariType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_acquariType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> <span class="scTag">name</span>="<span class="scContent">acquariType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;acquarioType&quot; type definition." href="#type_acquarioType">acquarioType</a></span></span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_acquariType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_immagineType" class="name">immagineType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>immagineType</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/complexType_immagineType.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_immagineType_xibox_button" class="control" onclick="switchState('type_immagineType_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_immagineType_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...&gt; <br /><div style="margin-left: 1.5em">&lt;id_immagine&gt; <span class="type"><a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:unsignedInt</span> &lt;/id_immagine&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;immagine_pianta&gt; <span class="type"><a title="Jump to &quot;base64Binary&quot; type definition." href="#type_base64Binary">base64Binary</a></span> &lt;/immagine_pianta&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;id_pianta&gt; <span class="type"><a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:unsignedInt</span> &lt;/id_pianta&gt; <span class="occurs">[1]</span></div>&lt;/...&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_immagineType_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_immagineType_scbox_button" class="control" onclick="switchState('type_immagineType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_immagineType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> <span class="scTag">name</span>="<span class="scContent">immagineType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_immagine</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:unsignedInt</span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">immagine_pianta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;base64Binary&quot; type definition." href="#type_base64Binary">base64Binary</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_pianta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:unsignedInt</span></span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_immagineType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_immaginiType" class="name">immaginiType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>immaginiType</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/complexType_immaginiType.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_immaginiType_xibox_button" class="control" onclick="switchState('type_immaginiType_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_immaginiType_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...&gt; <br /><div style="margin-left: 1.5em">&lt;item&gt; <span class="type"><a title="Jump to &quot;immagineType&quot; type definition." href="#type_immagineType">immagineType</a></span> &lt;/item&gt; <span class="occurs">[1..*]</span></div>&lt;/...&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_immaginiType_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_immaginiType_scbox_button" class="control" onclick="switchState('type_immaginiType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_immaginiType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> <span class="scTag">name</span>="<span class="scContent">immaginiType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;immagineType&quot; type definition." href="#type_immagineType">immagineType</a></span></span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_immaginiType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_pianta_acquarioType" class="name">pianta_acquarioType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>pianta_acquarioType</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/complexType_pianta_acquarioType.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_pianta_acquarioType_xibox_button" class="control" onclick="switchState('type_pianta_acquarioType_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_pianta_acquarioType_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...&gt; <br /><div style="margin-left: 1.5em">&lt;id_pianta&gt; <span class="type"><a title="Jump to &quot;idPiantaType&quot; type definition." href="#type_idPiantaType">idPiantaType</a></span> &lt;/id_pianta&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;id_acquario&gt; <span class="type"><a title="Jump to &quot;idAcquarioType&quot; type definition." href="#type_idAcquarioType">idAcquarioType</a></span> &lt;/id_acquario&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;quantita&gt; <span class="type"><a title="Jump to &quot;quantitaType&quot; type definition." href="#type_quantitaType">quantitaType</a></span> &lt;/quantita&gt; <span class="occurs">[1]</span></div>&lt;/...&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_pianta_acquarioType_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_pianta_acquarioType_scbox_button" class="control" onclick="switchState('type_pianta_acquarioType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_pianta_acquarioType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> <span class="scTag">name</span>="<span class="scContent">pianta_acquarioType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_pianta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;idPiantaType&quot; type definition." href="#type_idPiantaType">idPiantaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_acquario</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;idAcquarioType&quot; type definition." href="#type_idAcquarioType">idAcquarioType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">quantita</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;quantitaType&quot; type definition." href="#type_quantitaType">quantitaType</a></span></span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_pianta_acquarioType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_piantaType" class="name">piantaType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>piantaType</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/complexType_piantaType.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_piantaType_xibox_button" class="control" onclick="switchState('type_piantaType_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_piantaType_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...&gt; <br /><div style="margin-left: 1.5em">&lt;id_pianta&gt; <span class="type"><a title="Jump to &quot;idPiantaType&quot; type definition." href="#type_idPiantaType">idPiantaType</a></span> &lt;/id_pianta&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;nome&gt; <span class="type"><a title="Jump to &quot;testoType&quot; type definition." href="#type_testoType">testoType</a></span> &lt;/nome&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;link_pagina&gt; <span class="type"><a title="Jump to &quot;linkType&quot; type definition." href="#type_linkType">linkType</a></span> &lt;/link_pagina&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;link_img&gt; <span class="type"><a title="Jump to &quot;linkImgType&quot; type definition." href="#type_linkImgType">linkImgType</a></span> &lt;/link_img&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;tipo&gt; <span class="type"><a title="Jump to &quot;tipoPiantaType&quot; type definition." href="#type_tipoPiantaType">tipoPiantaType</a></span> &lt;/tipo&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;origine&gt; <span class="type"><a title="Jump to &quot;origineType&quot; type definition." href="#type_origineType">origineType</a></span> &lt;/origine&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;tasso_crescita&gt; <span class="type"><a title="Jump to &quot;tassoCrescitaType&quot; type definition." href="#type_tassoCrescitaType">tassoCrescitaType</a></span> &lt;/tasso_crescita&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;altezza_minima&gt; <span class="type"><a title="Jump to &quot;altezzaType&quot; type definition." href="#type_altezzaType">altezzaType</a></span> &lt;/altezza_minima&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;altezza_massima&gt; <span class="type"><a title="Jump to &quot;altezzaType&quot; type definition." href="#type_altezzaType">altezzaType</a></span> &lt;/altezza_massima&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;luce&gt; <span class="type"><a title="Jump to &quot;luceCO2Type&quot; type definition." href="#type_luceCO2Type">luceCO2Type</a></span> &lt;/luce&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;co2&gt; <span class="type"><a title="Jump to &quot;luceCO2Type&quot; type definition." href="#type_luceCO2Type">luceCO2Type</a></span> &lt;/co2&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;link_logo&gt; <span class="type"><a title="Jump to &quot;linkLogoType&quot; type definition." href="#type_linkLogoType">linkLogoType</a></span> &lt;/link_logo&gt; <span class="occurs">[1]</span></div><div style="margin-left: 1.5em">&lt;difficolta&gt; <span class="type"><a title="Jump to &quot;difficoltaType&quot; type definition." href="#type_difficoltaType">difficoltaType</a></span> &lt;/difficolta&gt; <span class="occurs">[1]</span></div>&lt;/...&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_piantaType_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_piantaType_scbox_button" class="control" onclick="switchState('type_piantaType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_piantaType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> <span class="scTag">name</span>="<span class="scContent">piantaType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">id_pianta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;idPiantaType&quot; type definition." href="#type_idPiantaType">idPiantaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">nome</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;testoType&quot; type definition." href="#type_testoType">testoType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">link_pagina</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;linkType&quot; type definition." href="#type_linkType">linkType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">link_img</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;linkImgType&quot; type definition." href="#type_linkImgType">linkImgType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">tipo</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;tipoPiantaType&quot; type definition." href="#type_tipoPiantaType">tipoPiantaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">origine</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;origineType&quot; type definition." href="#type_origineType">origineType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">tasso_crescita</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;tassoCrescitaType&quot; type definition." href="#type_tassoCrescitaType">tassoCrescitaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">altezza_minima</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;altezzaType&quot; type definition." href="#type_altezzaType">altezzaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">altezza_massima</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;altezzaType&quot; type definition." href="#type_altezzaType">altezzaType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">luce</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;luceCO2Type&quot; type definition." href="#type_luceCO2Type">luceCO2Type</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">co2</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;luceCO2Type&quot; type definition." href="#type_luceCO2Type">luceCO2Type</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">link_logo</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;linkLogoType&quot; type definition." href="#type_linkLogoType">linkLogoType</a></span></span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">difficolta</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;difficoltaType&quot; type definition." href="#type_difficoltaType">difficoltaType</a></span></span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_piantaType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_piante_acquariType" class="name">piante_acquariType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>piante_acquariType</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/complexType_piante_acquariType.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_piante_acquariType_xibox_button" class="control" onclick="switchState('type_piante_acquariType_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_piante_acquariType_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...&gt; <br /><div style="margin-left: 1.5em">&lt;item&gt; <span class="type"><a title="Jump to &quot;pianta_acquarioType&quot; type definition." href="#type_pianta_acquarioType">pianta_acquarioType</a></span> &lt;/item&gt; <span class="occurs">[1..*]</span></div>&lt;/...&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_piante_acquariType_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_piante_acquariType_scbox_button" class="control" onclick="switchState('type_piante_acquariType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_piante_acquariType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> <span class="scTag">name</span>="<span class="scContent">piante_acquariType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;pianta_acquarioType&quot; type definition." href="#type_pianta_acquarioType">pianta_acquarioType</a></span></span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_piante_acquariType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_pianteType" class="name">pianteType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>pianteType</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+<tr xmlns="">
+<th>Diagram</th>
+<td>
+<img src="plants.files/complexType_pianteType.jpg" />
+</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_pianteType_xibox_button" class="control" onclick="switchState('type_pianteType_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_pianteType_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...&gt; <br /><div style="margin-left: 1.5em">&lt;item&gt; <span class="type"><a title="Jump to &quot;piantaType&quot; type definition." href="#type_piantaType">piantaType</a></span> &lt;/item&gt; <span class="occurs">[1..*]</span></div>&lt;/...&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_pianteType_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_pianteType_scbox_button" class="control" onclick="switchState('type_pianteType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_pianteType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:complexType</span> <span class="scTag">name</span>="<span class="scContent">pianteType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;piantaType&quot; type definition." href="#type_piantaType">piantaType</a></span></span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>&lt;/<span class="scTag">xs:sequence</span>&gt;</div>&lt;/<span class="scTag">xs:complexType</span>&gt;</div>
+</div>
+<script type="text/javascript">
+<!--
+setState('type_pianteType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
 <h3>Simple Type: <a name="type_altezzaType" class="name">altezzaType</a>
 </h3>
 <table class="hierarchy">
@@ -1425,7 +1933,7 @@ setState('type_idPiantaType_scbox', false);
 <td>
 <ul><li>Base XSD Type: string</li></ul>
 <ul><li>
-<em>length</em> &lt;= 255</li></ul>
+<em>length</em> &lt;= 800</li></ul>
 </td>
 </tr>
 </table>
@@ -1434,7 +1942,7 @@ setState('type_idPiantaType_scbox', false);
 <input type="button" id="type_linkImgType_scbox_button" class="control" onclick="switchState('type_linkImgType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
 </div>
 <div id="type_linkImgType_scbox" class="contents">
-<div style="margin-left: 0em">&lt;<span class="scTag">xs:simpleType</span> <span class="scTag">name</span>="<span class="scContent">linkImgType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:restriction</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:maxLength</span> <span class="scTag">value</span>="<span class="scContent">255</span>"/&gt;</div>&lt;/<span class="scTag">xs:restriction</span>&gt;</div>&lt;/<span class="scTag">xs:simpleType</span>&gt;</div>
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:simpleType</span> <span class="scTag">name</span>="<span class="scContent">linkImgType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:restriction</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:maxLength</span> <span class="scTag">value</span>="<span class="scContent">800</span>"/&gt;</div>&lt;/<span class="scTag">xs:restriction</span>&gt;</div>&lt;/<span class="scTag">xs:simpleType</span>&gt;</div>
 </div>
 <script type="text/javascript">
 <!--
@@ -1511,7 +2019,7 @@ setState('type_linkLogoType_scbox', false);
 <td>
 <ul><li>Base XSD Type: string</li></ul>
 <ul><li>
-<em>length</em> &lt;= 500</li></ul>
+<em>length</em> &lt;= 800</li></ul>
 </td>
 </tr>
 </table>
@@ -1520,7 +2028,7 @@ setState('type_linkLogoType_scbox', false);
 <input type="button" id="type_linkType_scbox_button" class="control" onclick="switchState('type_linkType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
 </div>
 <div id="type_linkType_scbox" class="contents">
-<div style="margin-left: 0em">&lt;<span class="scTag">xs:simpleType</span> <span class="scTag">name</span>="<span class="scContent">linkType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:restriction</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:maxLength</span> <span class="scTag">value</span>="<span class="scContent">500</span>"/&gt;</div>&lt;/<span class="scTag">xs:restriction</span>&gt;</div>&lt;/<span class="scTag">xs:simpleType</span>&gt;</div>
+<div style="margin-left: 0em">&lt;<span class="scTag">xs:simpleType</span> <span class="scTag">name</span>="<span class="scContent">linkType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:restriction</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a href="#ns_xs" title="Find out namespace of 'xs' prefix">xs</a>:string</span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xs:maxLength</span> <span class="scTag">value</span>="<span class="scContent">800</span>"/&gt;</div>&lt;/<span class="scTag">xs:restriction</span>&gt;</div>&lt;/<span class="scTag">xs:simpleType</span>&gt;</div>
 </div>
 <script type="text/javascript">
 <!--

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <piante xmlns="Piante">
  <item>
-  <id_pianta>4</id_pianta>
-  <nome>Alternanthera reineckii 'Pink'</nome>
-  <link_pagina>https%3A%2F%2Ftropica.com%2F%2Fen%2Fplants%2Fplantdetails%2FAlternantherareineckii%27Pink%27%28023XL%29%2F4437</link_pagina>
-  <link_img>https%3A%2F%2Ftropica.com%2Fimagegen.ashx%3Fwidth%3D200%26image%3D%2FPlants%2F023%20XL%2F2.png%26crop%3Dresize%26class%3Dproduct</link_img>
-  <tipo>Stem</tipo>
-  <origine>South America</origine>
-  <tasso_crescita>medio</tasso_crescita>
-  <altezza_minima>20</altezza_minima>
-  <altezza_massima>30</altezza_massima>
-  <luce>media</luce>
-  <co2>media</co2>
-  <link_logo>/Graphics/Web/icon_difficulty_Medium.png</link_logo>
-  <difficolta>Medium.png</difficolta>
+  <id_pianta>1</id_pianta>
+  <nome>Aegagropila linnaei</nome>
+  <link_pagina>https%3A%2F%2Ftropica.com%2F%2Fen%2Fplants%2Fplantdetails%2FAegagropilalinnaei%28000CST%29%2F4385</link_pagina>
+  <link_img>https%3A%2F%2Ftropica.com%2Fimagegen.ashx%3Fwidth%3D200%26image%3D%2FPlants%2F000C%20ST%2F2.png%26crop%3Dresize%26class%3Dproduct</link_img>
+  <tipo>Moss</tipo>
+  <origine>Cosmopolitan</origine>
+  <tasso_crescita>lento</tasso_crescita>
+  <altezza_minima>3</altezza_minima>
+  <altezza_massima>10</altezza_massima>
+  <luce>poca</luce>
+  <co2>poca</co2>
+  <link_logo>/Graphics/Web/icon_difficulty_Easy.png</link_logo>
+  <difficolta>Easy.png</difficolta>
  </item>
 </piante>
