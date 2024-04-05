@@ -867,66 +867,129 @@ public class Window extends JFrame {
 		return listCercaPiante;
 	}
 
+	/**
+	 * Retrieves the text from the textFieldCercaNome object.
+	 * Returns null if the textFieldCercaNome is empty.
+	 * 
+	 * @return the text from textFieldCercaNome or null if it's empty
+	 */
+
 	public String getTxtCercaNome() {
 		if(textFieldCercaNome.getText().equals(""))
 			return null;
 		return textFieldCercaNome.getText();
 	}
 	
+	/**
+	 * Retrieves the selected item from the comboBoxCercaOrigine object.
+	 * Returns null if the selected item is "Qualsiasi".
+	 * 
+	 * @return the selected item as a String or null if it's "Qualsiasi"
+	 */
 	public String getItemComboBoxCercaOrigine() {
 		if(comboBoxCercaOrigine.getSelectedItem().toString().equals("Qualsiasi"))
 			return null;
 		return comboBoxCercaOrigine.getSelectedItem().toString();
 	}
 	
+	/**
+	 * Retrieves the selected item from the comboBoxCercaTassoCrescita object.
+	 * Returns null if the selected item is "Qualsiasi".
+	 * 
+	 * @return the selected item as a String or null if it's "Qualsiasi"
+	 */
 	public String getItemComboBoxCercaTassoCrescita() {
 		if(comboBoxCercaTassoCrescita.getSelectedItem().toString().equals("Qualsiasi"))
 			return null;
 		return comboBoxCercaTassoCrescita.getSelectedItem().toString();
 	}
 	
+	/**
+	 * Retrieves the selected item from the comboBoxCercaLuce object.
+	 * Returns null if the selected item is "Qualsiasi".
+	 * 
+	 * @return the selected item as a String or null if it's "Qualsiasi"
+	 */
 	public String getItemComboBoxCercaLuce() {
 		if(comboBoxCercaLuce.getSelectedItem().toString().equals("Qualsiasi"))
 			return null;
 		return comboBoxCercaLuce.getSelectedItem().toString();
 	}
 	
+	/**
+	 * Retrieves the selected item from the comboBoxCercaCo2 object.
+	 * Returns null if the selected item is "Qualsiasi".
+	 * 
+	 * @return the selected item as a String or null if it's "Qualsiasi"
+	 */
 	public String getItemComboBoxCercaCo2() {
 		if(comboBoxCercaCo2.getSelectedItem().toString().equals("Qualsiasi"))
 			return null;
 		return comboBoxCercaCo2.getSelectedItem().toString();
 	}
 	
+	/**
+	 * Retrieves the selected item from the comboBoxCercaDifficolta object.
+	 * Returns null if the selected item is "Qualsiasi".
+	 * 
+	 * @return the selected item as a String or null if it's "Qualsiasi"
+	 */
 	public String getItemComboBoxCercaDifficolta() {
 		if(comboBoxCercaDifficolta.getSelectedItem().toString().equals("Qualsiasi"))
 			return null;
 		return comboBoxCercaDifficolta.getSelectedItem().toString();
 	}
 	
+	/**
+	 * Retrieves the value from the spinnerLitraggio object.
+	 * 
+	 * @return the value as a Long
+	 */
 	public Long getValueSpinnerLitraggio() {
 		return ((Long)spinnerLitraggio.getValue());
 	}
 	
+	/**
+	 * Retrieves the value from the spinnerLunghezza object.
+	 * 
+	 * @return the value as a Long
+	 */
 	public Long getValueSpinnerLunghezza() {
 		return ((Long)spinnerLunghezza.getValue());
 	}
 	
+	/**
+	 * Retrieves the value from the spinnerLarghezza object.
+	 * 
+	 * @return the value as a Long
+	 */
 	public Long getValueSpinnerLarghezza() {
 		return ((Long)spinnerLarghezza.getValue());
 	}
 	
+	/**
+	 * Retrieves the value from the spinnerAltezza object.
+	 * 
+	 * @return the value as a Long
+	 */
 	public Long getValueSpinnerAltezza() {
 		return ((Long)spinnerAltezza.getValue());
 	}
 	
+	/**
+	 * Retrieves the text from the textAreaNewDescrizione object.
+	 * 
+	 * @return the text as a String
+	 */
 	public String getTextAreaDescrizione() {
 		return textAreaNewDescrizione.getText();
 	}
 	
 	/**
-	 * Retrieves a list of strings of the selected items in the JList used for searching plants.
+	 * Retrieves the selected items from the listCercaPiante object.
+	 * Removes the selected items from arrayListCercaPiante and the model of listCercaPiante.
 	 * 
-	 * @return a list containing the strings of the selected items
+	 * @return a list of selected PiantaType objects
 	 */
 	public List<PiantaType> getSelectedItemsListCercaPiante() {
 	    List<PiantaType> selectedItems = new ArrayList<>();
@@ -949,9 +1012,6 @@ public class Window extends JFrame {
 	    return selectedItems;
 	}
 	
-//	public PiantaType getSelectedItemListCercaPiante() throws Exception{
-		
-//	}
 	
     /**
      * Adds a list of PiantaType items to the existing list of PiantaType items.
@@ -975,8 +1035,12 @@ public class Window extends JFrame {
     }
     
     /**
-     * Removes all items from both the ArrayList and the DefaultListModel associated with the JList.
-     * This method clears all the items from the ArrayList and updates the JList model to reflect the changes.
+     * Removes all items from the list used for searching plants.
+     * 
+     * This method clears the arrayListCercaPiante by removing all elements from it. 
+     * Additionally, it retrieves the model of the listCercaPiante JList, which is assumed to be a 
+     * DefaultListModel<String>, and removes all elements from this model as well. This ensures 
+     * that both the underlying ArrayList and the displayed JList are cleared of all items.
      */
     public void removeAllItemsFromListCercaPiante() {
         arrayListCercaPiante.clear(); // Rimuove tutti gli elementi dall'ArrayList
@@ -985,9 +1049,16 @@ public class Window extends JFrame {
     }
     
     /**
-     * Adds items to the list of carrello piante and updates the display.
+     * Adds a list of PiantaType items to the shopping cart list.
      * 
-     * @param itemsToAdd the list of items to add PiantaType
+     * This method iterates over the provided list of PiantaType items, creates a JPanel for each item 
+     * using the createPanelWithComponentsForListaCarrello method, and adds the JPanel to the arrayPanelsListaCarrello 
+     * list. Additionally, each PiantaType item is added to the arrayListaCarrello list. After adding all panels 
+     * to the arrayPanelsListaCarrello list, the method adds each panel to the panelSalvaListaCarrello JPanel 
+     * container. Finally, the layout of the panelSalvaListaCarrello is updated to a dynamic grid layout with a 
+     * single column, and the panel is revalidated and repainted to reflect the changes.
+     * 
+     * @param itemsToAdd the list of PiantaType items to add to the shopping cart list
      */
     public void addItemsToListaCarrello(List<PiantaType> itemsToAdd) {
     	
@@ -1010,10 +1081,16 @@ public class Window extends JFrame {
     
     
     /**
-     * Creates a JPanel with components for a specific PiantaType.
+     * Creates and returns a JPanel containing components for displaying a PiantaType item in a shopping cart list.
      * 
-     * @param plant The PiantaType object for which the panel is created.
-     * @return The JPanel with the components.
+     * This method creates a JPanel with a border and sets its name to the ID of the provided PiantaType item.
+     * The panel contains a JCheckBox for selection, a JLabel to display the plant's name, and a JSpinner 
+     * for quantity selection. The JSpinner is initialized with a SpinnerNumberModel to allow selecting 
+     * quantities from 0 to any positive integer. If the quantity is set to 0 using the JSpinner, the item 
+     * is removed from the shopping cart list.
+     * 
+     * @param plant the PiantaType item to display in the panel
+     * @return a JPanel containing the components for the provided PiantaType item
      */
     public JPanel createPanelWithComponentsForListaCarrello(PiantaType plant) {
 		
@@ -1083,9 +1160,13 @@ public class Window extends JFrame {
     }
 
     /**
-     * Updates the list of aquariums with the given items.
-     *
-     * @param itemsToUpdate The list of aquarium items to update.
+     * Updates the list of AcquarioType items and refreshes the comboBoxSalvaAcquari and listAcquari components.
+     * 
+     * This method clears the existing arrayListAcquari and populates it with the provided itemsToUpdate list.
+     * It then updates the comboBoxSalvaAcquari model and the listAcquari model with the new items from the 
+     * arrayListAcquari list, displaying each item's ID and liters in the respective components.
+     * 
+     * @param itemsToUpdate a List of AcquarioType objects representing the items to update the list with
      */
     public void updateListAcquari(List<AcquarioType> itemsToUpdate) {
         arrayListAcquari.clear();
@@ -1110,6 +1191,15 @@ public class Window extends JFrame {
         listAcquari.setModel(listModel);
     }
 
+    /**
+     * Retrieves the selected AcquarioType item from the listAcquari component.
+     * 
+     * This method fetches the selected index from the listAcquari component and retrieves 
+     * the corresponding AcquarioType item from the arrayListAcquari list.
+     * 
+     * @return the selected AcquarioType item from the arrayListAcquari list
+     * @throws Exception if no item is selected in the listAcquari component
+     */
     public AcquarioType getSelectedItemListAcquari() throws Exception{
 
     	AcquarioType selectedItem;
@@ -1122,10 +1212,18 @@ public class Window extends JFrame {
 	    return selectedItem;
     }
 
-    //aggiungere come parametro una lista di PiantaType filtrata per l'id dell'acquario selezionato
-    //contr chiama getSelectedItemListAcquari prende la pk
-    //fa la richiesta su piante_acquari id_acquario=pk
-    //per ogni item del risultato prende la pk della pianta e fa una richiesta a piante e salva il singolo item ottenuto add in una lista di PiantaType che viene passata a questo metodo
+    /**
+     * Displays the details of a selected AcquarioType and updates the list of plants for the selected aquarium.
+     * 
+     * This method fetches the selected AcquarioType item, retrieves its details, and displays them in 
+     * corresponding text fields. It also populates the arrayListViewPianteForAcquario list with the provided 
+     * list of plants to view. Furthermore, it updates the view of the listViewPianteAcquario with the 
+     * names of the plants and their corresponding quantities.
+     * 
+     * @param plantsToView a List of PiantaType objects representing the plants to be viewed in the selected aquarium
+     * @param quantitas a List of Long values representing the quantities of the plants to be displayed
+     * @throws Exception if there's an issue retrieving the selected AcquarioType item or updating the view
+     */
     public void viewSelectedAcquario(List<PiantaType> plantsToView, List<Long> quantitas) throws Exception{
     	AcquarioType selectedItem = this.getSelectedItemListAcquari();
     	
@@ -1143,6 +1241,15 @@ public class Window extends JFrame {
     	
     }
     
+    /**
+     * Updates the view of the listViewPianteAcquario with plant names and quantities.
+     * 
+     * This method updates the content of the listViewPianteAcquario component by creating a new 
+     * DefaultListModel and populating it with the names of plants from the arrayListViewPianteForAcquario list 
+     * along with their corresponding quantities from the provided quantitas list.
+     * 
+     * @param quantitas a List of Long values representing the quantities of plants
+     */
     private void updateViewListPianteForAcquario(List<Long> quantitas) {
     	// Aggiornamento della JList listAcquari
     	
@@ -1160,6 +1267,13 @@ public class Window extends JFrame {
         listViewPianteAcquario.setModel(listModel);
     }
     
+    /**
+     * Resets all the view components related to the aquarium and sets default values.
+     * 
+     * This method clears the text fields, text areas, and lists related to the aquarium view.
+     * It also resets the spinners to default values and clears the array list of plants
+     * associated with the aquarium. Finally, it updates the plant list view with the cleared data.
+     */
     public void resetViewAndNew() {
     	textFieldViewLitraggio.setText(null);
     	textFieldViewLarghezza.setText(null);
@@ -1177,7 +1291,16 @@ public class Window extends JFrame {
     	textAreaNewDescrizione.setText(null);
     }
     
-    // Metodo per ottenere gli indici dei pannelli con checkbox selezionati
+    /**
+     * Retrieves the indices of selected checkboxes within the array of panels.
+     * 
+     * This method iterates through each panel in the arrayPanelsListaCarrello and checks
+     * if it contains a selected JCheckBox component. If a checkbox is selected within a panel,
+     * its index is added to a list of selected indices. The method then converts this list 
+     * of indices to an array of integers and returns it.
+     * 
+     * @return an array of integers representing the indices of selected checkboxes
+     */
     public int[] getSelectedCheckBoxIndices() {
         List<Integer> selectedIndices = new ArrayList<>();
 
@@ -1200,6 +1323,18 @@ public class Window extends JFrame {
         return selectedIndices.stream().mapToInt(Integer::intValue).toArray();
     }
     
+    /**
+     * Retrieves the value of the JSpinner component at the specified index within the array of panels.
+     * 
+     * This method retrieves the JSpinner component located at the given index in the arrayPanelsListaCarrello.
+     * If a JSpinner is found, its integer value is converted to a Long and returned. If no JSpinner is found
+     * at the specified index, an exception is thrown with an error message indicating the failure to retrieve
+     * the spinner value.
+     * 
+     * @param index the index of the panel containing the JSpinner component
+     * @return the Long value of the JSpinner at the specified index
+     * @throws Exception if no JSpinner is found at the specified index
+     */
     public Long getValueOfSpinnerListaCarrello(int index) throws Exception{
     	
     	Long value = null;
@@ -1223,6 +1358,18 @@ public class Window extends JFrame {
     	return value;
     }
     
+    /**
+     * Retrieves the ID of the PiantaType object at the specified index within the array of items in the cart.
+     * 
+     * This method retrieves the PiantaType object located at the given index in the arrayListaCarrello.
+     * If a valid PiantaType object is found, its ID is returned. If no object is found
+     * at the specified index, an exception is thrown with an error message indicating the failure to retrieve
+     * the ID of the selected plant in the cart.
+     * 
+     * @param index the index of the PiantaType object in the arrayListaCarrello
+     * @return the ID of the PiantaType object at the specified index
+     * @throws Exception if no PiantaType object is found at the specified index
+     */
     public Long getIdOfPiantaListaCarrello(int index) throws Exception{
     	if(arrayListaCarrello.get(index)==null)
     		throw new Exception("Errore: non è stato possibile recuperare l'id della pianta selezionata nel carrello");
@@ -1231,6 +1378,17 @@ public class Window extends JFrame {
     	
     }
     
+    /**
+     * Retrieves the ID of the selected AcquarioType object in the comboBoxSalvaAcquari.
+     * 
+     * This method retrieves the AcquarioType object that corresponds to the selected index
+     * in the comboBoxSalvaAcquari. If a valid AcquarioType object is found, its ID is returned.
+     * If no object is found at the selected index, an exception is thrown with an error message
+     * indicating the failure to retrieve the ID of the selected aquarium for saving.
+     * 
+     * @return the ID of the selected AcquarioType object in the comboBoxSalvaAcquari
+     * @throws Exception if no AcquarioType object is found at the selected index
+     */
     public Long getIdOfAcquarioSelectedInComboBoxSalvaAcquario() throws Exception{
     	if(arrayListAcquari.get(comboBoxSalvaAcquari.getSelectedIndex())==null)
     		throw new Exception("Errore: impossibile recuperare id dell'acuqario selezionato per il salvataggio");
@@ -1238,6 +1396,15 @@ public class Window extends JFrame {
     	return arrayListAcquari.get(comboBoxSalvaAcquari.getSelectedIndex()).getIdAcquario();
     }
     
+    /**
+     * Removes the item associated with the given JSpinner from the shopping cart list.
+     * 
+     * This method removes the JPanel containing the specified JSpinner from the shopping cart.
+     * It removes the panel from both the visual display and the internal data structures.
+     * After removing the panel, it updates the display and layout of the shopping cart.
+     * 
+     * @param spinner the JSpinner whose associated item needs to be removed
+     */
     public void removeItemFromListaCarrello(JSpinner spinner) {
     	// Ottieni il pannello padre dello spinner
         JPanel parentPanel = (JPanel) spinner.getParent();
@@ -1280,7 +1447,16 @@ public class Window extends JFrame {
         System.out.println(arrayListaCarrello.toString());
     }
     
-    //da chiamare nel controller dopo aver chimato i due metodi getSpinner value e getIdPianta
+    /**
+     * Removes the item at the specified index from the shopping cart list.
+     * 
+     * This method removes the JPanel at the specified index from the shopping cart.
+     * It clears the panel's contents, updates the display, and removes the corresponding 
+     * item from both the visual display and the internal data structures.
+     * After removing the item, it updates the display and layout of the shopping cart.
+     * 
+     * @param index the index of the item to be removed from the shopping cart
+     */
     public void removeItemFromListaCarrello(int index) {
     	arrayPanelsListaCarrello.get(index).removeAll();
     	arrayPanelsListaCarrello.get(index).revalidate();
@@ -1337,12 +1513,18 @@ public class Window extends JFrame {
 	}
 	
 	/**
-	 * Displays the specified panel within the given layout.
-	 *
-	 * @param layoutName The name of the layout to use ("cardLayout" or "acquarioLayout").
-	 * @param panelName The name of the panel to display within the specified layout.
-	 *
-	 * @throws IllegalArgumentException if the provided layout name is neither "cardLayout" nor "acquarioLayout".
+	 * Displays the specified panel within the specified layout.
+	 * 
+	 * This method switches between different layouts based on the provided layoutName 
+	 * and shows the panel identified by the panelName within that layout.
+	 * 
+	 * Supported layoutNames:
+	 * - "cardLayout" for CardLayout
+	 * - "acquarioLayout" for another specific layout (assumed to be named "acquarioLayout")
+	 * 
+	 * @param layoutName the name of the layout to use ("cardLayout" or "acquarioLayout")
+	 * @param panelName the name of the panel to display within the specified layout
+	 * @throws Exception if an invalid layoutName is provided
 	 */
 	public void showPanel(String layoutName, String panelName) throws Exception {
 	    switch (layoutName) {
@@ -1359,8 +1541,12 @@ public class Window extends JFrame {
 
 
 	/**
-	 * This method create a message dialog.
-	 * @param message the string that will be shown.
+	 * Displays a message dialog with the specified message.
+	 * 
+	 * This method shows a message dialog box containing the provided message.
+	 * Additionally, it prints the message to the console for debugging purposes.
+	 * 
+	 * @param message the message to display in the message dialog
 	 */
 	public void messageDialog(String message) {
 		JOptionPane.showMessageDialog(this, message);
@@ -1368,38 +1554,75 @@ public class Window extends JFrame {
 	}
 	
 	/**
-	 * Returns the index of the element in the listCercaPiante that corresponds to the given mouse click point.
-	 *
-	 * @param p the mouse click point
-	 * @return the index of the element in the listCercaPiante, or -1 if no element is found
+	 * Retrieves the index of the list element at the specified point.
+	 * 
+	 * This method translates the provided Point object to an index within the 
+	 * listCercaPiante component. It returns the index of the list element 
+	 * located at the specified point.
+	 * 
+	 * @param p the Point object representing the location of the mouse click
+	 * @return the index of the list element at the specified point
 	 */
 	public int getIndexOfElemenListCercaPiantaForMouseClick(Point p) {
 		return listCercaPiante.locationToIndex(p);
 	}
 	
 	/**
-	 * Returns the index of the element in the listViewPianteAcquario that corresponds to the given mouse click point.
-	 *
-	 * @param p the mouse click point
-	 * @return the index of the element in the listViewPianteAcquario, or -1 if no element is found
+	 * Retrieves the index of the list element at the specified point.
+	 * 
+	 * This method translates the provided Point object to an index within the 
+	 * listViewPianteAcquario component. It returns the index of the list element 
+	 * located at the specified point.
+	 * 
+	 * @param p the Point object representing the location of the mouse click
+	 * @return the index of the list element at the specified point
 	 */
 	public int getIndexOfElemenListViewPianteAcquarioForMouseClick(Point p) {
 		return listViewPianteAcquario.locationToIndex(p);
 	}
 	
+	/**
+	 * Clears the current selection in the listAcquari component.
+	 * 
+	 * This method clears the current selection in the listAcquari component,
+	 * deselecting any items that may have been previously selected.
+	 */
 	public void clearSelectionListAcquari() {
 		listAcquari.clearSelection();
 	}
 	
+	/**
+	 * Clears the current selection in the listCercaPiante component.
+	 * 
+	 * This method clears the current selection in the listCercaPiante component,
+	 * deselecting any items that may have been previously selected.
+	 */
 	public void clearSelectionListCercaPiante() {
 		listCercaPiante.clearSelection();
 	}
 	
+	/**
+	 * Clears the current selection in the listViewPianteAcquario component.
+	 * 
+	 * This method clears the current selection in the listViewPianteAcquario component,
+	 * deselecting any items that may have been previously selected.
+	 */
 	public void clearSelectionListViewPianteAcquario() {
 		listViewPianteAcquario.clearSelection();
 	}
 
-	
+	/**
+	 * Retrieves the PiantaType object at the specified index from the arrayListCercaPiante list.
+	 * 
+	 * This method retrieves the PiantaType object located at the given index in the arrayListCercaPiante list.
+	 * If the provided index is out of bounds or if there's any other exception during the retrieval process,
+	 * appropriate exceptions are thrown with relevant error messages.
+	 * 
+	 * @param index the index of the desired PiantaType object in the arrayListCercaPiante list
+	 * @return the PiantaType object at the specified index
+	 * @throws IndexOutOfBoundsException if the index is out of the bounds of the list
+	 * @throws Exception if any other error occurs during retrieval
+	 */
 	public PiantaType getPiantaAltClickedInListCerca(int index) throws IndexOutOfBoundsException, Exception {
         if (index < 0 || index > arrayListCercaPiante.size()) {
             throw new IndexOutOfBoundsException("Indice fuori dai limiti della lista");
@@ -1410,6 +1633,19 @@ public class Window extends JFrame {
         
         return pianta;
     }
+	
+	/**
+	 * Retrieves the PiantaType object at the specified index from the arrayListViewPianteForAcquario list.
+	 * 
+	 * This method retrieves the PiantaType object located at the given index in the arrayListViewPianteForAcquario list.
+	 * If the provided index is out of bounds or if there's any other exception during the retrieval process,
+	 * appropriate exceptions are thrown with relevant error messages.
+	 * 
+	 * @param index the index of the desired PiantaType object in the arrayListViewPianteForAcquario list
+	 * @return the PiantaType object at the specified index
+	 * @throws IndexOutOfBoundsException if the index is out of the bounds of the list
+	 * @throws Exception if any other error occurs during retrieval
+	 */
 	public PiantaType getPiantaAltClickInPianteForAcquario(int index)throws IndexOutOfBoundsException, Exception {
         if (index < 0 || index > arrayListViewPianteForAcquario.size()) {
             throw new IndexOutOfBoundsException("Indice fuori dai limiti della lista");
@@ -1421,6 +1657,16 @@ public class Window extends JFrame {
         return pianta;
 	}
 
+	/**
+	 * Retrieves the selected PiantaType object from the arrayListViewPianteForAcquario list.
+	 * 
+	 * This method retrieves the selected PiantaType object from the arrayListViewPianteForAcquario list
+	 * based on the current selection index of the listViewPianteAcquario component.
+	 * If the selected index is invalid or if the retrieved object is null, an exception is thrown with a relevant error message.
+	 * 
+	 * @return the selected PiantaType object from the arrayListViewPianteForAcquario list
+	 * @throws Exception if the selected index is out of bounds or if the retrieved object is null
+	 */
 	public PiantaType getSelectedItemOfListPlantsOfAcquario() throws Exception{
 		if(arrayListViewPianteForAcquario.get(listViewPianteAcquario.getSelectedIndex())==null)
     		throw new Exception("Errore: impossibile eliminare la pianta");
@@ -1457,7 +1703,17 @@ public class Window extends JFrame {
 	    this.updateViewListPianteForAcquario(quantitas);
 	}*/
 
-	
+	/**
+	 * Displays an image of a plant along with a clickable link.
+	 * 
+	 * This method creates a JFrame to display an ImageIcon of a plant, along with a clickable link below the image.
+	 * The provided image, name of the plant, and link are used to construct and display the JFrame.
+	 * The link is clickable and will open the provided URL in the default web browser when activated.
+	 * 
+	 * @param nomePianta the name of the plant to be displayed in the JFrame title
+	 * @param immagine the ImageIcon of the plant to be displayed
+	 * @param link the URL link associated with the plant image
+	 */
 	public void displayPlantImage(String nomePianta, ImageIcon immagine, String link) {
 	    String decodedLink = URLDecoder.decode(link, StandardCharsets.UTF_8);
 

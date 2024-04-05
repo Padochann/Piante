@@ -39,6 +39,31 @@ public class RestEasyPlantsClient {
 
 	private static final String API_URL = "http://localhost/PIANTE/restEasy.php";
 	
+	
+	/**
+	 * Fetches data from the API based on the provided query string.
+	 * 
+	 * This method extracts parameters and the table name from the provided 
+	 * query string, constructs a GET request URL with the encoded parameters, 
+	 * retrieves the data from the API, determines the JAXB class to use for 
+	 * deserialization based on the table name, and deserializes the API response 
+	 * using JAXB. If the CRUD operation is 'd' (delete), it reads all bytes from 
+	 * the input stream and returns the resulting message as a string. 
+	 * 
+	 * @param queryString the query string containing the CRUD operation, table name, 
+	 * and parameters for the API request.
+	 * 
+	 * @return the deserialized object representing the API response, or a string 
+	 * message if the CRUD operation is 'd' (delete).
+	 * 
+	 * @throws JAXBException if there's an issue with the JAXB context or unmarshalling 
+	 * the API response.
+	 * @throws Exception if there's an issue with extracting parameters from the 
+	 * query string, constructing the GET request URL, opening the input stream, 
+	 * or reading bytes from the input stream.
+	 * @throws IllegalArgumentException if the table name extracted from the query 
+	 * string is not supported.
+	 */
 	public Object fetchDataFromApi(String queryString) throws JAXBException, Exception{
         // Estrai i parametri e la tabella dalla query string
         Map<String, String> params = extractParameters(queryString);
@@ -97,6 +122,24 @@ public class RestEasyPlantsClient {
         }
     }
     
+	/**
+	 * Sends the provided object to the API using a POST request.
+	 * 
+	 * This method determines the JAXB class to use for marshalling the object 
+	 * into XML based on its type. It then marshals the object into XML, converts 
+	 * the XML data into a string, creates an HTTP connection to the API, sends 
+	 * the XML string as the body of the POST request, reads the response from the 
+	 * API, and returns the response as a string.
+	 * 
+	 * @param obj the object to send to the API.
+	 * 
+	 * @return the response from the API as a string.
+	 * 
+	 * @throws Exception if there's an issue with determining the JAXB class, 
+	 * creating the JAXB context, marshalling the object into XML, opening the 
+	 * connection to the API, sending data to the API, reading the response 
+	 * from the API, or disconnecting the connection.
+	 */
 	public String sendDataToApi(Object obj) throws Exception {
 		
 		// Decidi il tipo di classe JAXB da utilizzare per la deserializzazione in base alla tabella
@@ -157,6 +200,27 @@ public class RestEasyPlantsClient {
         return echo;
 	}
 	
+	/**
+	 * Fetches plant details for a list of plants associated with an aquarium.
+	 * 
+	 * This method takes a list of PiantaAcquarioType objects, retrieves the 
+	 * plant IDs from each object, constructs a query string for each plant ID, 
+	 * executes an API request for each query string to fetch the plant details, 
+	 * and adds the fetched plant details to a list of PiantaType objects. 
+	 * The list of PiantaType objects is then returned.
+	 * 
+	 * @param piantaAcquarioList the list of PiantaAcquarioType objects 
+	 *                           containing plant IDs for which details need 
+	 *                           to be fetched.
+	 * 
+	 * @return the list of PiantaType objects containing the fetched plant details.
+	 * 
+	 * @throws JAXBException if there's an issue with the JAXB context or 
+	 *                       unmarshalling the XML response.
+	 * 
+	 * @throws Exception if there's an issue with constructing the query string, 
+	 *                   executing the API request, or processing the response.
+	 */
 	public List<PiantaType> fetchPianteForAcquario(List<PiantaAcquarioType> piantaAcquarioList) throws JAXBException, Exception {
 	    List<PiantaType> pianteForAcquarioList = new ArrayList<PiantaType>();
 
@@ -183,6 +247,27 @@ public class RestEasyPlantsClient {
 	    return pianteForAcquarioList;
 	}
 
+	/**
+	 * Creates a PianteAcquariType object with multiple PiantaAcquarioType items.
+	 * 
+	 * This method takes arrays of plant IDs and quantities, along with an aquarium ID. 
+	 * It creates a new PiantaAcquarioType object for each pair of plant ID and quantity, 
+	 * sets the properties for each object, and adds them to a PianteAcquariType object. 
+	 * The resulting PianteAcquariType object with the populated list of 
+	 * PiantaAcquarioType items is then returned.
+	 * 
+	 * @param idsPianta the array of plant IDs.
+	 * @param quantitas the array of quantities corresponding to the plant IDs.
+	 * @param idAcquario the ID of the aquarium to which the plants belong.
+	 * 
+	 * @return the PianteAcquariType object populated with PiantaAcquarioType items.
+	 * 
+	 * @throws IllegalArgumentException if the arrays idsPianta and quantitas are null, 
+	 *                                  or if their lengths do not match.
+	 * 
+	 * @throws Exception if there's an issue with creating or setting the 
+	 *                   properties of the PiantaAcquarioType objects.
+	 */
 	public PianteAcquariType createObjectPianteAcquariTypeMulti(Long[] idsPianta, Long[] quantitas, Long idAcquario) throws Exception {
 	    if (idsPianta == null || quantitas == null || idsPianta.length != quantitas.length)
 	        throw new IllegalArgumentException("Gli array idsPianta e quantitas devono avere la stessa lunghezza e non possono essere nulli");
@@ -203,6 +288,26 @@ public class RestEasyPlantsClient {
 	    return pianteAcquariDataResult;
 	}
 	
+	/**
+	 * Creates an AcquariType object with a single AcquarioType item.
+	 * 
+	 * This method constructs an AcquarioType object with the provided parameters, 
+	 * sets the properties for the object, and adds it to an AcquariType object. 
+	 * The resulting AcquariType object with the populated AcquarioType item 
+	 * is then returned.
+	 * 
+	 * @param idAcquario the ID of the aquarium.
+	 * @param litri the capacity of the aquarium in liters.
+	 * @param larghezza the width of the aquarium.
+	 * @param lunghezza the length of the aquarium.
+	 * @param altezza the height of the aquarium.
+	 * @param descrizione the description or details of the aquarium.
+	 * 
+	 * @return the AcquariType object populated with the AcquarioType item.
+	 * 
+	 * @throws Exception if there's an issue with creating or setting the 
+	 *                   properties of the AcquarioType object.
+	 */
 	public AcquariType createObjectAcquariTypeSolo(long idAcquario, long litri, long larghezza, long lunghezza, long altezza, String descrizione) throws Exception {
 	    AcquariType acquariTypeResult = new AcquariType();
 	    AcquarioType acquario = new AcquarioType();
@@ -219,7 +324,19 @@ public class RestEasyPlantsClient {
 	    return acquariTypeResult;
 	}
 
-
+	/**
+	 * Converts a byte array representing an image into an ImageIcon.
+	 * 
+	 * This method reads the byte array as an image using the ImageIO class, 
+	 * creates a BufferedImage, and then constructs an ImageIcon from it. 
+	 * The resulting ImageIcon can be used to display the image in a GUI component.
+	 * 
+	 * @param imageBytes the byte array representing the image data.
+	 * 
+	 * @return an ImageIcon object containing the image.
+	 * 
+	 * @throws IOException if there's an issue reading the image data from the byte array.
+	 */
 	public static ImageIcon convertToImage(byte[] imageBytes) throws IOException {
 		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
 	    // Visualizza l'immagine
@@ -228,6 +345,19 @@ public class RestEasyPlantsClient {
 	    return imageIcon;
 	}
 	
+	/**
+	 * Extracts key-value pairs from a given query string and stores them in a Map.
+	 * 
+	 * This method takes a query string as input, splits it into individual key-value pairs 
+	 * separated by '&', and then further splits each pair by '=' to extract the key and value.
+	 * The extracted key-value pairs are stored in a Map and returned.
+	 * 
+	 * @param queryString the input query string containing key-value pairs separated by '&'.
+	 * 
+	 * @return a Map containing the extracted key-value pairs.
+	 * 
+	 * @throws Exception if there's an issue parsing the query string or if the format is incorrect.
+	 */
     private Map<String, String> extractParameters(String queryString) throws Exception{
         Map<String, String> params = new HashMap<>();
         String[] keyValuePairs = queryString.split("&");

@@ -54,6 +54,18 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	private RestEasyPlantsClient requester;
 	private JButton lastToken;
 
+	/**
+	 * Constructor for the Controller class.
+	 * 
+	 * This constructor initializes a Controller object with a given Window instance.
+	 * It registers itself as an event listener with the provided Window instance.
+	 * Additionally, it creates a new instance of RestEasyPlantsClient for making API requests
+	 * and updates the list of acquari in the Window instance.
+	 * 
+	 * @param w the Window instance to associate with this Controller.
+	 * 
+	 * @throws Exception if there's an issue initializing the Controller or registering the event.
+	 */
 	public Controller(Window w) throws Exception {
 		this.w= w;
 		this.w.registerEvent(this);
@@ -96,11 +108,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	                lastToken = w.getBtnSalva();
 	            
 	            }
-			//questo sotto lo fai solo nel COSTRUTTORE e nel bottone salva nuovo acquario
-			//metodo che ti ritorna un List di AcquarioType facendo la richiesta in get con jaxb
-			//List<AcquarioType> tmp = this.getAcquariList();
-			//metodo che updeita la arrayListAcquari e che riupdeita la combo box e la list acquari nella card acquari id+litri display
-			//w.updateListAcquari(tmp);
+			
 		
 			if(e.getSource() == w.getBtnView())
 			{
@@ -135,14 +143,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			
 			if(e.getSource() == w.getBtnCercaPianta())
 			{
-				/*List<PiantaType> prova = new ArrayList<PiantaType>();
-			    prova.add(new PiantaType() {
-			    	{
-			    		setNome("lollo");
-			    		setIdPianta(3);
-			    	}
-			    });
-			    w.addItemsToListCercaPiante(prova);*/
 				
 				w.removeAllItemsFromListCercaPiante();
 				this.cercaPianta();
@@ -157,11 +157,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 			
 			if(e.getSource() == w.getBtnSalvaAggiungiPiante())
 			{
-				/*int[] tmp = w.getSelectedCheckBoxIndices();
-				System.out.println(Arrays.toString(tmp));
-				System.out.println(w.getValueOfSpinnerListaCarrello(tmp[0]));
-				System.out.println(w.getIdOfPiantaListaCarrello(tmp[0]));*/
-				
 				this.salvaPiante();
 			}
 			
@@ -173,7 +168,18 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	}
 
 	
-
+	/**
+	 * Searches for plants based on various criteria.
+	 * 
+	 * This method constructs a query string for searching plants based on the values obtained 
+	 * from various UI components of the application. The constructed query string is then 
+	 * URL-encoded and appended to the base CRUD operation and table name to form a complete 
+	 * query string. After building the query string, an API call is made to fetch the plant 
+	 * data based on the constructed query. The fetched plant data is then printed and added 
+	 * to the list used for searching plants in the UI.
+	 * 
+	 * @throws Exception if there's an issue with constructing the query string or fetching data from the API.
+	 */
 	private void cercaPianta() throws Exception {
 	    // Costruisci la query string in base ai valori ottenuti dai metodi
 	    StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=piante");
@@ -212,6 +218,18 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	    w.addItemsToListCercaPiante(pianteData.getItem());
 	}
 
+	/**
+	 * Retrieves a list of aquariums from the database.
+	 * 
+	 * This method constructs a query string specifically for fetching aquarium data from 
+	 * the database. The constructed query string is then used to make an API call to fetch 
+	 * the aquarium data. The fetched aquarium data is printed and returned as a list of 
+	 * AcquarioType objects.
+	 * 
+	 * @return a list of AcquarioType objects containing the fetched aquarium data.
+	 * @throws Exception if there's an issue with constructing the query string or fetching 
+	 * data from the API.
+	 */
 	private List<AcquarioType> getAcquariList() throws Exception{
 		StringBuilder queryStringBuilder = new StringBuilder("crud=r&table=acquari");
 		String queryString = queryStringBuilder.toString();
@@ -221,6 +239,19 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		return acquariData.getItem();
 	}
 	
+	/**
+	 * Displays the details of a selected aquarium.
+	 * 
+	 * This method resets the view to its initial state and retrieves the selected aquarium 
+	 * from the view. Based on the selected aquarium, it constructs a query string to fetch 
+	 * associated plant-aquarium data. After fetching the data, it extracts the quantities of 
+	 * plants associated with the aquarium and then fetches the details of these plants from 
+	 * the database. Finally, it displays the selected aquarium along with the associated 
+	 * plants and their quantities on the view.
+	 * 
+	 * @throws Exception if there's an issue with resetting the view, constructing the query 
+	 * string, fetching data from the API, or processing the retrieved data.
+	 */
 	private void viewAcquario() throws Exception{
 		w.resetViewAndNew();
 		AcquarioType selectedAcquario = w.getSelectedItemListAcquari();
@@ -250,6 +281,20 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		
 	}
 	
+	/**
+	 * Saves a new aquarium or updates an existing one.
+	 * 
+	 * This method retrieves the details of the aquarium to be saved from the view, 
+	 * constructs an `AcquariType` object with the provided details, and sends this 
+	 * object to the API to either create a new aquarium or update an existing one. 
+	 * After saving the aquarium, it displays a message dialog with the response 
+	 * received from the API. Additionally, it resets the view to its initial state 
+	 * and updates the list of aquariums displayed on the view.
+	 * 
+	 * @throws Exception if there's an issue with retrieving the aquarium details 
+	 * from the view, constructing the `AcquariType` object, sending data to the 
+	 * API, or updating the view with the new list of aquariums.
+	 */
 	private void salvaAcquario() throws Exception{
 		//w.resetViewAndNew();
 		Long idAcquario = new Long(0);
@@ -269,6 +314,20 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		w.updateListAcquari(getAcquariList());
 	}
 	
+	/**
+	 * Deletes an aquarium from the database.
+	 * 
+	 * This method retrieves the selected aquarium's ID from the view, constructs 
+	 * a query string for deleting the aquarium based on the ID, and sends this query 
+	 * to the API to delete the corresponding aquarium from the database. After 
+	 * deleting the aquarium, it displays a message dialog with the response received 
+	 * from the API. Additionally, it updates the view by refreshing the list of 
+	 * aquariums displayed.
+	 * 
+	 * @throws Exception if there's an issue with retrieving the selected aquarium's 
+	 * ID from the view, constructing the query string, sending data to the API, or 
+	 * updating the view with the new list of aquariums.
+	 */
 	private void cancellaAcquario() throws Exception{
 		Long idAcquarioToDelete = w.getSelectedItemListAcquari().getIdAcquario();
 		
@@ -282,6 +341,23 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		w.updateListAcquari(this.getAcquariList());
 	}
 	
+	
+	/**
+	 * Saves selected plants to an aquarium.
+	 * 
+	 * This method retrieves the indexes of selected plants from the view, the ID 
+	 * of the selected aquarium from a combo box, and the quantities of the selected 
+	 * plants from spinners in the view. It constructs an object representing the 
+	 * plants to be saved to the aquarium, sends this object to the API to save the 
+	 * data, and displays a message dialog with the response received from the API. 
+	 * Additionally, it updates the view by refreshing the list of aquariums displayed.
+	 * 
+	 * @throws Exception if there's an issue with retrieving the selected plants' 
+	 * indexes, retrieving the ID of the selected aquarium, getting the ID of plants 
+	 * from the view, getting the quantities of plants from the view, removing items 
+	 * from the view's cart, sending data to the API, or updating the view with the 
+	 * new list of aquariums.
+	 */
 	private void salvaPiante() throws Exception{
 		int[] indexesOfPlantsToSave = w.getSelectedCheckBoxIndices();
 		if(indexesOfPlantsToSave.length==0)
@@ -305,6 +381,22 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 		w.updateListAcquari(this.getAcquariList());
 	}
 	
+	/**
+	 * Deletes a plant from an aquarium.
+	 * 
+	 * This method retrieves the ID of the selected aquarium and the ID of the 
+	 * selected plant from the view. It constructs a query string to specify the 
+	 * deletion of the selected plant from the selected aquarium, sends this query 
+	 * string to the API to delete the data, displays a message dialog with the 
+	 * response received from the API, and refreshes the view by calling the 
+	 * {@code viewAcquario} method to display the updated list of plants in the 
+	 * selected aquarium.
+	 * 
+	 * @throws Exception if there's an issue with retrieving the ID of the selected 
+	 * aquarium, retrieving the ID of the selected plant, constructing the query 
+	 * string, sending data to the API, displaying the message dialog, or refreshing 
+	 * the view with the updated list of plants in the selected aquarium.
+	 */
 	private void cancellaPiantaDaAcquario() throws Exception{
 		
 		Long idAcquario = w.getSelectedItemListAcquari().getIdAcquario();
@@ -374,7 +466,23 @@ public class Controller implements ActionListener, MouseListener, KeyListener{
 	}
 	
 	
-	
+	/**
+	 * Displays an image for a specific plant.
+	 * 
+	 * This method constructs a query string to fetch the image associated with the 
+	 * provided plant ID from the API. It retrieves the image data from the API 
+	 * response, checks if the retrieved image data list is empty, converts the 
+	 * byte array of the image to an actual image, retrieves the link and name of 
+	 * the plant, and displays the image along with the plant's name and link using 
+	 * the {@code displayPlantImage} method from the view.
+	 * 
+	 * @param pianta the plant for which the image needs to be displayed.
+	 * 
+	 * @throws Exception if there's an issue with constructing the query string, 
+	 * fetching data from the API, checking for an empty image data list, converting 
+	 * the byte array to an image, or displaying the image along with the plant's 
+	 * name and link.
+	 */
 	private void showImageForPianta(PiantaType pianta) throws Exception {
 
 	    // Costruisci la query string
